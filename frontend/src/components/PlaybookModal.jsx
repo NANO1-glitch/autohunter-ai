@@ -10,7 +10,8 @@ import {
   HelpCircle, 
   Wrench, 
   MessageSquare,
-  ArrowRight
+  ArrowRight,
+  ShieldCheck
 } from 'lucide-react';
 
 export default function PlaybookModal({ job, onClose, onLaunchPitch }) {

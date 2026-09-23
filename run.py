@@ -30,7 +30,39 @@ def open_browser():
     except Exception:
         pass
 
+def ensure_port_free(port: int = 8000):
+    """Checks if port 8000 is occupied. If so, frees it cleanly or reuses existing instance."""
+    try:
+        with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
+            if s.connect_ex(('127.0.0.1', port)) == 0:
+                # Port is already in use
+                import urllib.request
+                try:
+                    req = urllib.request.Request(f"http://127.0.0.1:{port}/api/stats")
+                    with urllib.request.urlopen(req, timeout=1.5) as resp:
+                        if resp.status == 200:
+                            print(f"[OK] AutoHunter AI is already active and running on port {port}!")
+                            print(f"🚀 Opening Dashboard in your browser: http://localhost:{port}")
+                            webbrowser.open(f"http://localhost:{port}")
+                            sys.exit(0)
+                except Exception:
+                    pass
+
+                # If stale or uncooperative, terminate old process
+                import subprocess
+                out = subprocess.check_output(f'netstat -ano | findstr :{port}', shell=True, text=True)
+                for line in out.strip().split('\n'):
+                    parts = line.split()
+                    if len(parts) >= 5 and "LISTENING" in parts[3].upper():
+                        old_pid = parts[-1]
+                        if old_pid != str(os.getpid()):
+                            subprocess.run(f'taskkill /F /PID {old_pid}', shell=True, capture_output=True)
+                            time.sleep(0.5)
+    except Exception:
+        pass
+
 if __name__ == "__main__":
+    ensure_port_free(8000)
     local_ip = get_local_ip()
 
     print("=" * 68)
