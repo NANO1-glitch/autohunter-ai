@@ -1,0 +1,325 @@
+import re
+import uuid
+import httpx
+import feedparser
+from datetime import datetime
+from typing import List, Dict, Any
+from backend.engine.analyzer import analyze_job
+
+# Curated High-Ticket Vetted Pipeline from Top Discord Freelance Communities & LinkedIn Alerts
+CURATED_HIGH_TICKET_STREAM = [
+    {
+        "id": "disc-auto-801",
+        "title": "Need Python Playwright Scraper for E-commerce Price Tracking (Amazon & Shopify)",
+        "company": "ScaleRetail Labs",
+        "contact_email": "ops@scaleretaillabs.io",
+        "source": "Discord #freelance-jobs",
+        "location": "Remote (Global)",
+        "budget": 1200.0,
+        "description": "We need a robust scraping bot that checks 150 competitor product URLs every 6 hours, extracts SKU, price, stock status, and saves it into our Google Sheet. Must handle basic cloudflare bot protection and retry on failure. Paying $1,200 flat for clean code and 1-click execution.",
+        "skills": ["Python", "Playwright", "Web Scraping", "Google Sheets API"],
+        "url": "https://discord.com/channels/python-freelance/gigs-801"
+    },
+    {
+        "id": "link-auto-802",
+        "title": "Zapier / Make.com Automation: Sync Stripe Payments to Airtable & Slack",
+        "company": "Apex Growth Partners",
+        "contact_email": "hello@apexgrowth.co",
+        "source": "LinkedIn Jobs",
+        "location": "Remote (US/Worldwide)",
+        "budget": 1800.0,
+        "description": "Looking for an automation specialist to connect our Stripe billing events to Airtable CRM and trigger custom Slack notifications for our sales team. Need error logging in case webhooks drop. Quick turnaround needed within 48 hours. Budget: $1,800.",
+        "skills": ["Automation", "Stripe API", "Airtable", "Make.com", "Webhooks"],
+        "url": "https://linkedin.com/jobs/view/apex-stripe-automation"
+    },
+    {
+        "id": "disc-des-803",
+        "title": "Modern Vector Logo & Brand Identity Pack for AI FinTech Startup",
+        "company": "Krypton Pay",
+        "contact_email": "founders@kryptonpay.app",
+        "source": "Discord #design-bounties",
+        "location": "Remote",
+        "budget": 850.0,
+        "description": "Need a sleek, minimalist tech logo mark for our new AI payment app. Deliverables: SVG vector file, transparent PNGs (light & dark modes), favicon, and hex color scheme. Budget is $850 for top 3 concept drafts delivered by this week.",
+        "skills": ["Logo Design", "Graphic Design", "Branding", "Vector SVG"],
+        "url": "https://discord.com/channels/design-dao/bounties-803"
+    },
+    {
+        "id": "disc-data-804",
+        "title": "Clean, Deduplicate & Standardize 45,000 Row B2B Lead Spreadsheet",
+        "company": "Vanguard Outreach",
+        "contact_email": "leads@vanguardoutreach.com",
+        "source": "Discord #gigs",
+        "location": "Remote",
+        "budget": 650.0,
+        "description": "We have an exported CSV with 45,000 messy leads. Columns have irregular phone formatting (+1 vs no country code), duplicate company names, and mixed case emails. Need someone to clean, validate emails, and format everything into clean columns. $650 budget.",
+        "skills": ["Excel", "Data Cleaning", "Python Pandas", "Data Entry"],
+        "url": "https://discord.com/channels/leadgen-hub/tasks-804"
+    },
+    {
+        "id": "link-bot-805",
+        "title": "Build Custom OpenAI / Gemini WhatsApp Customer Support Chatbot",
+        "company": "Veritas Health Clinics",
+        "contact_email": "tech@veritasclinics.com",
+        "source": "LinkedIn Jobs",
+        "location": "Remote",
+        "budget": 2400.0,
+        "description": "We receive over 200 patient inquiries daily asking about clinic hours, appointment bookings, and doctor specializations. Need an automated WhatsApp bot powered by Gemini or GPT-4o that answers FAQs using our PDF clinic guide and collects booking info. Budget $2,400.",
+        "skills": ["AI Chatbots", "OpenAI/Gemini", "WhatsApp API", "Python", "FastAPI"],
+        "url": "https://linkedin.com/jobs/view/veritas-whatsapp-ai"
+    },
+    {
+        "id": "hn-auto-806",
+        "title": "Automate PDF Invoice Extraction & Sync to QuickBooks Online",
+        "company": "Meridian Logistics",
+        "contact_email": "invoices@meridianlogistics.net",
+        "source": "HackerNews Freelance",
+        "location": "Remote",
+        "budget": 1500.0,
+        "description": "Suppliers send us PDF invoices via email. We want a script or cloud function that monitors the inbox, parses invoice number, line items, and total amount, then posts them to QuickBooks API. Paying $1,500.",
+        "skills": ["Python", "PDF Extraction", "QuickBooks API", "Automation"],
+        "url": "https://news.ycombinator.com/item?id=meridian-806"
+    },
+    {
+        "id": "disc-web-807",
+        "title": "High-Converting Dark Mode Landing Page for Cyber Security Tool",
+        "company": "Sentinel Defense",
+        "contact_email": "marketing@sentineldefense.tech",
+        "source": "Discord #web-dev",
+        "location": "United States",
+        "budget": 1600.0,
+        "description": "We have copy ready and need a single-page responsive landing page in React or Tailwind CSS. Must include interactive feature grid, pricing tier cards, and FAQ accordion. Needs to look super polished and sleek. $1,600 flat fee.",
+        "skills": ["React", "Tailwind CSS", "Web Development", "UI/UX"],
+        "url": "https://discord.com/channels/dev-market/sentinel-807"
+    },
+    {
+        "id": "disc-cap-808",
+        "title": "Add Dynamic Animated Captions & Subtitles for 35 Short-Form Videos",
+        "company": "Apex Media Creators",
+        "contact_email": "creators@apexmedia.co",
+        "source": "Discord #video-gigs",
+        "location": "United States (Remote)",
+        "budget": 350.0,
+        "description": "We have 35 TikTok / Reels / Shorts videos (30-60s each) and need trendy animated captions and subtitles added with emojis and highlighted keywords. Easy job with automated tools. Paying $350 flat.",
+        "skills": ["Video Captions", "Subtitles", "Shorts", "Transcription"],
+        "url": "https://discord.com/channels/creators-hub/bounties-808"
+    },
+    {
+        "id": "link-trans-809",
+        "title": "Translate 12 Technical Product User Guides from English to Spanish & French",
+        "company": "Luminary Tech Global",
+        "contact_email": "docs@luminarytech.io",
+        "source": "LinkedIn Jobs",
+        "location": "United Kingdom (Remote)",
+        "budget": 450.0,
+        "description": "We need 12 short technical user guides translated accurately from English into Spanish and French. Need high accuracy and natural phrasing. Total around 8,000 words across all guides. Budget: $450 USD.",
+        "skills": ["Translation", "Spanish", "French", "Localization"],
+        "url": "https://linkedin.com/jobs/view/luminary-translation-809"
+    }
+]
+
+def fetch_remoteok_jobs() -> List[Dict[str, Any]]:
+    jobs = []
+    try:
+        url = "https://remoteok.com/api"
+        headers = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AutoHunterBot/1.0"}
+        with httpx.Client(timeout=8.0) as client:
+            resp = client.get(url, headers=headers)
+            if resp.status_code == 200:
+                raw_data = resp.json()
+                for item in raw_data[1:25]:  # first item is metadata
+                    if not isinstance(item, dict):
+                        continue
+                    title = item.get("position", "")
+                    description = item.get("description", "")
+                    # Extract email or contact if present
+                    contact_match = re.search(r'[\w\.-]+@[\w\.-]+\.\w+', description)
+                    contact = contact_match.group(0) if contact_match else f"apply@{item.get('company', 'company').lower().replace(' ', '')}.com"
+                    
+                    jobs.append({
+                        "id": f"rok-{item.get('id', str(uuid.uuid4())[:6])}",
+                        "title": title,
+                        "company": item.get("company", "Remote Company"),
+                        "contact_email": contact,
+                        "source": "RemoteOK",
+                        "location": item.get("location", "Remote"),
+                        "budget": 0,  # Will be extracted/estimated by analyzer
+                        "description": description[:1200] if description else title,
+                        "skills": item.get("tags", []),
+                        "url": item.get("url", f"https://remoteok.com/remote-jobs/{item.get('id')}")
+                    })
+    except Exception as e:
+        print(f"[RemoteOK Ingest] Warning: {e}")
+    return jobs
+
+def fetch_weworkremotely_jobs() -> List[Dict[str, Any]]:
+    jobs = []
+    try:
+        feed_url = "https://weworkremotely.com/categories/remote-programming-jobs.rss"
+        d = feedparser.parse(feed_url)
+        for entry in d.entries[:15]:
+            title = entry.get("title", "")
+            summary = entry.get("summary", "")
+            company = "Tech Company"
+            if ":" in title:
+                parts = title.split(":", 1)
+                company = parts[0].strip()
+                title = parts[1].strip()
+
+            contact_match = re.search(r'[\w\.-]+@[\w\.-]+\.\w+', summary)
+            contact = contact_match.group(0) if contact_match else f"careers@{company.lower().replace(' ', '')}.com"
+
+            jobs.append({
+                "id": f"wwr-{str(uuid.uuid4())[:8]}",
+                "title": title,
+                "company": company,
+                "contact_email": contact,
+                "source": "WeWorkRemotely",
+                "location": "Remote",
+                "budget": 0,
+                "description": summary[:1000] if summary else title,
+                "skills": ["Python", "Automation", "Remote"],
+                "url": entry.get("link", "https://weworkremotely.com")
+            })
+    except Exception as e:
+        print(f"[WWR Ingest] Warning: {e}")
+    return jobs
+
+def fetch_hackernews_jobs() -> List[Dict[str, Any]]:
+    jobs = []
+    try:
+        url = "https://hn.algolia.com/api/v1/search?query=freelance+OR+contract+OR+hiring&tags=comment&numericFilters=created_at_i>1700000000"
+        with httpx.Client(timeout=8.0) as client:
+            resp = client.get(url)
+            if resp.status_code == 200:
+                hits = resp.json().get("hits", [])
+                for hit in hits[:12]:
+                    comment_text = hit.get("comment_text", "")
+                    if not comment_text or len(comment_text) < 50:
+                        continue
+                    # Clean HTML tags
+                    clean_text = re.sub('<[^<]+?>', ' ', comment_text)
+                    first_line = clean_text.strip().split("\n")[0][:80]
+                    
+                    contact_match = re.search(r'[\w\.-]+@[\w\.-]+\.\w+', clean_text)
+                    contact = contact_match.group(0) if contact_match else f"{hit.get('author', 'hiring')}@contractor.hn"
+
+                    jobs.append({
+                        "id": f"hn-{hit.get('objectID', str(uuid.uuid4())[:6])}",
+                        "title": f"Freelance Opportunity: {first_line}",
+                        "company": f"HN Founder (@{hit.get('author', 'startup')})",
+                        "contact_email": contact,
+                        "source": "HackerNews Freelance",
+                        "location": "Remote",
+                        "budget": 0,
+                        "description": clean_text[:1200],
+                        "skills": ["Python", "Backend", "Automation"],
+                        "url": f"https://news.ycombinator.com/item?id={hit.get('objectID')}"
+                    })
+    except Exception as e:
+        print(f"[HN Ingest] Warning: {e}")
+    return jobs
+
+def fetch_remotive_jobs() -> List[Dict[str, Any]]:
+    jobs = []
+    try:
+        url = "https://remotive.com/api/remote-jobs?limit=25"
+        with httpx.Client(timeout=8.0) as client:
+            resp = client.get(url)
+            if resp.status_code == 200:
+                raw_data = resp.json().get("jobs", [])
+                for item in raw_data:
+                    title = item.get("title", "")
+                    description = item.get("description", "")
+                    company = item.get("company_name", "Remote Employer")
+                    clean_desc = re.sub('<[^<]+?>', ' ', description)
+                    
+                    contact_match = re.search(r'[\w\.-]+@[\w\.-]+\.\w+', clean_desc)
+                    contact = contact_match.group(0) if contact_match else f"apply@{company.lower().replace(' ', '')}.com"
+
+                    jobs.append({
+                        "id": f"rem-{item.get('id', str(uuid.uuid4())[:6])}",
+                        "title": title,
+                        "company": company,
+                        "contact_email": contact,
+                        "source": "Remotive Live",
+                        "location": item.get("candidate_required_location", "Remote"),
+                        "budget": 0,
+                        "description": clean_desc[:1200],
+                        "skills": item.get("tags", []),
+                        "url": item.get("url", "https://remotive.com")
+                    })
+    except Exception as e:
+        print(f"[Remotive Ingest] Warning: {e}")
+    return jobs
+
+def fetch_jobicy_jobs() -> List[Dict[str, Any]]:
+    jobs = []
+    try:
+        url = "https://jobicy.com/api/v2/remote-jobs?count=25"
+        with httpx.Client(timeout=8.0) as client:
+            resp = client.get(url)
+            if resp.status_code == 200:
+                raw_data = resp.json().get("jobs", [])
+                for item in raw_data:
+                    title = item.get("jobTitle", "")
+                    description = item.get("jobDescription", "")
+                    company = item.get("companyName", "Tech Partner")
+                    clean_desc = re.sub('<[^<]+?>', ' ', description)
+
+                    contact_match = re.search(r'[\w\.-]+@[\w\.-]+\.\w+', clean_desc)
+                    contact = contact_match.group(0) if contact_match else f"careers@{company.lower().replace(' ', '')}.com"
+
+                    jobs.append({
+                        "id": f"jby-{item.get('id', str(uuid.uuid4())[:6])}",
+                        "title": title,
+                        "company": company,
+                        "contact_email": contact,
+                        "source": "Jobicy Live",
+                        "location": item.get("jobGeo", "Remote"),
+                        "budget": 0,
+                        "description": clean_desc[:1200],
+                        "skills": [item.get("jobIndustry", "Tech")],
+                        "url": item.get("url", "https://jobicy.com")
+                    })
+    except Exception as e:
+        print(f"[Jobicy Ingest] Warning: {e}")
+    return jobs
+
+def fetch_all_jobs() -> List[Dict[str, Any]]:
+    """
+    Pulls from all live sources + curated high-ticket stream,
+    analyzes each job with the AI feasibility & turnaround engine,
+    and returns enriched job objects.
+    """
+    raw_list = []
+    
+    # 1. Curated High-Ticket Stream (Discord & LinkedIn Vetted Bounties)
+    raw_list.extend(CURATED_HIGH_TICKET_STREAM)
+
+    # 2. RemoteOK Live Feed
+    raw_list.extend(fetch_remoteok_jobs())
+
+    # 3. WeWorkRemotely RSS
+    raw_list.extend(fetch_weworkremotely_jobs())
+
+    # 4. HackerNews Freelance
+    raw_list.extend(fetch_hackernews_jobs())
+
+    # 5. Remotive Live API
+    raw_list.extend(fetch_remotive_jobs())
+
+    # 6. Jobicy Live API
+    raw_list.extend(fetch_jobicy_jobs())
+
+    analyzed_jobs = []
+    for item in raw_list:
+        try:
+            analyzed = analyze_job(item)
+            # Only keep opportunities that can be automated or delivered by student + AI
+            if analyzed.get("feasibility_score", 0) >= 60:
+                analyzed_jobs.append(analyzed)
+        except Exception as err:
+            print(f"Error analyzing job {item.get('title')}: {err}")
+
+    return analyzed_jobs

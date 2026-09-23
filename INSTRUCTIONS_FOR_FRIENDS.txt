@@ -1,0 +1,25 @@
+====================================================================
+           AutoHunter AI - Quick Start Guide For Friends
+====================================================================
+
+HOW TO RUN:
+1. Double-click "run.bat"
+
+DO I NEED PYTHON INSTALLED?
+No! If you don't have Python, "run.bat" will automatically detect that,
+download the official Python installer directly from python.org, install
+it silently in the background (no admin password needed), install the
+libraries, and open AutoHunter AI in your browser.
+
+DO I NEED ANY SPECIAL SOFTWARE / ANTIGRAVITY?
+No! AutoHunter AI is 100% standalone. It runs on any standard Windows PC.
+
+FEATURES:
+- Live Global Freelance & High-Ticket Gig Radar (US, UK, Europe, Remote)
+- AI Code Generator & Deliverable Packager (Zero setup required)
+- Anti-Scam Shield & Automated Reply Bot (Protects you from scam clients)
+- 1-Click Humanized Cold Pitch Composer
+- Micro-Gig Filters: Video Captions, Subtitles, Translations, Excel scripts
+
+Enjoy closing deals!
+====================================================================
