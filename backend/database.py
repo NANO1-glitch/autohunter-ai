@@ -292,7 +292,9 @@ class Database:
         curated_domains = {
             "scaleretaillabs.io", "apexgrowth.co", "kryptonpay.app", "vanguardoutreach.com",
             "meridianlogistics.net", "sentineldefense.tech", "apexmedia.co", "luminarytech.io",
-            "pulsehealth.app", "gmail.com", "outlook.com", "yahoo.com", "veritasclinics.com"
+            "pulsehealth.app", "gmail.com", "outlook.com", "yahoo.com", "veritasclinics.com",
+            "sneakerdropalerts.com", "apexventurepartners.io", "crestviewcapital.re",
+            "elevatestudios.co", "hyperflowanalytics.com", "pulsefitglobal.com"
         }
         if any(target.startswith(p) for p in ["apply@", "careers@", "inquiries@", "jobs@", "recruiting@"]):
             if domain not in curated_domains:

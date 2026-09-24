@@ -115,6 +115,78 @@ CURATED_HIGH_TICKET_STREAM = [
         "description": "We need 12 short technical user guides translated accurately from English into Spanish and French. Need high accuracy and natural phrasing. Total around 8,000 words across all guides. Budget: $450 USD.",
         "skills": ["Translation", "Spanish", "French", "Localization"],
         "url": "https://linkedin.com/jobs/view/luminary-translation-809"
+    },
+    {
+        "id": "disc-auto-810",
+        "title": "Need Python Bot to Monitor Product Inventory & Send Instant Telegram Alerts",
+        "company": "DropAlerts Network",
+        "contact_email": "botdev@sneakerdropalerts.com",
+        "source": "Discord #python-gigs",
+        "location": "Remote",
+        "budget": 950.0,
+        "description": "We need a Python monitor script running 24/7 that checks product restock endpoints every 30 seconds and pings our VIP Telegram channel with instant checkout links. Must have proxy rotation and error recovery. $950 flat.",
+        "skills": ["Python", "Telegram API", "Web Automation", "API Integration"],
+        "url": "https://discord.com/channels/dropalerts/dev-810"
+    },
+    {
+        "id": "link-api-811",
+        "title": "Make.com & HubSpot Automation: Inbound Lead Qualification & Slack Alerts",
+        "company": "Apex Venture Partners",
+        "contact_email": "integrations@apexventurepartners.io",
+        "source": "LinkedIn Jobs",
+        "location": "Remote (US)",
+        "budget": 1400.0,
+        "description": "Looking for an automation engineer to connect our web form submissions through Make.com to HubSpot CRM, enrich the lead with company revenue data, and alert our account reps on Slack. Need error handling and retry logging. Budget $1,400.",
+        "skills": ["Make.com", "HubSpot API", "Slack API", "Webhooks", "Automation"],
+        "url": "https://linkedin.com/jobs/view/apex-hubspot-automation-811"
+    },
+    {
+        "id": "disc-scrape-812",
+        "title": "Python Scraper to Extract Real Estate Listings & Historical Tax Records",
+        "company": "Crestview Capital",
+        "contact_email": "deals@crestviewcapital.re",
+        "source": "Discord #freelance-jobs",
+        "location": "Remote",
+        "budget": 1100.0,
+        "description": "Need a Playwright/BeautifulSoup scraper that extracts commercial property listings across 5 county portals, pulls historical tax assessments, and saves into our Postgres database or CSV. Paying $1,100.",
+        "skills": ["Python", "Playwright", "Web Scraping", "Data Extraction"],
+        "url": "https://discord.com/channels/cre-deals/scraper-812"
+    },
+    {
+        "id": "disc-cap-813",
+        "title": "Dynamic Animated Captions & Sound Effects for 25 YouTube Shorts / Reels",
+        "company": "Elevate Studios",
+        "contact_email": "media@elevatestudios.co",
+        "source": "Discord #video-editing",
+        "location": "Remote",
+        "budget": 400.0,
+        "description": "We have 25 talking-head YouTube Shorts and Reels (45s each) and need trendy word-by-word animated captions, highlighted keywords, and emojis added to hook viewers. Quick turnaround needed. $400 flat.",
+        "skills": ["Video Captions", "Subtitles", "Shorts", "Reels"],
+        "url": "https://discord.com/channels/elevate/gigs-813"
+    },
+    {
+        "id": "link-web-814",
+        "title": "Modern Dark Mode SaaS Landing Page in React & Tailwind CSS",
+        "company": "HyperFlow Analytics",
+        "contact_email": "product@hyperflowanalytics.com",
+        "source": "LinkedIn Jobs",
+        "location": "Remote (Worldwide)",
+        "budget": 1750.0,
+        "description": "We need a sleek, high-converting marketing landing page for our developer analytics platform. Includes animated hero section, pricing table, interactive chart mockup, and FAQ. Copy and wireframes ready. Budget $1,750.",
+        "skills": ["React", "Tailwind CSS", "Web Development", "UI/UX"],
+        "url": "https://linkedin.com/jobs/view/hyperflow-landing-814"
+    },
+    {
+        "id": "disc-trans-815",
+        "title": "Translate & Localize Mobile Fitness App into German and Italian",
+        "company": "PulseFit Global",
+        "contact_email": "apps@pulsefitglobal.com",
+        "source": "Discord #mobile-dev",
+        "location": "Remote",
+        "budget": 600.0,
+        "description": "We need our iOS and Android fitness tracker strings and app store descriptions localized into natural German and Italian. Total approximately 5,500 words. Need native quality and workout terminology accuracy. $600.",
+        "skills": ["Translation", "German", "Italian", "Localization"],
+        "url": "https://discord.com/channels/pulsefit/trans-815"
     }
 ]
 

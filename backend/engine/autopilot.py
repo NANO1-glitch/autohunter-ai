@@ -73,27 +73,33 @@ class AutoPilotEngine:
                 and j.get("feasibility_score", 0) >= min_feasibility
             ]
 
-            db.add_autopilot_log(f"🎯 Filtered {len(eligible)} high-priority deals meeting auto-dispatch criteria.", level="info")
+            # Separate direct email clients from portal applications
+            direct_pitch_deals = [
+                j for j in eligible 
+                if j.get("contact_email") and "@" in j.get("contact_email") and not db.is_placeholder_or_bounced(j.get("contact_email"))
+            ]
+            portal_deals = [
+                j for j in eligible 
+                if not j.get("contact_email") or db.is_placeholder_or_bounced(j.get("contact_email"))
+            ]
+
+            db.add_autopilot_log(f"🎯 Filtered {len(direct_pitch_deals)} verified direct email deals & {len(portal_deals)} portal opportunities.", level="info")
 
             dispatched_count = 0
-            for job in eligible[:5]:  # Process up to 5 per cycle to maintain healthy pacing
+            # 1. Pitch direct email clients first
+            for job in direct_pitch_deals[:5]:
                 job_id = job["id"]
                 title = job["title"]
                 email = job.get("contact_email")
 
-                if not email or "@" not in email or db.is_placeholder_or_bounced(email):
-                    # Portal jobs are applied directly via the official portal, not via SMTP
-                    db.add_autopilot_log(f"📋 Official Portal gig ready for 1-click apply: '{title[:40]}'", level="info", job_id=job_id)
-                    continue
-
                 # A. Pre-build sanitized deliverable package
                 try:
                     pkg = generate_deliverable_package(job, agency_name=sender_name)
-                    db.add_autopilot_log(f"📦 Pre-built sanitized solution: {pkg['zip_name']} (100% personal paths stripped)", level="success", job_id=job_id)
+                    db.add_autopilot_log(f"📦 Pre-built solution for {title[:30]}: {pkg['zip_name']}", level="success", job_id=job_id)
                 except Exception as b_err:
                     db.add_autopilot_log(f"Package warning: {b_err}", level="warning", job_id=job_id)
 
-                # B. Generate Humanized Cold Pitch
+                # B. Generate Humanized Cold Pitch tailored specifically to what they need
                 pitch = generate_humanized_pitch(job, sender_name=sender_name)
 
                 # C. Autonomous Dispatch
@@ -105,6 +111,8 @@ class AutoPilotEngine:
                 )
 
                 if result.get("success"):
+                    # Mark job as contacted so it doesn't repeat
+                    db.update_job_status(job_id, "contacted")
                     mode_str = "Simulated Safe" if result.get("mode") == "simulation" else "Live Gmail"
                     db.add_autopilot_log(f"⚡ Autonomously dispatched cold pitch to {email} ({mode_str}) for ${job.get('budget')} gig!", level="action", job_id=job_id)
                     dispatched_count += 1
@@ -119,6 +127,10 @@ class AutoPilotEngine:
                     db.add_autopilot_log(f"❌ Mailer issue: {result.get('message')}", level="warning", job_id=job_id)
 
                 time.sleep(2)  # Polite pacing
+
+            # Mark processed portal deals as portal_ready so they don't clog future scans
+            for p_job in portal_deals[:10]:
+                db.update_job_status(p_job["id"], "portal_ready")
 
             db.add_autopilot_log(f"✅ Autonomous pass complete. {dispatched_count} deals processed and pitches dispatched.", level="success")
             return {"success": True, "dispatched": dispatched_count}

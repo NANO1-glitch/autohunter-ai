@@ -12,6 +12,7 @@ import DeliverableModal from './components/DeliverableModal';
 import AutoPilotConsole from './components/AutoPilotConsole';
 import AntiScamModal from './components/AntiScamModal';
 import GmailOutreachHub from './components/GmailOutreachHub';
+import JobDetailsModal from './components/JobDetailsModal';
 import { Sparkles, RefreshCw, AlertCircle, CheckCircle2, Flame, Bot, Palette, FileSpreadsheet, Code2 } from 'lucide-react';
 
 export default function App() {
@@ -36,6 +37,7 @@ export default function App() {
   const [hideDone, setHideDone] = useState(true);
 
   // Active Modals
+  const [activeDetailsJob, setActiveDetailsJob] = useState(null);
   const [activePlaybookJob, setActivePlaybookJob] = useState(null);
   const [activeOutreachJob, setActiveOutreachJob] = useState(null);
   const [activeDeliverableJob, setActiveDeliverableJob] = useState(null);
@@ -389,6 +391,7 @@ export default function App() {
               <JobCard
                 key={job.id}
                 job={job}
+                onOpenDetails={(j) => setActiveDetailsJob(j)}
                 onOpenPlaybook={(j) => setActivePlaybookJob(j)}
                 onOpenOutreach={(j) => setActiveOutreachJob(j)}
                 onOpenDeliverable={(j) => setActiveDeliverableJob(j)}
@@ -403,6 +406,16 @@ export default function App() {
       </main>
 
       {/* Modals & Drawers */}
+      {activeDetailsJob && (
+        <JobDetailsModal
+          job={activeDetailsJob}
+          onClose={() => setActiveDetailsJob(null)}
+          onOpenOutreach={(j) => setActiveOutreachJob(j)}
+          onOpenPlaybook={(j) => setActivePlaybookJob(j)}
+          onOpenDeliverable={(j) => setActiveDeliverableJob(j)}
+        />
+      )}
+
       {activeDeliverableJob && (
         <DeliverableModal
           job={activeDeliverableJob}

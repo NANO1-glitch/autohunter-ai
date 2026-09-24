@@ -232,7 +232,9 @@ def analyze_job(job_data: Dict[str, Any]) -> Dict[str, Any]:
     curated_domains = {
         "scaleretaillabs.io", "apexgrowth.co", "kryptonpay.app", "vanguardoutreach.com",
         "meridianlogistics.net", "sentineldefense.tech", "apexmedia.co", "luminarytech.io",
-        "pulsehealth.app", "gmail.com", "outlook.com", "yahoo.com", "veritasclinics.com"
+        "pulsehealth.app", "gmail.com", "outlook.com", "yahoo.com", "veritasclinics.com",
+        "sneakerdropalerts.com", "apexventurepartners.io", "crestviewcapital.re",
+        "elevatestudios.co", "hyperflowanalytics.com", "pulsefitglobal.com"
     }
     contact_email = raw_email
     if contact_email:

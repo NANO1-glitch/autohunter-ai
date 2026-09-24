@@ -15,7 +15,7 @@ import {
   X
 } from 'lucide-react';
 
-export default function JobCard({ job, onOpenPlaybook, onOpenOutreach, onOpenDeliverable, onDismissJob }) {
+export default function JobCard({ job, onOpenPlaybook, onOpenOutreach, onOpenDeliverable, onDismissJob, onOpenDetails }) {
   const isHighTicket = job.budget >= 1000;
 
   // Source badge styling
@@ -164,7 +164,11 @@ export default function JobCard({ job, onOpenPlaybook, onOpenOutreach, onOpenDel
         </div>
 
         {/* Job Title */}
-        <h3 className="font-extrabold text-[15px] leading-snug text-white group-hover:text-cyan-300 transition-colors line-clamp-2 mb-1.5">
+        <h3 
+          onClick={() => onOpenDetails && onOpenDetails(job)}
+          className="font-extrabold text-[15px] leading-snug text-white group-hover:text-cyan-300 transition-colors line-clamp-2 mb-1.5 cursor-pointer hover:underline"
+          title="Click to view full job requirements and details"
+        >
           {job.title}
         </h3>
 
@@ -176,9 +180,19 @@ export default function JobCard({ job, onOpenPlaybook, onOpenOutreach, onOpenDel
         </div>
 
         {/* Description snippet */}
-        <p className="text-xs text-slate-300 line-clamp-3 mb-4 leading-relaxed bg-slate-950/70 p-3 rounded-xl border border-white/[0.04]">
-          {job.description}
-        </p>
+        <div 
+          onClick={() => onOpenDetails && onOpenDetails(job)}
+          className="text-xs text-slate-300 mb-4 leading-relaxed bg-slate-950/70 hover:bg-slate-950 p-3 rounded-xl border border-white/[0.04] hover:border-cyan-500/30 transition-all cursor-pointer group/desc relative"
+          title="Click to read full client requirements"
+        >
+          <p className="line-clamp-3">
+            {job.description ? job.description.replace(/<[^>]*>?/gm, '') : ""}
+          </p>
+          <div className="text-[10px] text-cyan-400 font-bold mt-1.5 flex items-center gap-1 opacity-80 group-hover/desc:opacity-100">
+            <span>Read full requirements</span>
+            <span>&rarr;</span>
+          </div>
+        </div>
 
         {/* Student Stats Metric Box */}
         <div className="grid grid-cols-2 gap-2 text-xs mb-4">
