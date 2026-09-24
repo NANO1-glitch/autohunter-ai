@@ -266,6 +266,13 @@ def analyze_job(job_data: Dict[str, Any]) -> Dict[str, Any]:
     has_direct_email = bool(contact_email)
     apply_mode = "direct_email" if has_direct_email else "official_portal"
 
+    acceptance_metrics = calculate_acceptance_probability(
+        feasibility=feasibility,
+        difficulty=difficulty,
+        turnaround=turnaround,
+        has_direct_email=has_direct_email,
+        is_bidding_gig=is_bidding_gig
+    )
 
     return {
         **job_data,
@@ -286,6 +293,127 @@ def analyze_job(job_data: Dict[str, Any]) -> Dict[str, Any]:
         "marketplace_category": marketplace_category,
         "application_type": application_type,
 
+        # Acceptance Probability Metrics
+        **acceptance_metrics,
+
         "country_badge": country_badge,
         "skills": deduped_skills
     }
+
+
+def calculate_acceptance_probability(
+    feasibility: int,
+    difficulty: str,
+    turnaround: str,
+    has_direct_email: bool,
+    is_bidding_gig: bool
+) -> Dict[str, Any]:
+    """
+    Computes a realistic acceptance / win probability score (55% - 97%)
+    based on outreach channel, feasibility score, delivery speed, and risk-reversal pilot strategy.
+    """
+    score = 42
+    factors = []
+
+    # 1. Channel Advantage
+    if has_direct_email:
+        score += 26
+        factors.append({
+            "name": "Direct Inbox Access",
+            "impact": "+26%",
+            "positive": True,
+            "description": "Direct email reaches the decision-maker directly, bypassing portal applicant queues."
+        })
+    elif is_bidding_gig:
+        score += 12
+        factors.append({
+            "name": "Marketplace Opportunity",
+            "impact": "+12%",
+            "positive": True,
+            "description": "Active freelance portal bidding; tailored custom proposal elevates win probability."
+        })
+    else:
+        score += 18
+        factors.append({
+            "name": "Official Portal Application",
+            "impact": "+18%",
+            "positive": True,
+            "description": "Standard portal submission with tailored cover pitch."
+        })
+
+    # 2. Feasibility & Automation Match
+    if feasibility >= 90:
+        score += 18
+        factors.append({
+            "name": "High AI Feasibility",
+            "impact": "+18%",
+            "positive": True,
+            "description": f"{feasibility}% compatibility with rapid, reliable automation scripts."
+        })
+    elif feasibility >= 80:
+        score += 12
+        factors.append({
+            "name": "Solid Technical Match",
+            "impact": "+12%",
+            "positive": True,
+            "description": f"{feasibility}% compatibility with project scope."
+        })
+    else:
+        score += 6
+        factors.append({
+            "name": "Moderate Match",
+            "impact": "+6%",
+            "positive": True,
+            "description": "Custom solution architecture needed."
+        })
+
+    # 3. Rapid Turnaround Speed
+    turn_lower = turnaround.lower()
+    if any(k in turn_lower for k in ["24", "48", "1-2", "2-3"]):
+        score += 10
+        factors.append({
+            "name": "Rapid 24-48h Delivery",
+            "impact": "+10%",
+            "positive": True,
+            "description": f"Express deadline ({turnaround}) beats traditional slow agency timelines."
+        })
+    else:
+        score += 5
+        factors.append({
+            "name": "Standard Delivery",
+            "impact": "+5%",
+            "positive": True,
+            "description": f"Standard delivery timeline ({turnaround})."
+        })
+
+    # 4. Zero-Risk Pilot Offer
+    score += 10
+    factors.append({
+        "name": "Zero-Risk Pilot Offer",
+        "impact": "+10%",
+        "positive": True,
+        "description": "Proposing a working prototype or test proof upfront removes client risk."
+    })
+
+    probability = max(55, min(97, score))
+
+    if probability >= 90:
+        tier = "Very High (Top Deal)"
+        color = "emerald"
+    elif probability >= 80:
+        tier = "High Win Chance"
+        color = "cyan"
+    elif probability >= 70:
+        tier = "Moderate Win Chance"
+        color = "indigo"
+    else:
+        tier = "Standard Competition"
+        color = "amber"
+
+    return {
+        "acceptance_probability": probability,
+        "acceptance_tier": tier,
+        "acceptance_color": color,
+        "acceptance_factors": factors
+    }
+

@@ -12,8 +12,10 @@ import {
   PackageCheck,
   Trash2,
   CheckCircle2,
-  X
+  X,
+  TrendingUp
 } from 'lucide-react';
+
 
 export default function JobCard({ job, onOpenPlaybook, onOpenOutreach, onOpenDeliverable, onDismissJob, onOpenDetails }) {
   const isHighTicket = job.budget >= 1000;
@@ -194,8 +196,41 @@ export default function JobCard({ job, onOpenPlaybook, onOpenOutreach, onOpenDel
           </div>
         </div>
 
+        {/* Probability of Being Accepted */}
+        <div className="mb-3 p-2.5 rounded-xl bg-slate-950/70 border border-white/[0.06] hover:border-emerald-500/30 transition-all">
+          <div className="flex items-center justify-between text-xs mb-1.5">
+            <span className="text-[11px] font-semibold text-slate-300 flex items-center gap-1.5">
+              <TrendingUp className="w-3.5 h-3.5 text-emerald-400" />
+              <span>Acceptance Probability:</span>
+            </span>
+            <span className={`font-black text-xs flex items-center gap-1 ${
+              (job.acceptance_probability || 80) >= 88 
+                ? 'text-emerald-400' 
+                : (job.acceptance_probability || 80) >= 75 
+                  ? 'text-cyan-400' 
+                  : 'text-amber-400'
+            }`}>
+              <span>{job.acceptance_probability || 80}%</span>
+              <span className="text-[10px] font-bold text-slate-400">({job.acceptance_tier || 'High Win Chance'})</span>
+            </span>
+          </div>
+          <div className="w-full bg-slate-900 rounded-full h-1.5 overflow-hidden border border-white/[0.04]">
+            <div 
+              className={`h-full rounded-full transition-all duration-700 ${
+                (job.acceptance_probability || 80) >= 88 
+                  ? 'bg-gradient-to-r from-emerald-500 via-teal-400 to-cyan-400' 
+                  : (job.acceptance_probability || 80) >= 75 
+                    ? 'bg-gradient-to-r from-cyan-500 to-blue-400' 
+                    : 'bg-gradient-to-r from-amber-500 to-orange-400'
+              }`}
+              style={{ width: `${job.acceptance_probability || 80}%` }}
+            />
+          </div>
+        </div>
+
         {/* Student Stats Metric Box */}
         <div className="grid grid-cols-2 gap-2 text-xs mb-4">
+
           
           {/* Difficulty & Dev Time */}
           <div className={`p-2.5 rounded-xl border ${diffBadge.badge} flex flex-col justify-center`}>

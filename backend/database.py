@@ -63,7 +63,8 @@ class Database:
                  no_resume_only: Optional[bool] = False,
                  hide_done: Optional[bool] = False,
                  search: Optional[str] = None,
-                 marketplace_category: Optional[str] = None) -> List[Dict[str, Any]]:
+                 marketplace_category: Optional[str] = None,
+                 min_acceptance: Optional[int] = None) -> List[Dict[str, Any]]:
 
         data = self._read_data()
         jobs = data.get("jobs", [])
@@ -86,6 +87,8 @@ class Database:
                 continue
             if no_resume_only and job.get("requires_resume") is True:
                 continue
+            if min_acceptance is not None and job.get("acceptance_probability", 80) < min_acceptance:
+                continue
             if marketplace_category:
                 cat = marketplace_category.lower()
                 is_bidding = bool(job.get("is_bidding_gig") or job.get("requires_resume") or job.get("marketplace_category") == "bidding_and_resumes")
@@ -105,8 +108,8 @@ class Database:
                     continue
             filtered.append(job)
 
-        # Sort by feasibility desc, budget desc
-        filtered.sort(key=lambda j: (j.get("feasibility_score", 0), j.get("budget", 0)), reverse=True)
+        # Sort by acceptance probability desc, feasibility desc, budget desc
+        filtered.sort(key=lambda j: (j.get("acceptance_probability", 80), j.get("feasibility_score", 0), j.get("budget", 0)), reverse=True)
         return filtered
 
     def get_job_by_id(self, job_id: str) -> Optional[Dict[str, Any]]:

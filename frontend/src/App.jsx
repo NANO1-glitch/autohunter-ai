@@ -33,8 +33,10 @@ export default function App() {
   const [selectedSource, setSelectedSource] = useState('All');
   const [selectedDifficulty, setSelectedDifficulty] = useState('All');
   const [minBudget, setMinBudget] = useState(0);
+  const [minAcceptance, setMinAcceptance] = useState(0);
   const [noResumeOnly, setNoResumeOnly] = useState(false);
   const [hideDone, setHideDone] = useState(true);
+
 
   // Active Modals
   const [activeDetailsJob, setActiveDetailsJob] = useState(null);
@@ -200,7 +202,11 @@ export default function App() {
     if (minBudget > 0 && (job.budget || 0) < minBudget) {
       return false;
     }
+    if (minAcceptance > 0 && (job.acceptance_probability || 80) < minAcceptance) {
+      return false;
+    }
     if (noResumeOnly && job.requires_resume === true) {
+
       return false;
     }
     if (search.trim()) {
@@ -425,6 +431,8 @@ export default function App() {
           setSelectedDifficulty={setSelectedDifficulty}
           minBudget={minBudget}
           setMinBudget={setMinBudget}
+          minAcceptance={minAcceptance}
+          setMinAcceptance={setMinAcceptance}
           noResumeOnly={noResumeOnly}
           setNoResumeOnly={setNoResumeOnly}
           hideDone={hideDone}
@@ -455,6 +463,7 @@ export default function App() {
                 setSelectedSource('All');
                 setSelectedDifficulty('All');
                 setMinBudget(0);
+                setMinAcceptance(0);
                 setSearch('');
                 setHideDone(false);
               }}

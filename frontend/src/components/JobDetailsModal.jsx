@@ -16,8 +16,10 @@ import {
   MapPin, 
   Tag, 
   FileText,
-  Copy
+  Copy,
+  TrendingUp
 } from 'lucide-react';
+
 
 export default function JobDetailsModal({ job, onClose, onOpenOutreach, onOpenPlaybook, onOpenDeliverable }) {
   if (!job) return null;
@@ -124,7 +126,60 @@ export default function JobDetailsModal({ job, onClose, onOpenOutreach, onOpenPl
             </div>
           </div>
 
+          {/* Probability of Being Accepted Card */}
+          <div className="p-4 rounded-xl bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 border border-emerald-500/30 shadow-lg">
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-3">
+              <div className="flex items-center gap-2.5">
+                <div className="p-2 rounded-lg bg-emerald-500/10 border border-emerald-500/30">
+                  <TrendingUp className="w-5 h-5 text-emerald-400" />
+                </div>
+                <div>
+                  <div className="text-[11px] font-bold uppercase tracking-wider text-slate-400">Probability of Being Accepted</div>
+                  <div className="text-base font-black text-white flex items-center gap-2 mt-0.5">
+                    <span className="text-emerald-400 text-lg font-black">{job.acceptance_probability || 85}%</span>
+                    <span className="text-xs font-bold px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 border border-emerald-500/40">
+                      {job.acceptance_tier || "High Win Chance"}
+                    </span>
+                  </div>
+                </div>
+              </div>
+              
+              <div className="text-right text-[11px] text-slate-400 hidden sm:block">
+                <span>Calculated via channel advantage, pilot strategy & AI feasibility</span>
+              </div>
+            </div>
+
+            {/* Progress bar */}
+            <div className="w-full bg-slate-800 rounded-full h-2 mb-3.5 overflow-hidden">
+              <div 
+                className="h-full rounded-full bg-gradient-to-r from-emerald-500 via-teal-400 to-cyan-400 transition-all duration-700"
+                style={{ width: `${job.acceptance_probability || 85}%` }}
+              />
+            </div>
+
+            {/* Acceptance Factors Breakdown */}
+            {job.acceptance_factors && job.acceptance_factors.length > 0 && (
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 pt-2 border-t border-slate-800/80">
+                {job.acceptance_factors.map((factor, idx) => (
+                  <div key={idx} className="p-2.5 rounded-lg bg-slate-950/80 border border-slate-800 flex items-start gap-2 text-xs">
+                    <CheckCircle2 className="w-3.5 h-3.5 text-emerald-400 shrink-0 mt-0.5" />
+                    <div className="flex-1">
+                      <div className="font-bold text-slate-200 flex items-center justify-between">
+                        <span>{factor.name}</span>
+                        <span className="text-emerald-400 font-extrabold text-[11px]">{factor.impact}</span>
+                      </div>
+                      <div className="text-[11px] text-slate-400 mt-0.5 leading-snug">
+                        {factor.description}
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+
           {/* Full Job Description & Requirements Section */}
+
           <div className="space-y-2">
             <div className="flex items-center justify-between">
               <h4 className="text-xs font-bold uppercase tracking-wider text-slate-400 flex items-center gap-1.5">

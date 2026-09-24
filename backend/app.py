@@ -88,7 +88,8 @@ def get_jobs(
     no_resume_only: Optional[bool] = False,
     hide_done: Optional[bool] = False,
     search: Optional[str] = None,
-    marketplace_category: Optional[str] = None
+    marketplace_category: Optional[str] = None,
+    min_acceptance: Optional[int] = None
 ):
     return db.get_jobs(
         category=category,
@@ -98,8 +99,10 @@ def get_jobs(
         no_resume_only=no_resume_only,
         hide_done=hide_done,
         search=search,
-        marketplace_category=marketplace_category
+        marketplace_category=marketplace_category,
+        min_acceptance=min_acceptance
     )
+
 
 
 @app.get("/api/jobs/{job_id}")

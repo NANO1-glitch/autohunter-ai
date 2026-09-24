@@ -44,8 +44,11 @@ export default function FilterBar({
   setHideDone,
   onPurgeClosed,
   doneCount = 0,
+  minAcceptance = 0,
+  setMinAcceptance,
   totalMatching
 }) {
+
   return (
     <div className="glass-panel p-4 rounded-xl border border-slate-800/80 mb-6 space-y-3">
       
@@ -147,7 +150,21 @@ export default function FilterBar({
             <option value="1200">Min $1,200 (Premium)</option>
             <option value="2000">Min $2,000 (Enterprise)</option>
           </select>
+
+          {/* Win Probability Filter */}
+          <select
+            value={minAcceptance}
+            onChange={(e) => setMinAcceptance && setMinAcceptance(Number(e.target.value))}
+            className="bg-slate-900 border border-slate-700/80 rounded-lg px-3 py-2 text-xs text-slate-200 focus:outline-none focus:border-cyan-500 cursor-pointer"
+            title="Filter by estimated acceptance probability"
+          >
+            <option value="0">🎯 Any Win Chance</option>
+            <option value="90">🔥 90%+ Top Win Chance</option>
+            <option value="80">⚡ 80%+ High Win Chance</option>
+            <option value="70">⚖️ 70%+ Moderate</option>
+          </select>
         </div>
+
 
       </div>
 
