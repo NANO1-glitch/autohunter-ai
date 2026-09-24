@@ -99,16 +99,28 @@ class AutoPilotEngine:
                 except Exception as b_err:
                     db.add_autopilot_log(f"Package warning: {b_err}", level="warning", job_id=job_id)
 
-                # B. Generate Humanized Cold Pitch tailored specifically to what they need
-                pitch = generate_humanized_pitch(job, sender_name=sender_name)
+                # B. Generate Executive Pitch tailored specifically to what they need
+                sender_title = settings.get("sender_title", "Lead Automation & Solutions Engineer")
+                sender_company = settings.get("sender_company", "Autonomous Systems & Workflow Automation")
+                sender_email = settings.get("smtp_email", "")
 
-                # C. Autonomous Dispatch
+                pitch = generate_humanized_pitch(
+                    job, 
+                    sender_name=sender_name,
+                    sender_title=sender_title,
+                    sender_company=sender_company,
+                    sender_email=sender_email
+                )
+
+                # C. Autonomous Dispatch with dual-part HTML + plain text
                 result = send_cold_email(
                     to_email=email,
                     subject=pitch["subject"],
                     body=pitch["body"],
-                    job_id=job_id
+                    job_id=job_id,
+                    html_body=pitch.get("html_body")
                 )
+
 
                 if result.get("success"):
                     # Mark job as contacted so it doesn't repeat

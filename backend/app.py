@@ -52,6 +52,8 @@ class OutreachRequest(BaseModel):
     to_email: str
     subject: str
     body: str
+    html_body: Optional[str] = None
+
 
 class OutreachStatusUpdate(BaseModel):
     status: str  # 'sent', 'pending', 'approved', 'denied'
@@ -216,8 +218,17 @@ def generate_pitch(payload: Dict[str, Any]):
     if not job:
         raise HTTPException(status_code=404, detail="Job not found")
     settings = db.get_settings()
-    sender_name = settings.get("sender_name", "Student Automation Consultant")
-    pitch = generate_humanized_pitch(job, sender_name=sender_name)
+    sender_name = settings.get("sender_name", "Sharesth")
+    sender_title = settings.get("sender_title", "Lead Automation & Solutions Engineer")
+    sender_company = settings.get("sender_company", "Autonomous Systems & Workflow Automation")
+    sender_email = settings.get("smtp_email", "")
+    pitch = generate_humanized_pitch(
+        job, 
+        sender_name=sender_name,
+        sender_title=sender_title,
+        sender_company=sender_company,
+        sender_email=sender_email
+    )
     return pitch
 
 @app.post("/api/outreach/send")
@@ -229,9 +240,11 @@ def send_pitch(outreach: OutreachRequest):
         to_email=outreach.to_email,
         subject=outreach.subject,
         body=outreach.body,
-        job_id=outreach.job_id
+        job_id=outreach.job_id,
+        html_body=outreach.html_body
     )
     return result
+
 
 @app.get("/api/outreaches")
 def list_outreaches():

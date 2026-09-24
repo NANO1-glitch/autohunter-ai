@@ -18,6 +18,8 @@ export default function OutreachModal({ job, onClose, onSentSuccess }) {
   const [recipientEmail, setRecipientEmail] = useState('');
   const [subject, setSubject] = useState('');
   const [body, setBody] = useState('');
+  const [htmlBody, setHtmlBody] = useState('');
+  const [activeTab, setActiveTab] = useState('preview'); // 'preview' | 'edit'
   const [isLoading, setIsLoading] = useState(true);
   const [isSending, setIsSending] = useState(false);
   const [dispatchResult, setDispatchResult] = useState(null);
@@ -35,6 +37,7 @@ export default function OutreachModal({ job, onClose, onSentSuccess }) {
       .then(data => {
         setSubject(data.subject || '');
         setBody(data.body || '');
+        setHtmlBody(data.html_body || '');
         setRecipientEmail(job.contact_email || 'client@company.com');
         setIsLoading(false);
       })
@@ -43,6 +46,7 @@ export default function OutreachModal({ job, onClose, onSentSuccess }) {
         setIsLoading(false);
       });
   };
+
 
   useEffect(() => {
     fetchPitch();
@@ -63,8 +67,10 @@ export default function OutreachModal({ job, onClose, onSentSuccess }) {
           job_id: job.id,
           to_email: recipientEmail,
           subject: subject,
-          body: body
+          body: body,
+          html_body: htmlBody
         })
+
       });
       const data = await res.json();
       setDispatchResult(data);
@@ -264,9 +270,14 @@ export default function OutreachModal({ job, onClose, onSentSuccess }) {
 
               {/* Subject Line Input */}
               <div className="space-y-1">
-                <label className="text-xs font-semibold text-slate-400 flex items-center gap-1.5">
-                  <FileText className="w-3.5 h-3.5 text-cyan-400" />
-                  <span>Subject / Proposal Title (Peer-to-Peer, Lowercase Hook)</span>
+                <label className="text-xs font-semibold text-slate-400 flex items-center justify-between">
+                  <div className="flex items-center gap-1.5">
+                    <FileText className="w-3.5 h-3.5 text-cyan-400" />
+                    <span>Executive Subject Line (B2B & Deliverability Optimized)</span>
+                  </div>
+                  <span className="text-[10px] text-emerald-400 font-bold bg-emerald-500/10 px-2 py-0.5 rounded border border-emerald-500/20">
+                    High Open Rate
+                  </span>
                 </label>
                 <input
                   type="text"
@@ -276,18 +287,66 @@ export default function OutreachModal({ job, onClose, onSentSuccess }) {
                 />
               </div>
 
-              {/* Pitch Body */}
-              <div className="space-y-1">
-                <label className="text-xs font-semibold text-slate-400">
-                  {isPortal ? 'Tailored Proposal / Cover Note (Editable)' : 'Email Body (Editable)'}
-                </label>
-                <textarea
-                  rows={8}
-                  value={body}
-                  onChange={(e) => setBody(e.target.value)}
-                  className="w-full p-3.5 bg-slate-950 border border-slate-800 focus:border-cyan-500 rounded-lg text-xs text-slate-200 leading-relaxed font-sans focus:outline-none resize-none"
-                />
+              {/* Pitch Body & View Toggle */}
+              <div className="space-y-2">
+                <div className="flex items-center justify-between">
+                  <label className="text-xs font-semibold text-slate-400">
+                    {isPortal ? 'Tailored Proposal / Cover Note' : 'Email Presentation'}
+                  </label>
+                  {!isPortal && (
+                    <div className="flex items-center gap-1 bg-slate-950 p-1 rounded-lg border border-slate-800">
+                      <button
+                        type="button"
+                        onClick={() => setActiveTab('preview')}
+                        className={`px-2.5 py-1 text-[11px] font-bold rounded-md transition-all cursor-pointer ${
+                          activeTab === 'preview'
+                            ? 'bg-cyan-500 text-slate-950 shadow-sm'
+                            : 'text-slate-400 hover:text-slate-200'
+                        }`}
+                      >
+                        ✉️ Gmail Render Preview
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => setActiveTab('edit')}
+                        className={`px-2.5 py-1 text-[11px] font-bold rounded-md transition-all cursor-pointer ${
+                          activeTab === 'edit'
+                            ? 'bg-cyan-500 text-slate-950 shadow-sm'
+                            : 'text-slate-400 hover:text-slate-200'
+                        }`}
+                      >
+                        ✏️ Edit Plain Text
+                      </button>
+                    </div>
+                  )}
+                </div>
+
+                {activeTab === 'preview' && !isPortal ? (
+                  <div className="rounded-xl border border-slate-700/80 bg-white text-slate-900 p-5 max-h-[320px] overflow-y-auto shadow-inner text-xs">
+                    <div className="flex items-center justify-between pb-3 mb-3 border-b border-slate-200 text-[11px] text-slate-500">
+                      <div>
+                        <span className="font-bold text-slate-700">To:</span> {recipientEmail || 'client@company.com'}
+                      </div>
+                      <div className="text-[10px] bg-slate-100 text-slate-600 px-2 py-0.5 rounded font-mono font-semibold">
+                        Gmail Web & Mobile Responsive
+                      </div>
+                    </div>
+                    <div 
+                      className="email-render-container"
+                      dangerouslySetInnerHTML={{ __html: htmlBody || body.replace(/\n/g, '<br />') }}
+                    />
+                  </div>
+                ) : (
+                  <textarea
+                    rows={8}
+                    value={body}
+                    onChange={(e) => setBody(e.target.value)}
+                    className="w-full p-3.5 bg-slate-950 border border-slate-800 focus:border-cyan-500 rounded-lg text-xs text-slate-200 leading-relaxed font-sans focus:outline-none resize-none"
+                    placeholder="Enter email message body..."
+                  />
+                )}
               </div>
+
 
               {/* Live Dispatch Feedback Alert */}
               {dispatchResult && (

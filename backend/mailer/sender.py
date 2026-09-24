@@ -4,10 +4,12 @@ from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 from email.mime.base import MIMEBase
 from email import encoders
+from email.utils import formatdate, make_msgid
 from pathlib import Path
 from typing import Dict, Any, List, Optional
 from backend.database import db
 from backend.mailer.dns_verifier import verify_email_domain_mx
+from backend.engine.humanizer import convert_plain_to_professional_html
 
 
 def send_cold_email(
@@ -15,8 +17,10 @@ def send_cold_email(
     subject: str, 
     body: str, 
     job_id: str = None, 
-    attachments: Optional[List[str]] = None
+    attachments: Optional[List[str]] = None,
+    html_body: Optional[str] = None
 ) -> Dict[str, Any]:
+
     """
     Sends cold outreach email.
     If simulation_mode is enabled in settings or credentials are empty,
@@ -75,15 +79,41 @@ def send_cold_email(
 
     # Real SMTP Dispatch
     try:
-        msg = MIMEMultipart()
-        msg["From"] = f"{sender_name} <{smtp_email}>"
+        sender_title = settings.get("sender_title", "Lead Automation & Solutions Engineer")
+        sender_company = settings.get("sender_company", "Autonomous Systems & Workflow Automation")
+        
+        # Display From header formatted for executive inbox appearance
+        display_from = f"{sender_name} | {sender_title} <{smtp_email}>" if sender_title else f"{sender_name} <{smtp_email}>"
+
+        if attachments:
+            msg = MIMEMultipart("mixed")
+            body_container = MIMEMultipart("alternative")
+            msg.attach(body_container)
+        else:
+            msg = MIMEMultipart("alternative")
+            body_container = msg
+
+        msg["From"] = display_from
         msg["To"] = to_email
+        msg["Reply-To"] = smtp_email
         msg["Subject"] = subject
+        msg["Date"] = formatdate(localtime=True)
+        msg["Message-ID"] = make_msgid(domain="gmail.com")
 
-        # Attach plain text body for maximum human deliverability (bypasses spam filters)
-        msg.attach(MIMEText(body, "plain", "utf-8"))
+        # 1. Plain text fallback part
+        body_container.attach(MIMEText(body, "plain", "utf-8"))
 
-        # Attach files if any
+        # 2. Executive HTML part
+        html_content = html_body or convert_plain_to_professional_html(
+            plain_text=body,
+            sender_name=sender_name,
+            sender_title=sender_title,
+            sender_company=sender_company,
+            sender_email=smtp_email
+        )
+        body_container.attach(MIMEText(html_content, "html", "utf-8"))
+
+        # 3. Attach files if any
         if attachments:
             for attach_path in attachments:
                 p = Path(attach_path)
@@ -110,6 +140,7 @@ def send_cold_email(
         server.login(smtp_email, smtp_password)
         server.sendmail(smtp_email, [to_email], msg.as_string())
         server.quit()
+
 
         record = {
             "job_id": job_id,

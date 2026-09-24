@@ -12,8 +12,12 @@ CLEAN_DEFAULT_SETTINGS = {
     "smtp_port": 587,
     "smtp_email": "",
     "smtp_password": "",
-    "sender_name": "Automation Specialist",
+    "sender_name": "Automation & AI Engineer",
+    "sender_title": "Lead Automation & Solutions Specialist",
+    "sender_company": "Autonomous Systems Studio",
+    "signature_style": "executive_card",
     "simulation_mode": True,
+
     "min_budget": 300,
     "min_feasibility": 70,
     "auto_pilot": False,

@@ -156,16 +156,64 @@ export default function SettingsModal({ onClose, onSettingsUpdated }) {
               <span>Gmail Credentials</span>
             </h3>
 
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+              <div>
+                <label className="font-semibold text-slate-400 mb-1 block">Full Name</label>
+                <input
+                  type="text"
+                  value={settings.sender_name || ''}
+                  onChange={(e) => setSettings({ ...settings, sender_name: e.target.value })}
+                  placeholder="e.g. Sharesth"
+                  className="w-full px-3.5 py-2 bg-slate-950 border border-slate-800 focus:border-cyan-500 rounded-lg text-xs text-white focus:outline-none"
+                />
+              </div>
+              <div>
+                <label className="font-semibold text-slate-400 mb-1 block">Professional Title</label>
+                <input
+                  type="text"
+                  value={settings.sender_title || ''}
+                  onChange={(e) => setSettings({ ...settings, sender_title: e.target.value })}
+                  placeholder="e.g. Lead Automation & Solutions Engineer"
+                  className="w-full px-3.5 py-2 bg-slate-950 border border-slate-800 focus:border-cyan-500 rounded-lg text-xs text-white focus:outline-none"
+                />
+              </div>
+            </div>
+
             <div>
-              <label className="font-semibold text-slate-400 mb-1 block">Sender Display Name</label>
+              <label className="font-semibold text-slate-400 mb-1 block">Company / Studio Brand (Optional)</label>
               <input
                 type="text"
-                value={settings.sender_name}
-                onChange={(e) => setSettings({ ...settings, sender_name: e.target.value })}
-                placeholder="e.g. Sharesth | Automation & Tech Consultant"
+                value={settings.sender_company || ''}
+                onChange={(e) => setSettings({ ...settings, sender_company: e.target.value })}
+                placeholder="e.g. Autonomous Systems & Workflow Automation"
                 className="w-full px-3.5 py-2 bg-slate-950 border border-slate-800 focus:border-cyan-500 rounded-lg text-xs text-white focus:outline-none"
               />
             </div>
+
+            {/* Live Executive Signature Card Preview */}
+            <div className="p-3.5 rounded-xl bg-slate-950 border border-slate-800/80">
+              <div className="text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-2 flex items-center justify-between">
+                <span>Executive Signature Card (Sent with Every Email)</span>
+                <span className="text-emerald-400 font-bold">✓ Active</span>
+              </div>
+              <div className="flex items-center gap-3 pt-1">
+                <div className="w-10 h-10 rounded-lg bg-gradient-to-br from-cyan-500 to-indigo-600 flex items-center justify-center text-white font-bold text-sm shadow-md shrink-0">
+                  {((settings.sender_name || 'Sharesth').split(' ').map(p => p[0]).join('').slice(0, 2)).toUpperCase() || 'S'}
+                </div>
+                <div className="min-w-0">
+                  <div className="text-xs font-bold text-white leading-tight">
+                    {settings.sender_name || 'Sharesth'}
+                  </div>
+                  <div className="text-[11px] font-semibold text-cyan-400 mt-0.5">
+                    {settings.sender_title || 'Lead Automation & Solutions Engineer'}
+                  </div>
+                  <div className="text-[10px] text-slate-400 mt-0.5 truncate">
+                    {settings.sender_company || 'Autonomous Systems & Workflow Automation'} &bull; Verified Technical Deliverables
+                  </div>
+                </div>
+              </div>
+            </div>
+
 
             <div>
               <label className="font-semibold text-slate-400 mb-1 block">Business Gmail / Email Address</label>

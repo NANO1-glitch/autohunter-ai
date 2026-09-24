@@ -16,8 +16,12 @@ DEFAULT_SETTINGS = {
     "smtp_port": 587,
     "smtp_email": "",
     "smtp_password": "",
-    "sender_name": "Student Automation Consultant",
+    "sender_name": "Automation & AI Engineer",
+    "sender_title": "Lead Automation & Solutions Specialist",
+    "sender_company": "Autonomous Systems Studio",
+    "signature_style": "executive_card",
     "simulation_mode": True,  # When True, emails are logged safely without real SMTP
+
     "min_budget": 300,
     "min_feasibility": 70,
     "auto_pilot": False,
