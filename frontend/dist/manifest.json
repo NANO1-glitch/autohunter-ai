@@ -1,0 +1,18 @@
+{
+  "name": "AutoHunter AI - Autonomous Freelance Deal Hunter",
+  "short_name": "AutoHunter",
+  "description": "Autonomous freelance deal discovery, AI scoring, and cold pitch generator",
+  "start_url": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#030712",
+  "theme_color": "#06b6d4",
+  "icons": [
+    {
+      "src": "/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

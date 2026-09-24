@@ -9,10 +9,13 @@ import {
   Sparkles,
   Layers,
   ArrowUpRight,
-  PackageCheck
+  PackageCheck,
+  Trash2,
+  CheckCircle2,
+  X
 } from 'lucide-react';
 
-export default function JobCard({ job, onOpenPlaybook, onOpenOutreach, onOpenDeliverable }) {
+export default function JobCard({ job, onOpenPlaybook, onOpenOutreach, onOpenDeliverable, onDismissJob }) {
   const isHighTicket = job.budget >= 1000;
 
   // Source badge styling
@@ -102,20 +105,34 @@ export default function JobCard({ job, onOpenPlaybook, onOpenOutreach, onOpenDel
             )}
           </div>
 
-          {/* Budget */}
-          <div className="text-right">
-            <div className="text-xl font-black text-emerald-400 flex items-center justify-end tracking-tight">
-              ${Number(job.budget).toLocaleString()}
-            </div>
-            {job.effective_hourly_rate && (
-              <div className="text-[10px] text-slate-400 font-semibold">
-                ~${job.effective_hourly_rate}/hr
+          {/* Budget & Dismiss Button */}
+          <div className="flex items-center gap-2">
+            <div className="text-right">
+              <div className="text-xl font-black text-emerald-400 flex items-center justify-end tracking-tight">
+                ${Number(job.budget).toLocaleString()}
               </div>
-            )}
+              {job.effective_hourly_rate && (
+                <div className="text-[10px] text-slate-400 font-semibold">
+                  ~${job.effective_hourly_rate}/hr
+                </div>
+              )}
+            </div>
+
+            {/* Remove / Closed Button */}
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                if (onDismissJob) onDismissJob(job.id);
+              }}
+              className="p-1.5 rounded-lg text-slate-500 hover:text-rose-400 hover:bg-rose-500/15 transition-all cursor-pointer opacity-40 group-hover:opacity-100"
+              title="Remove gig (Completed by you or closed by client)"
+            >
+              <Trash2 className="w-3.5 h-3.5" />
+            </button>
           </div>
         </div>
 
-        {/* Category & Application Type Tag */}
+        {/* Category, Status & Application Type Tag */}
         <div className="mb-2 flex items-center gap-1.5 flex-wrap">
           <span className="text-[11px] font-semibold text-cyan-300 bg-cyan-950/40 border border-cyan-800/40 px-2 py-0.5 rounded-md inline-block">
             {job.category}
@@ -123,6 +140,27 @@ export default function JobCard({ job, onOpenPlaybook, onOpenOutreach, onOpenDel
           <span className="text-[10px] font-semibold text-emerald-400 bg-emerald-950/40 border border-emerald-800/40 px-2 py-0.5 rounded-md inline-block">
             {job.application_type || "⚡ Direct Deal (No Resume)"}
           </span>
+          {job.has_direct_email ? (
+            <span className="text-[10px] font-semibold text-emerald-300 bg-emerald-950/50 border border-emerald-500/30 px-2 py-0.5 rounded-md inline-flex items-center gap-1">
+              ✉️ Direct Email
+            </span>
+          ) : (
+            <span className="text-[10px] font-semibold text-indigo-300 bg-indigo-950/50 border border-indigo-500/30 px-2 py-0.5 rounded-md inline-flex items-center gap-1">
+              🌐 Official Portal
+            </span>
+          )}
+          {job.status === 'contacted' && (
+            <span className="text-[10px] font-bold px-2 py-0.5 rounded-md bg-sky-500/15 text-sky-300 border border-sky-500/30 flex items-center gap-1">
+              <CheckCircle2 className="w-2.5 h-2.5 text-sky-400" />
+              Pitched / In Progress
+            </span>
+          )}
+          {job.status === 'won' && (
+            <span className="text-[10px] font-bold px-2 py-0.5 rounded-md bg-emerald-500/20 text-emerald-300 border border-emerald-500/40 flex items-center gap-1">
+              <CheckCircle2 className="w-2.5 h-2.5 text-emerald-400" />
+              Won Deal
+            </span>
+          )}
         </div>
 
         {/* Job Title */}
@@ -200,15 +238,26 @@ export default function JobCard({ job, onOpenPlaybook, onOpenOutreach, onOpenDel
           <span>Student Guide</span>
         </button>
 
-        {/* 1-Click Cold Approach */}
-        <button
-          onClick={() => onOpenOutreach(job)}
-          className="flex-1 flex items-center justify-center gap-1.5 py-2 px-3 rounded-xl bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 text-white text-xs font-extrabold shadow-md shadow-cyan-600/25 transition-all cursor-pointer hover:shadow-cyan-500/40"
-          title="Approve & Send Humanized Cold Pitch"
-        >
-          <Send className="w-3.5 h-3.5" />
-          <span>Cold Pitch</span>
-        </button>
+        {/* 1-Click Cold Approach or Official Portal */}
+        {job.has_direct_email ? (
+          <button
+            onClick={() => onOpenOutreach(job)}
+            className="flex-1 flex items-center justify-center gap-1.5 py-2 px-3 rounded-xl bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 text-white text-xs font-extrabold shadow-md shadow-cyan-600/25 transition-all cursor-pointer hover:shadow-cyan-500/40"
+            title="Approve & Send Humanized Cold Pitch via Gmail"
+          >
+            <Send className="w-3.5 h-3.5" />
+            <span>Cold Pitch</span>
+          </button>
+        ) : (
+          <button
+            onClick={() => onOpenOutreach(job)}
+            className="flex-1 flex items-center justify-center gap-1.5 py-2 px-3 rounded-xl bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white text-xs font-extrabold shadow-md shadow-indigo-600/25 transition-all cursor-pointer hover:shadow-indigo-500/40"
+            title="Open tailored cover letter & 1-click portal link"
+          >
+            <ExternalLink className="w-3.5 h-3.5" />
+            <span>Apply Portal</span>
+          </button>
+        )}
 
         {/* AI Build & Package Deliverable */}
         <button

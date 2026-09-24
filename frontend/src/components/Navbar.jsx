@@ -8,19 +8,24 @@ import {
   ShieldCheck, 
   ShieldAlert,
   Sparkles,
+  Mail,
   Zap,
+  Clock,
   Radio
 } from 'lucide-react';
 
 export default function Navbar({ 
+  activeTab = 'radar',
+  onTabChange,
   onRefresh, 
   isRefreshing, 
+  schedulerStatus,
   onOpenManual, 
   onOpenSettings, 
-  onOpenOutbox,
+  onOpenOutbox, 
   onOpenAntiScam,
   outboxCount,
-  totalJobs = 58 
+  totalJobs = 180 
 }) {
   return (
     <header className="sticky top-0 z-40 w-full border-b border-white/[0.08] bg-slate-950/80 backdrop-blur-xl">
@@ -58,19 +63,67 @@ export default function Navbar({
           </div>
         </div>
 
+        {/* Navigation Tabs: Radar vs Gmail Outreach */}
+        <div className="flex items-center gap-1 p-1 bg-slate-900/90 border border-slate-800 rounded-xl">
+          <button
+            onClick={() => onTabChange && onTabChange('radar')}
+            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer ${
+              activeTab === 'radar'
+                ? 'bg-cyan-500/20 text-cyan-300 border border-cyan-500/40 shadow-sm'
+                : 'text-slate-400 hover:text-slate-200'
+            }`}
+          >
+            <Radar className="w-3.5 h-3.5 text-cyan-400" />
+            <span className="hidden sm:inline">Job Radar</span>
+            <span className="text-[10px] px-1.5 py-0.2 rounded-full bg-slate-800 text-slate-400 font-bold">
+              {totalJobs}
+            </span>
+          </button>
+
+          <button
+            onClick={() => onTabChange && onTabChange('outreach')}
+            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer ${
+              activeTab === 'outreach'
+                ? 'bg-red-500/20 text-red-300 border border-red-500/40 shadow-sm'
+                : 'text-slate-400 hover:text-slate-200'
+            }`}
+          >
+            <Mail className="w-3.5 h-3.5 text-red-400" />
+            <span>Gmail Outreach</span>
+            {outboxCount > 0 && (
+              <span className="text-[10px] px-1.5 py-0.2 rounded-full bg-red-500 text-white font-extrabold shadow-sm">
+                {outboxCount}
+              </span>
+            )}
+          </button>
+        </div>
+
         {/* Global Action Controls */}
         <div className="flex items-center gap-2.5">
           
-          {/* Sync Feeds */}
-          <button
-            onClick={onRefresh}
-            disabled={isRefreshing}
-            className="flex items-center gap-2 px-3.5 py-1.5 text-xs font-semibold rounded-lg bg-slate-900/90 hover:bg-slate-800 text-slate-200 border border-slate-700/80 hover:border-cyan-500/40 transition-all cursor-pointer disabled:opacity-50"
-            title="Scan & ingest fresh gigs worldwide"
-          >
-            <RefreshCw className={`w-3.5 h-3.5 text-cyan-400 ${isRefreshing ? 'animate-spin' : ''}`} />
-            <span className="hidden sm:inline">{isRefreshing ? 'Scanning Feeds...' : 'Sync Feeds'}</span>
-          </button>
+          {/* Sync Feeds with 2-Hour Auto-Refresh Countdown */}
+          <div className="flex items-center gap-1.5">
+            <button
+              onClick={onRefresh}
+              disabled={isRefreshing}
+              className="flex items-center gap-2 px-3 py-1.5 text-xs font-semibold rounded-lg bg-slate-900/90 hover:bg-slate-800 text-slate-200 border border-slate-700/80 hover:border-cyan-500/40 transition-all cursor-pointer disabled:opacity-50"
+              title="Manual Scan: Ingest fresh gigs immediately & reset 2-hour timer"
+            >
+              <RefreshCw className={`w-3.5 h-3.5 text-cyan-400 ${isRefreshing ? 'animate-spin' : ''}`} />
+              <span className="hidden sm:inline">{isRefreshing ? 'Scanning Feeds...' : 'Sync Feeds'}</span>
+            </button>
+
+            {schedulerStatus && (
+              <div 
+                className="hidden md:flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg bg-cyan-500/10 border border-cyan-500/25 text-[11px] font-bold text-cyan-300"
+                title={`2-Hour Auto-Refresh: Next automatic scan in ${schedulerStatus.formatted_remaining || '2 hours'}`}
+              >
+                <Clock className="w-3.5 h-3.5 text-cyan-400 animate-pulse" />
+                <span className="text-slate-400">Auto-Sync:</span>
+                <span className="text-white font-mono">{schedulerStatus.formatted_remaining || '2h'}</span>
+              </div>
+            )}
+          </div>
 
           {/* Paste Gig */}
           <button

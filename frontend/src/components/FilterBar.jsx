@@ -1,5 +1,5 @@
 import React from 'react';
-import { Search, Filter, Layers, Globe, ShieldAlert, DollarSign } from 'lucide-react';
+import { Search, Filter, Layers, Globe, ShieldAlert, DollarSign, Trash2 } from 'lucide-react';
 
 const CATEGORIES = [
   "All",
@@ -40,6 +40,10 @@ export default function FilterBar({
   setMinBudget,
   noResumeOnly,
   setNoResumeOnly,
+  hideDone,
+  setHideDone,
+  onPurgeClosed,
+  doneCount = 0,
   totalMatching
 }) {
   return (
@@ -76,6 +80,33 @@ export default function FilterBar({
           >
             <span>⚡ No Resume / Direct Pitch</span>
           </button>
+
+          {/* Hide Done / Contacted Gigs Toggle */}
+          <button
+            type="button"
+            onClick={() => setHideDone(!hideDone)}
+            className={`px-3 py-2 rounded-lg text-xs font-bold transition-all cursor-pointer flex items-center gap-1.5 ${
+              hideDone
+                ? 'bg-cyan-500/20 text-cyan-300 border border-cyan-500/40 shadow-sm'
+                : 'bg-slate-900 text-slate-400 border border-slate-700/80 hover:text-white'
+            }`}
+            title="Hide gigs you've already pitched/completed or that are closed"
+          >
+            <span>{hideDone ? '🔒 Hiding Done/Pitched' : '👁️ Showing All'}</span>
+          </button>
+
+          {/* Purge Closed Gigs Button */}
+          {doneCount > 0 && (
+            <button
+              type="button"
+              onClick={onPurgeClosed}
+              className="px-3 py-2 rounded-lg text-xs font-bold bg-rose-500/15 hover:bg-rose-500/25 text-rose-300 border border-rose-500/40 transition-all cursor-pointer flex items-center gap-1.5 shadow-sm"
+              title="Permanently remove all completed, contacted, and closed gigs from the database"
+            >
+              <Trash2 className="w-3.5 h-3.5 text-rose-400" />
+              <span>Purge Done ({doneCount})</span>
+            </button>
+          )}
 
           {/* Source Dropdown */}
           <select

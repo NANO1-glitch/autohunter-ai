@@ -118,6 +118,33 @@ CURATED_HIGH_TICKET_STREAM = [
     }
 ]
 
+def extract_real_email(text: str) -> str:
+    """
+    Extracts only real, genuine contact emails from job descriptions.
+    Rejects placeholder domains, fake addresses, and file names.
+    Never invents or fabricates an address.
+    """
+    if not text:
+        return ""
+    matches = re.findall(r'[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+', text)
+    fake_domains = {
+        "clientcompany.com", "example.com", "domain.com", "test.com",
+        "client.com", "sample.com", "company.com", "yourdomain.com", "placeholder.com",
+        "contractor.hn", "sentry.io", "w3.org", "schema.org", "google.com"
+    }
+    image_exts = (".png", ".jpg", ".jpeg", ".svg", ".webp", ".gif", ".css", ".js")
+    for email_candidate in matches:
+        em = email_candidate.strip().lower()
+        domain = em.split("@")[-1]
+        if domain in fake_domains:
+            continue
+        if any(em.endswith(ext) for ext in image_exts):
+            continue
+        if len(domain.split(".")) < 2 or len(domain.split(".")[-1]) < 2:
+            continue
+        return em
+    return ""
+
 def fetch_remoteok_jobs() -> List[Dict[str, Any]]:
     jobs = []
     try:
@@ -132,9 +159,8 @@ def fetch_remoteok_jobs() -> List[Dict[str, Any]]:
                         continue
                     title = item.get("position", "")
                     description = item.get("description", "")
-                    # Extract email or contact if present
-                    contact_match = re.search(r'[\w\.-]+@[\w\.-]+\.\w+', description)
-                    contact = contact_match.group(0) if contact_match else f"apply@{item.get('company', 'company').lower().replace(' ', '')}.com"
+                    # Extract real email only if explicitly provided in post
+                    contact = extract_real_email(description)
                     
                     jobs.append({
                         "id": f"rok-{item.get('id', str(uuid.uuid4())[:6])}",
@@ -166,8 +192,7 @@ def fetch_weworkremotely_jobs() -> List[Dict[str, Any]]:
                 company = parts[0].strip()
                 title = parts[1].strip()
 
-            contact_match = re.search(r'[\w\.-]+@[\w\.-]+\.\w+', summary)
-            contact = contact_match.group(0) if contact_match else f"careers@{company.lower().replace(' ', '')}.com"
+            contact = extract_real_email(summary)
 
             jobs.append({
                 "id": f"wwr-{str(uuid.uuid4())[:8]}",
@@ -193,7 +218,7 @@ def fetch_hackernews_jobs() -> List[Dict[str, Any]]:
             resp = client.get(url)
             if resp.status_code == 200:
                 hits = resp.json().get("hits", [])
-                for hit in hits[:12]:
+                for hit in hits[:15]:
                     comment_text = hit.get("comment_text", "")
                     if not comment_text or len(comment_text) < 50:
                         continue
@@ -201,12 +226,11 @@ def fetch_hackernews_jobs() -> List[Dict[str, Any]]:
                     clean_text = re.sub('<[^<]+?>', ' ', comment_text)
                     first_line = clean_text.strip().split("\n")[0][:80]
                     
-                    contact_match = re.search(r'[\w\.-]+@[\w\.-]+\.\w+', clean_text)
-                    contact = contact_match.group(0) if contact_match else f"{hit.get('author', 'hiring')}@contractor.hn"
+                    contact = extract_real_email(clean_text)
 
                     jobs.append({
                         "id": f"hn-{hit.get('objectID', str(uuid.uuid4())[:6])}",
-                        "title": f"Freelance Opportunity: {first_line}",
+                        "title": f"Freelance Gig: {first_line}",
                         "company": f"HN Founder (@{hit.get('author', 'startup')})",
                         "contact_email": contact,
                         "source": "HackerNews Freelance",
@@ -234,8 +258,7 @@ def fetch_remotive_jobs() -> List[Dict[str, Any]]:
                     company = item.get("company_name", "Remote Employer")
                     clean_desc = re.sub('<[^<]+?>', ' ', description)
                     
-                    contact_match = re.search(r'[\w\.-]+@[\w\.-]+\.\w+', clean_desc)
-                    contact = contact_match.group(0) if contact_match else f"apply@{company.lower().replace(' ', '')}.com"
+                    contact = extract_real_email(clean_desc)
 
                     jobs.append({
                         "id": f"rem-{item.get('id', str(uuid.uuid4())[:6])}",
@@ -267,8 +290,7 @@ def fetch_jobicy_jobs() -> List[Dict[str, Any]]:
                     company = item.get("companyName", "Tech Partner")
                     clean_desc = re.sub('<[^<]+?>', ' ', description)
 
-                    contact_match = re.search(r'[\w\.-]+@[\w\.-]+\.\w+', clean_desc)
-                    contact = contact_match.group(0) if contact_match else f"careers@{company.lower().replace(' ', '')}.com"
+                    contact = extract_real_email(clean_desc)
 
                     jobs.append({
                         "id": f"jby-{item.get('id', str(uuid.uuid4())[:6])}",

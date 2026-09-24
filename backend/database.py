@@ -59,12 +59,19 @@ class Database:
                  min_budget: Optional[float] = None,
                  difficulty: Optional[str] = None,
                  no_resume_only: Optional[bool] = False,
+                 hide_done: Optional[bool] = False,
                  search: Optional[str] = None) -> List[Dict[str, Any]]:
         data = self._read_data()
         jobs = data.get("jobs", [])
+        closed_statuses = {"contacted", "won", "done", "completed", "closed", "rejected", "passed"}
+        outreaches = data.get("outreaches", [])
+        contacted_ids = {o.get("job_id") for o in outreaches if o.get("job_id")}
 
         filtered = []
         for job in jobs:
+            # Filter out jobs that were completed/contacted or closed by someone else
+            if hide_done and (job.get("status") in closed_statuses or job.get("id") in contacted_ids):
+                continue
             if category and category.lower() != "all" and job.get("category") != category:
                 continue
             if source and source.lower() != "all" and job.get("source", "").lower() != source.lower():
@@ -94,6 +101,42 @@ class Database:
             if j.get("id") == job_id:
                 return j
         return None
+
+    def delete_job(self, job_id: str) -> bool:
+        """
+        Permanently removes a job/gig from database (e.g. if closed by client or done).
+        """
+        data = self._read_data()
+        jobs = data.get("jobs", [])
+        orig_count = len(jobs)
+        data["jobs"] = [j for j in jobs if j.get("id") != job_id]
+        if len(data["jobs"]) < orig_count:
+            self._write_data(data)
+            return True
+        return False
+
+    def dismiss_job(self, job_id: str) -> bool:
+        return self.delete_job(job_id)
+
+    def purge_done_and_closed_jobs(self) -> int:
+        """
+        Purges all jobs that were done/contacted by the user or marked as closed/rejected.
+        """
+        data = self._read_data()
+        jobs = data.get("jobs", [])
+        orig_count = len(jobs)
+        closed_statuses = {"contacted", "won", "done", "completed", "closed", "rejected", "passed"}
+        outreaches = data.get("outreaches", [])
+        contacted_ids = {o.get("job_id") for o in outreaches if o.get("job_id")}
+
+        data["jobs"] = [
+            j for j in jobs 
+            if j.get("status") not in closed_statuses and j.get("id") not in contacted_ids
+        ]
+        removed_count = orig_count - len(data["jobs"])
+        if removed_count > 0:
+            self._write_data(data)
+        return removed_count
 
     def upsert_jobs(self, new_jobs: List[Dict[str, Any]]) -> int:
         data = self._read_data()
@@ -139,17 +182,122 @@ class Database:
         if "id" not in outreach_entry:
             outreach_entry["id"] = str(uuid.uuid4())[:8]
 
+        # Enrich with job details if job_id exists
+        if "job_id" in outreach_entry and outreach_entry["job_id"]:
+            job = self.get_job_by_id(outreach_entry["job_id"])
+            if job:
+                if "company" not in outreach_entry or not outreach_entry["company"]:
+                    outreach_entry["company"] = job.get("company", "Client")
+                if "job_title" not in outreach_entry or not outreach_entry["job_title"]:
+                    outreach_entry["job_title"] = job.get("title", "")
+                if "budget" not in outreach_entry or not outreach_entry["budget"]:
+                    outreach_entry["budget"] = job.get("budget", 0)
+
+        if "outreach_status" not in outreach_entry:
+            outreach_entry["outreach_status"] = "pending"
+
         data["outreaches"].append(outreach_entry)
         self._write_data(data)
 
         # Also update job status to "contacted"
-        if "job_id" in outreach_entry:
+        if "job_id" in outreach_entry and outreach_entry["job_id"]:
             self.update_job_status(outreach_entry["job_id"], "contacted")
 
         return outreach_entry
 
     def get_outreaches(self) -> List[Dict[str, Any]]:
-        return self._read_data().get("outreaches", [])
+        outreaches = self._read_data().get("outreaches", [])
+        for o in outreaches:
+            if "outreach_status" not in o:
+                # Default legacy status to sent or pending
+                o["outreach_status"] = "sent"
+        return outreaches
+
+    def update_outreach_status(self, outreach_id: str, new_status: str) -> Optional[Dict[str, Any]]:
+        data = self._read_data()
+        outreaches = data.get("outreaches", [])
+        updated = None
+        for item in outreaches:
+            if item.get("id") == outreach_id:
+                item["outreach_status"] = new_status
+                item["updated_at"] = datetime.now().isoformat()
+                updated = item
+                if item.get("job_id"):
+                    job_status = "won" if new_status == "approved" else ("rejected" if new_status == "denied" else "contacted")
+                    self.update_job_status(item["job_id"], job_status)
+                break
+        if updated:
+            self._write_data(data)
+        return updated
+
+    def delete_outreach(self, outreach_id: str) -> bool:
+        data = self._read_data()
+        outreaches = data.get("outreaches", [])
+        orig_len = len(outreaches)
+        data["outreaches"] = [o for o in outreaches if o.get("id") != outreach_id]
+        if len(data["outreaches"]) < orig_len:
+            self._write_data(data)
+            return True
+        return False
+
+    def remove_outreaches_by_email(self, email_address: str) -> int:
+        """
+        Removes all outreaches sent to a specific bounced or invalid email address.
+        """
+        data = self._read_data()
+        outreaches = data.get("outreaches", [])
+        orig_len = len(outreaches)
+        target = email_address.strip().lower()
+        data["outreaches"] = [o for o in outreaches if (o.get("to_email") or "").strip().lower() != target]
+        removed = orig_len - len(data["outreaches"])
+        if removed > 0:
+            self._write_data(data)
+        return removed
+
+    def add_bounced_email(self, email_address: str) -> int:
+        """
+        Blacklists a bounced email address and automatically cleans it from CRM.
+        """
+        data = self._read_data()
+        if "bounced_emails" not in data:
+            data["bounced_emails"] = []
+        target = email_address.strip().lower()
+        if target and target not in data["bounced_emails"]:
+            data["bounced_emails"].append(target)
+            self._write_data(data)
+        return self.remove_outreaches_by_email(target)
+
+    def get_bounced_emails(self) -> List[str]:
+        return self._read_data().get("bounced_emails", [])
+
+    def is_placeholder_or_bounced(self, email_address: str) -> bool:
+        """
+        Checks if an email is fake, a placeholder (e.g. clientcompany.com), or blacklisted.
+        """
+        if not email_address or "@" not in email_address:
+            return True
+        target = email_address.strip().lower()
+        if target in self.get_bounced_emails():
+            return True
+        domain = target.split("@")[-1]
+        fake_domains = {
+            "clientcompany.com", "example.com", "domain.com", "test.com",
+            "client.com", "sample.com", "company.com", "yourdomain.com", "placeholder.com",
+            "contractor.hn", "sentry.io", "w3.org", "schema.org", "google.com"
+        }
+        if domain in fake_domains:
+            return True
+        if any(domain.endswith(ext) for ext in [".png", ".jpg", ".jpeg", ".svg", ".webp", ".gif", ".css", ".js"]):
+            return True
+        curated_domains = {
+            "scaleretaillabs.io", "apexgrowth.co", "kryptonpay.app", "vanguardoutreach.com",
+            "meridianlogistics.net", "sentineldefense.tech", "apexmedia.co", "luminarytech.io",
+            "pulsehealth.app", "gmail.com", "outlook.com", "yahoo.com", "veritasclinics.com"
+        }
+        if any(target.startswith(p) for p in ["apply@", "careers@", "inquiries@", "jobs@", "recruiting@"]):
+            if domain not in curated_domains:
+                return True
+        return False
 
     def get_stats(self) -> Dict[str, Any]:
         data = self._read_data()

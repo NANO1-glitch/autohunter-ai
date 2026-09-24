@@ -19,8 +19,8 @@ def analyze_job(job_data: Dict[str, Any]) -> Dict[str, Any]:
     deliverable = "Automated solution package"
     skills = []
 
-    # Category matching heuristics - specific micro-tasks first
-    if any(k in content for k in ["caption", "captions", "subtitle", "subtitles", "transcribe", "transcription", "srt", "vtt", "reels caption", "tiktok caption"]):
+    # Category matching heuristics with strict regex word boundaries
+    if re.search(r'\b(captions?|subtitles?|transcrib(?:e|tion)|srt|vtt|reels?\s*caption|tiktok\s*caption)\b', content):
         category = "Video Captions & Subtitles"
         feasibility = 98
         difficulty = "Very Easy"
@@ -29,7 +29,7 @@ def analyze_job(job_data: Dict[str, Any]) -> Dict[str, Any]:
         deliverable = "Synchronized SRT / VTT subtitle files + formatted text script"
         skills = ["Video Captions", "Subtitles", "Transcription", "Short-Form Video"]
 
-    elif any(k in content for k in ["translate", "translation", "translator", "spanish", "french", "german", "localize", "localization"]):
+    elif re.search(r'\b(translat(?:e|ion|or)|spanish|french|german|localiz(?:e|ation))\b', content):
         category = "Language Translation & Localization"
         feasibility = 98
         difficulty = "Very Easy"
@@ -38,7 +38,7 @@ def analyze_job(job_data: Dict[str, Any]) -> Dict[str, Any]:
         deliverable = "Accurate, culturally natural translated document + side-by-side verification"
         skills = ["Translation", "Localization", "Multi-Language", "Proofreading"]
 
-    elif any(k in content for k in ["scrape", "scraper", "scraping", "crawl", "playwright", "selenium", "extract data", "lead extraction"]):
+    elif re.search(r'\b(scrap(?:e|er|ing)|crawl(?:er)?|playwright|selenium|extract data|lead extraction|price tracking)\b', content):
         category = "Web Scraping & Data Extraction"
         feasibility = 95
         difficulty = "Very Easy"
@@ -47,34 +47,16 @@ def analyze_job(job_data: Dict[str, Any]) -> Dict[str, Any]:
         deliverable = "Robust Python extraction script + Clean sample CSV + README setup"
         skills = ["Python", "Playwright", "Web Scraping", "CSV/Excel Data"]
 
-    elif any(k in content for k in ["bot", "script", "automation", "automate", "zapier", "make.com", "webhook", "cron", "auto-reply", "sync"]):
-        category = "Automation & Python Scripts"
-        feasibility = 92
+    elif re.search(r'\b(zapier|make\.com|webhooks?|stripe|airtable|slack integration|api integration|sync payments)\b', content):
+        category = "API & Webhook Automations"
+        feasibility = 94
         difficulty = "Easy"
-        ai_time = "30-45 mins with Python or Make.com"
-        turnaround = "2 to 3 days"
-        deliverable = "End-to-end automation workflow + auto-retry error handling + instructions"
-        skills = ["Python", "API Integration", "Automation", "Zapier/Make"]
-
-    elif any(k in content for k in ["excel", "google sheet", "spreadsheet", "data entry", "clean data", "csv", "format data", "vba", "macro"]):
-        category = "Data Entry & Excel Automations"
-        feasibility = 98
-        difficulty = "Very Easy"
-        ai_time = "10-20 mins using Python Pandas & OpenPyXL"
-        turnaround = "24 hours"
-        deliverable = "100% cleaned and validated spreadsheet + 1-click update script"
-        skills = ["Excel", "Google Sheets", "Data Cleaning", "Pandas"]
-
-    elif any(k in content for k in ["logo", "brand identity", "graphic design", "banner", "flyer", "social media post", "thumbnail", "vector", "svg"]):
-        category = "Logo & Brand Design"
-        feasibility = 90
-        difficulty = "Very Easy"
-        ai_time = "15-30 mins with AI generation + vectorization"
+        ai_time = "25-35 mins with Python or Make.com"
         turnaround = "24 to 48 hours"
-        deliverable = "3-5 high-resolution vector logo concepts (SVG, PNG transparent, brand palette)"
-        skills = ["Graphic Design", "Logo Design", "Branding", "Vector SVG"]
+        deliverable = "End-to-end webhook bridge + auto-retry error handling + instructions"
+        skills = ["Python", "API Integration", "Make.com", "Zapier", "Webhooks"]
 
-    elif any(k in content for k in ["chatgpt", "openai", "claude", "llm", "ai chatbot", "langchain", "agent", "gemini", "rag", "custom gpt"]):
+    elif re.search(r'\b(chatgpt|openai|claude|llms?|chatbot|langchain|agents?|gemini|rag|custom gpt)\b', content):
         category = "AI Chatbots & Workflows"
         feasibility = 92
         difficulty = "Easy"
@@ -83,7 +65,7 @@ def analyze_job(job_data: Dict[str, Any]) -> Dict[str, Any]:
         deliverable = "Custom trained AI bot embeddable on website/WhatsApp + prompt template"
         skills = ["AI Chatbots", "Prompt Engineering", "OpenAI/Gemini", "FastAPI"]
 
-    elif any(k in content for k in ["landing page", "website", "react", "html", "css", "portfolio", "wordpress", "webflow", "shopify"]):
+    elif re.search(r'\b(landing page|websites?|react|tailwind|wordpress|webflow|shopify|frontend|next\.?js)\b', content):
         category = "Web & Landing Page Dev"
         feasibility = 85
         difficulty = "Moderate"
@@ -92,8 +74,62 @@ def analyze_job(job_data: Dict[str, Any]) -> Dict[str, Any]:
         deliverable = "Responsive, high-converting landing page with mobile optimization"
         skills = ["Web Development", "React/Tailwind", "Responsive Design"]
 
-    elif any(k in content for k in ["copywriting", "blog", "content writer", "article", "newsletter", "email sequence"]):
-        category = "Copywriting & Translation"
+    elif re.search(r'\b(logo|brand identity|graphic design|vector|svg|branding|figma)\b', content):
+        category = "Logo & Brand Design"
+        feasibility = 90
+        difficulty = "Very Easy"
+        ai_time = "15-30 mins with AI generation + vectorization"
+        turnaround = "24 to 48 hours"
+        deliverable = "3-5 high-resolution vector logo concepts (SVG, PNG transparent, brand palette)"
+        skills = ["Graphic Design", "Logo Design", "Branding", "Vector SVG"]
+
+    elif re.search(r'\b(siem|detection engineer|infosec|\bsoc\b|penetration testing|cyber\s?security)\b', content):
+        category = "Cyber Security & Infrastructure"
+        feasibility = 80
+        difficulty = "Moderate"
+        ai_time = "1-2 hours"
+        turnaround = "3 to 5 days"
+        deliverable = "Security policy configuration + detection rules + audit report"
+        skills = ["Cyber Security", "SIEM", "Detection Rules", "Linux"]
+
+    elif re.search(r'\b(devops|docker|kubernetes|aws|azure|gcp|terraform|ci/cd)\b', content):
+        category = "DevOps & Cloud Engineering"
+        feasibility = 85
+        difficulty = "Moderate"
+        ai_time = "1 hour with Docker & Terraform"
+        turnaround = "2 to 3 days"
+        deliverable = "Containerized setup + CI/CD workflow pipeline"
+        skills = ["DevOps", "Docker", "CI/CD", "Cloud"]
+
+    elif re.search(r'\b(data analyst|sql|databricks|tableau|power bi|etl pipeline)\b', content):
+        category = "Data Analytics & SQL Pipelines"
+        feasibility = 90
+        difficulty = "Easy"
+        ai_time = "30-45 mins with SQL & Pandas"
+        turnaround = "24 to 48 hours"
+        deliverable = "Optimized SQL queries + clean dataset export + reporting dashboard"
+        skills = ["SQL", "Data Analytics", "Databricks", "Reporting"]
+
+    elif re.search(r'\b(excel|google sheets?|spreadsheets?|data entry|clean data|\bcsv\b|\bvba\b|\bmacro\b)\b', content):
+        category = "Data Entry & Excel Automations"
+        feasibility = 98
+        difficulty = "Very Easy"
+        ai_time = "10-20 mins using Python Pandas & OpenPyXL"
+        turnaround = "24 hours"
+        deliverable = "100% cleaned and validated spreadsheet + 1-click update script"
+        skills = ["Excel", "Google Sheets", "Data Cleaning", "Pandas"]
+
+    elif re.search(r'\b(bot|scripts?|automation|automate|cron|auto-reply)\b', content):
+        category = "Automation & Python Scripts"
+        feasibility = 92
+        difficulty = "Easy"
+        ai_time = "30-45 mins with Python or Make.com"
+        turnaround = "2 to 3 days"
+        deliverable = "End-to-end automation workflow + auto-retry error handling + instructions"
+        skills = ["Python", "API Integration", "Automation", "Zapier/Make"]
+
+    elif re.search(r'\b(copywriting|blog|content writer|article|newsletter|email sequence)\b', content):
+        category = "Copywriting & Content"
         feasibility = 95
         difficulty = "Very Easy"
         ai_time = "15 mins with AI editor"
@@ -186,8 +222,38 @@ def analyze_job(job_data: Dict[str, Any]) -> Dict[str, Any]:
     else:
         country_badge = "🌍 Global Remote ($ USD)"
 
+    # 7. Real Direct Email vs Official Hiring Portal Detection
+    raw_email = (job_data.get("contact_email") or "").strip()
+    fake_domains = {
+        "clientcompany.com", "example.com", "domain.com", "test.com",
+        "client.com", "sample.com", "company.com", "yourdomain.com", "placeholder.com",
+        "contractor.hn", "sentry.io", "w3.org", "schema.org", "google.com"
+    }
+    curated_domains = {
+        "scaleretaillabs.io", "apexgrowth.co", "kryptonpay.app", "vanguardoutreach.com",
+        "meridianlogistics.net", "sentineldefense.tech", "apexmedia.co", "luminarytech.io",
+        "pulsehealth.app", "gmail.com", "outlook.com", "yahoo.com", "veritasclinics.com"
+    }
+    contact_email = raw_email
+    if contact_email:
+        target_em = contact_email.lower()
+        domain = target_em.split("@")[-1] if "@" in target_em else ""
+        if (
+            not domain or 
+            domain in fake_domains or 
+            any(domain.endswith(ext) for ext in [".png", ".jpg", ".jpeg", ".svg", ".webp", ".gif", ".css", ".js"]) or
+            (any(target_em.startswith(p) for p in ["apply@", "careers@", "inquiries@", "jobs@", "recruiting@"]) and domain not in curated_domains)
+        ):
+            contact_email = ""
+
+    has_direct_email = bool(contact_email)
+    apply_mode = "direct_email" if has_direct_email else "official_portal"
+
     return {
         **job_data,
+        "contact_email": contact_email,
+        "has_direct_email": has_direct_email,
+        "apply_mode": apply_mode,
         "category": category,
         "feasibility_score": feasibility,
         "difficulty": difficulty,

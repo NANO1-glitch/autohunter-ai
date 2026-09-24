@@ -9,7 +9,9 @@ import {
   AlertCircle, 
   User, 
   Mail, 
-  FileText 
+  FileText,
+  Copy,
+  ExternalLink
 } from 'lucide-react';
 
 export default function OutreachModal({ job, onClose, onSentSuccess }) {
@@ -19,6 +21,7 @@ export default function OutreachModal({ job, onClose, onSentSuccess }) {
   const [isLoading, setIsLoading] = useState(true);
   const [isSending, setIsSending] = useState(false);
   const [dispatchResult, setDispatchResult] = useState(null);
+  const [copied, setCopied] = useState(false);
 
   const fetchPitch = () => {
     if (!job) return;
@@ -78,6 +81,75 @@ export default function OutreachModal({ job, onClose, onSentSuccess }) {
     }
   };
 
+  const handleOpenInGmail = async () => {
+    const to = encodeURIComponent(recipientEmail);
+    const su = encodeURIComponent(subject);
+    const b = encodeURIComponent(body);
+    const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${to}&su=${su}&body=${b}`;
+    window.open(gmailUrl, '_blank');
+
+    // Automatically record to Gmail Outreach Tracker
+    try {
+      await fetch('/api/outreach/record', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          job_id: job.id,
+          to_email: recipientEmail,
+          subject: subject,
+          body: body,
+          company: job.company || 'Client',
+          job_title: job.title || '',
+          budget: job.budget || 0,
+          mode: 'Gmail (1-Click)',
+          outreach_status: 'pending'
+        })
+      });
+      if (onSentSuccess) {
+        onSentSuccess(job.id);
+      }
+    } catch (err) {
+      console.error("Failed to auto-record outreach", err);
+    }
+  };
+
+  const handleCopyPitch = () => {
+    navigator.clipboard.writeText(`To: ${recipientEmail}\nSubject: ${subject}\n\n${body}`);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
+
+  const isPortal = !job.has_direct_email || !recipientEmail;
+
+  const handleOpenPortal = async () => {
+    if (job.url) {
+      window.open(job.url, '_blank');
+    }
+    // Record to CRM
+    try {
+      await fetch('/api/outreach/record', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          job_id: job.id,
+          to_email: 'Hiring Portal Direct',
+          subject: subject,
+          body: body,
+          company: job.company || 'Client',
+          job_title: job.title || '',
+          budget: job.budget || 0,
+          mode: 'Official Portal (1-Click)',
+          outreach_status: 'contacted'
+        })
+      });
+      if (onSentSuccess) {
+        onSentSuccess(job.id);
+      }
+    } catch (err) {
+      console.error("Failed to auto-record portal outreach", err);
+    }
+  };
+
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm animate-in fade-in duration-200">
       <div className="bg-slate-900 border border-slate-700/80 rounded-2xl w-full max-w-2xl max-h-[92vh] flex flex-col shadow-2xl overflow-hidden">
@@ -85,19 +157,27 @@ export default function OutreachModal({ job, onClose, onSentSuccess }) {
         {/* Header */}
         <div className="px-6 py-4 border-b border-slate-800 bg-slate-950 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <div className="w-9 h-9 rounded-xl bg-gradient-to-tr from-cyan-500 to-blue-600 flex items-center justify-center shadow-lg shadow-cyan-500/20 text-white">
-              <Send className="w-4 h-4" />
+            <div className={`w-9 h-9 rounded-xl flex items-center justify-center shadow-lg text-white ${
+              isPortal 
+                ? 'bg-gradient-to-tr from-indigo-500 to-purple-600 shadow-indigo-500/20' 
+                : 'bg-gradient-to-tr from-cyan-500 to-blue-600 shadow-cyan-500/20'
+            }`}>
+              {isPortal ? <ExternalLink className="w-4 h-4" /> : <Send className="w-4 h-4" />}
             </div>
             <div>
               <div className="flex items-center gap-2">
-                <h2 className="text-base font-bold text-white">1-Click Cold Email Approval</h2>
+                <h2 className="text-base font-bold text-white">
+                  {isPortal ? '1-Click Portal Application & Proposal' : '1-Click Direct Email Approval'}
+                </h2>
                 <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 flex items-center gap-1">
                   <ShieldCheck className="w-3 h-3 text-emerald-400" />
                   Anti-AI Detector Tuned
                 </span>
               </div>
               <p className="text-xs text-slate-400">
-                Calibrated to sound 100% human, casual-professional, and achieve 3x reply rates
+                {isPortal 
+                  ? 'Customized proposal ready to paste into the official employer application portal' 
+                  : 'Calibrated to sound 100% human, casual-professional, and achieve 3x reply rates'}
               </p>
             </div>
           </div>
@@ -115,7 +195,7 @@ export default function OutreachModal({ job, onClose, onSentSuccess }) {
           {isLoading ? (
             <div className="py-12 flex flex-col items-center justify-center gap-3 text-slate-400">
               <Sparkles className="w-6 h-6 text-cyan-400 animate-spin" />
-              <span>Tailoring humanized cold pitch to client's exact problem...</span>
+              <span>Tailoring humanized pitch to client's exact problem...</span>
             </div>
           ) : (
             <>
@@ -136,26 +216,57 @@ export default function OutreachModal({ job, onClose, onSentSuccess }) {
                 </button>
               </div>
 
-              {/* Recipient Input */}
-              <div className="space-y-1">
-                <label className="text-xs font-semibold text-slate-400 flex items-center gap-1.5">
-                  <Mail className="w-3.5 h-3.5 text-cyan-400" />
-                  <span>Recipient Client Email</span>
-                </label>
-                <input
-                  type="email"
-                  value={recipientEmail}
-                  onChange={(e) => setRecipientEmail(e.target.value)}
-                  className="w-full px-3.5 py-2 bg-slate-950 border border-slate-800 focus:border-cyan-500 rounded-lg text-xs text-white focus:outline-none"
-                  placeholder="client@company.com"
-                />
-              </div>
+              {/* Portal Mode Info Banner */}
+              {isPortal ? (
+                <div className="p-3.5 rounded-xl bg-indigo-500/10 border border-indigo-500/30 flex items-center justify-between gap-3 text-xs">
+                  <div className="flex items-center gap-2.5">
+                    <ExternalLink className="w-4 h-4 text-indigo-400 shrink-0" />
+                    <div>
+                      <div className="font-bold text-indigo-200">Official Hiring Portal Deal</div>
+                      <div className="text-slate-400 text-[11px]">
+                        This company accepts applications on their hiring portal ({job.source || 'Direct Portal'}). Copy the customized proposal below and submit directly on their page.
+                      </div>
+                    </div>
+                  </div>
+                  {job.url && (
+                    <a
+                      href={job.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="px-3 py-1.5 rounded-lg bg-indigo-600 hover:bg-indigo-500 text-white font-bold flex items-center gap-1.5 shrink-0 text-xs shadow-md shadow-indigo-600/30 transition-all"
+                    >
+                      <span>Visit Portal</span>
+                      <ExternalLink className="w-3 h-3" />
+                    </a>
+                  )}
+                </div>
+              ) : (
+                /* Recipient Input for Direct Email */
+                <div className="space-y-1">
+                  <div className="flex items-center justify-between">
+                    <label className="text-xs font-semibold text-slate-400 flex items-center gap-1.5">
+                      <Mail className="w-3.5 h-3.5 text-cyan-400" />
+                      <span>Verified Client Direct Email</span>
+                    </label>
+                    <span className="text-[10px] font-bold text-emerald-400 bg-emerald-500/15 border border-emerald-500/30 px-2 py-0.5 rounded-full">
+                      ✓ Confirmed Real Address
+                    </span>
+                  </div>
+                  <input
+                    type="email"
+                    value={recipientEmail}
+                    onChange={(e) => setRecipientEmail(e.target.value)}
+                    className="w-full px-3.5 py-2 bg-slate-950 border border-slate-800 focus:border-cyan-500 rounded-lg text-xs text-white focus:outline-none"
+                    placeholder="client@company.com"
+                  />
+                </div>
+              )}
 
               {/* Subject Line Input */}
               <div className="space-y-1">
                 <label className="text-xs font-semibold text-slate-400 flex items-center gap-1.5">
                   <FileText className="w-3.5 h-3.5 text-cyan-400" />
-                  <span>Subject Line (Peer-to-Peer, Lowercase Hook)</span>
+                  <span>Subject / Proposal Title (Peer-to-Peer, Lowercase Hook)</span>
                 </label>
                 <input
                   type="text"
@@ -165,10 +276,10 @@ export default function OutreachModal({ job, onClose, onSentSuccess }) {
                 />
               </div>
 
-              {/* Email Body */}
+              {/* Pitch Body */}
               <div className="space-y-1">
                 <label className="text-xs font-semibold text-slate-400">
-                  Email Body (Editable)
+                  {isPortal ? 'Tailored Proposal / Cover Note (Editable)' : 'Email Body (Editable)'}
                 </label>
                 <textarea
                   rows={8}
@@ -207,7 +318,7 @@ export default function OutreachModal({ job, onClose, onSentSuccess }) {
         </div>
 
         {/* Footer Actions */}
-        <div className="px-6 py-4 border-t border-slate-800 bg-slate-950 flex items-center justify-between">
+        <div className="px-6 py-4 border-t border-slate-800 bg-slate-950 flex flex-wrap items-center justify-between gap-3">
           <button
             onClick={onClose}
             className="px-4 py-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs font-medium cursor-pointer"
@@ -215,14 +326,48 @@ export default function OutreachModal({ job, onClose, onSentSuccess }) {
             Cancel
           </button>
 
-          <button
-            onClick={handleApproveAndSend}
-            disabled={isSending || isLoading}
-            className="flex items-center gap-2 px-6 py-2.5 rounded-lg bg-gradient-to-r from-emerald-600 via-teal-600 to-cyan-600 hover:from-emerald-500 hover:to-cyan-500 text-white text-xs font-bold shadow-lg shadow-emerald-600/30 transition-all cursor-pointer disabled:opacity-50"
-          >
-            <Send className={`w-4 h-4 ${isSending ? 'animate-bounce' : ''}`} />
-            <span>{isSending ? 'Dispatching...' : '1-Click Approve & Send'}</span>
-          </button>
+          <div className="flex items-center gap-2.5 flex-wrap">
+            <button
+              onClick={handleCopyPitch}
+              className="flex items-center gap-1.5 px-3.5 py-2 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-700 text-xs font-bold transition-all cursor-pointer"
+              title="Copy pitch text to clipboard"
+            >
+              <Copy className="w-3.5 h-3.5 text-cyan-400" />
+              <span>{copied ? 'Copied!' : 'Copy Proposal Text'}</span>
+            </button>
+
+            {isPortal ? (
+              <button
+                onClick={handleOpenPortal}
+                className="flex items-center gap-1.5 px-5 py-2 rounded-lg bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-500 hover:to-purple-500 text-white text-xs font-bold shadow-lg shadow-indigo-600/30 transition-all cursor-pointer"
+                title="Open official portal and record application in tracker"
+              >
+                <ExternalLink className="w-3.5 h-3.5" />
+                <span>Open Portal & Apply (1-Click)</span>
+              </button>
+            ) : (
+              <>
+                <button
+                  onClick={handleOpenInGmail}
+                  className="flex items-center gap-1.5 px-4 py-2 rounded-lg bg-rose-600 hover:bg-rose-500 text-white text-xs font-bold shadow-md shadow-rose-600/30 transition-all cursor-pointer"
+                  title="Open directly in Gmail web composer with cursuv1@gmail.com"
+                >
+                  <ExternalLink className="w-3.5 h-3.5" />
+                  <span>Open in Gmail (1-Click)</span>
+                </button>
+
+                <button
+                  onClick={handleApproveAndSend}
+                  disabled={isSending || isLoading}
+                  className="flex items-center gap-2 px-5 py-2 rounded-lg bg-gradient-to-r from-emerald-600 via-teal-600 to-cyan-600 hover:from-emerald-500 hover:to-cyan-500 text-white text-xs font-bold shadow-lg shadow-emerald-600/30 transition-all cursor-pointer disabled:opacity-50"
+                  title="Send via background SMTP server"
+                >
+                  <Send className={`w-4 h-4 ${isSending ? 'animate-bounce' : ''}`} />
+                  <span>{isSending ? 'Dispatching...' : '1-Click Send'}</span>
+                </button>
+              </>
+            )}
+          </div>
         </div>
 
       </div>

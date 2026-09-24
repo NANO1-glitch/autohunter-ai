@@ -8,7 +8,8 @@ import {
   AlertCircle, 
   ShieldCheck, 
   Sliders, 
-  Send 
+  Send,
+  DollarSign
 } from 'lucide-react';
 
 export default function SettingsModal({ onClose, onSettingsUpdated }) {
@@ -250,6 +251,39 @@ export default function SettingsModal({ onClose, onSettingsUpdated }) {
               )}
             </div>
 
+          </div>
+
+          {/* Payment & PayPal Gateway */}
+          <div className="space-y-3 pt-3 border-t border-slate-800">
+            <h3 className="font-bold text-xs text-white uppercase tracking-wider text-slate-300 flex items-center gap-1.5">
+              <DollarSign className="w-3.5 h-3.5 text-emerald-400" />
+              <span>PayPal & Payment Gateway (For Automated Handover)</span>
+            </h3>
+
+            <div>
+              <label className="font-semibold text-slate-400 mb-1 block">PayPal.Me Link (Recommended)</label>
+              <input
+                type="text"
+                value={settings.paypal_me_link || ''}
+                onChange={(e) => setSettings({ ...settings, paypal_me_link: e.target.value })}
+                placeholder="https://paypal.me/yourusername"
+                className="w-full px-3.5 py-2 bg-slate-950 border border-slate-800 focus:border-cyan-500 rounded-lg text-xs text-white focus:outline-none font-mono"
+              />
+              <p className="text-[10px] text-slate-400 mt-1">
+                Embedded directly into your Stage 1 Trial Proof emails. Clients can pay via Credit Card, Debit Card, or PayPal.
+              </p>
+            </div>
+
+            <div>
+              <label className="font-semibold text-slate-400 mb-1 block">PayPal Email (Alternative)</label>
+              <input
+                type="email"
+                value={settings.paypal_email || ''}
+                onChange={(e) => setSettings({ ...settings, paypal_email: e.target.value })}
+                placeholder="cursuv1@gmail.com"
+                className="w-full px-3.5 py-2 bg-slate-950 border border-slate-800 focus:border-cyan-500 rounded-lg text-xs text-white focus:outline-none font-mono"
+              />
+            </div>
           </div>
 
           {/* Preferences */}

@@ -24,7 +24,7 @@ def get_local_ip():
 def open_browser():
     time.sleep(1.5)
     url = "http://127.0.0.1:8000"
-    print(f"\n🚀 Opening Dashboard at: {url}\n")
+    print(f"\n[*] Opening Dashboard at: {url}\n")
     try:
         webbrowser.open(url)
     except Exception:
@@ -65,19 +65,25 @@ if __name__ == "__main__":
     ensure_port_free(8000)
     local_ip = get_local_ip()
 
+    try:
+        sys.stdout.reconfigure(encoding='utf-8', errors='replace')
+        sys.stderr.reconfigure(encoding='utf-8', errors='replace')
+    except Exception:
+        pass
+
     print("=" * 68)
-    print("      AUTOHUNTER AI • GLOBAL FREELANCE & AUTOMATION ENGINE      ")
+    print("      AUTOHUNTER AI - GLOBAL FREELANCE & AUTOMATION ENGINE      ")
     print("=" * 68)
-    print("✓ 100% Autonomous Auto-Pilot: Ready")
-    print("✓ Privacy Shield (Zero Personal Leaks): Active")
-    print("✓ Android PWA / Mobile App Support: Active")
+    print("[+] 100% Autonomous Auto-Pilot: Ready")
+    print("[+] Privacy Shield (Zero Personal Leaks): Active")
+    print("[+] Android PWA / Mobile App Support: Active")
     print("=" * 68)
-    print(f"💻 On this PC:                  http://localhost:8000")
-    print(f"📱 On Android Phone / Friends:  http://{local_ip}:8000")
+    print(f"[*] On this PC:                  http://localhost:8000")
+    print(f"[*] On Android Phone / Friends:  http://{local_ip}:8000")
     print("=" * 68)
-    print("💡 Android Tip: Open the mobile link on your phone in Chrome,")
-    print("   tap the 3 dots (menu) -> 'Install App' or 'Add to Home screen'")
-    print("   to install it as an Android App with its own icon!")
+    print("[*] Android Tip: Open the mobile link on your phone in Chrome,")
+    print("    tap the 3 dots (menu) -> 'Install App' or 'Add to Home screen'")
+    print("    to install it as an Android App with its own icon!")
     print("=" * 68)
 
     # Launch browser on PC

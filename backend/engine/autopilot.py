@@ -81,15 +81,9 @@ class AutoPilotEngine:
                 title = job["title"]
                 email = job.get("contact_email")
 
-                if not email or "@" not in email:
-                    # AI unable to extract email -> Escalate to human
-                    db.add_escalation(
-                        title=f"Missing Client Email for: {title[:45]}",
-                        description=f"The job from {job.get('source')} pays ${job.get('budget')} but requires manual contact lookup on {job.get('url')}.",
-                        action_required="Click the link to check the contact method on Discord/LinkedIn.",
-                        job_id=job_id
-                    )
-                    db.add_autopilot_log(f"⚠️ Escalation created: Missing direct email for '{title[:35]}...'", level="warning", job_id=job_id)
+                if not email or "@" not in email or db.is_placeholder_or_bounced(email):
+                    # Portal jobs are applied directly via the official portal, not via SMTP
+                    db.add_autopilot_log(f"📋 Official Portal gig ready for 1-click apply: '{title[:40]}'", level="info", job_id=job_id)
                     continue
 
                 # A. Pre-build sanitized deliverable package

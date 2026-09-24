@@ -1,22 +1,33 @@
 import smtplib
+import mimetypes
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
-from typing import Dict, Any
+from email.mime.base import MIMEBase
+from email import encoders
+from pathlib import Path
+from typing import Dict, Any, List, Optional
 from backend.database import db
 
-def send_cold_email(to_email: str, subject: str, body: str, job_id: str = None) -> Dict[str, Any]:
+def send_cold_email(
+    to_email: str, 
+    subject: str, 
+    body: str, 
+    job_id: str = None, 
+    attachments: Optional[List[str]] = None
+) -> Dict[str, Any]:
     """
     Sends cold outreach email.
     If simulation_mode is enabled in settings or credentials are empty,
     it records a successful simulated delivery.
     Otherwise, dispatches via business Gmail/SMTP with TLS.
+    Supports file attachments (PNG screenshots, GIF demos, ZIP deliverables).
     """
     settings = db.get_settings()
     simulation_mode = settings.get("simulation_mode", True)
     smtp_server = settings.get("smtp_server", "smtp.gmail.com")
     smtp_port = int(settings.get("smtp_port", 587))
     smtp_email = settings.get("smtp_email", "").strip()
-    smtp_password = settings.get("smtp_password", "").strip()
+    smtp_password = settings.get("smtp_password", "").replace(" ", "").strip()
     sender_name = settings.get("sender_name", "Student Automation Specialist")
 
     if simulation_mode or not smtp_email or not smtp_password:
@@ -27,14 +38,35 @@ def send_cold_email(to_email: str, subject: str, body: str, job_id: str = None) 
             "subject": subject,
             "body": body,
             "status": "Simulated Sent (Safe Mode)",
+            "outreach_status": "sent",
             "mode": "Simulation",
-            "info": "Email verified and logged. To send live emails, disable Safe Mode in Settings and provide Gmail App Password."
+            "info": f"Email verified and logged. Attachments: {[Path(a).name for a in (attachments or [])]}"
         }
         db.record_outreach(record)
         return {
             "success": True,
             "mode": "simulation",
             "message": f"Cold pitch successfully queued and recorded for {to_email} (Simulation Mode).",
+            "record": record
+        }
+
+    # Pre-flight check: Prevent sending to placeholder or known bounced addresses
+    if db.is_placeholder_or_bounced(to_email):
+        record = {
+            "job_id": job_id,
+            "to_email": to_email,
+            "subject": subject,
+            "body": body,
+            "status": "Blocked (Invalid / Placeholder Domain)",
+            "outreach_status": "denied",
+            "mode": "Simulation (Pre-flight Shield)",
+            "info": f"Prevented delivery failure: {to_email} is a placeholder or bounced domain. Real SMTP skipped to protect sender reputation."
+        }
+        db.record_outreach(record)
+        return {
+            "success": True,
+            "mode": "blocked_fake_domain",
+            "message": f"Pre-flight shield prevented bounce to placeholder address ({to_email}).",
             "record": record
         }
 
@@ -47,6 +79,22 @@ def send_cold_email(to_email: str, subject: str, body: str, job_id: str = None) 
 
         # Attach plain text body for maximum human deliverability (bypasses spam filters)
         msg.attach(MIMEText(body, "plain", "utf-8"))
+
+        # Attach files if any
+        if attachments:
+            for attach_path in attachments:
+                p = Path(attach_path)
+                if p.exists() and p.is_file():
+                    ctype, encoding = mimetypes.guess_type(str(p))
+                    if ctype is None or encoding is not None:
+                        ctype = "application/octet-stream"
+                    maintype, subtype = ctype.split("/", 1)
+                    with open(p, "rb") as f:
+                        part = MIMEBase(maintype, subtype)
+                        part.set_payload(f.read())
+                    encoders.encode_base64(part)
+                    part.add_header("Content-Disposition", f"attachment; filename=\"{p.name}\"")
+                    msg.attach(part)
 
         if smtp_port == 465:
             server = smtplib.SMTP_SSL(smtp_server, smtp_port, timeout=12)
@@ -66,6 +114,7 @@ def send_cold_email(to_email: str, subject: str, body: str, job_id: str = None) 
             "subject": subject,
             "body": body,
             "status": "Delivered",
+            "outreach_status": "sent",
             "mode": "Live SMTP",
             "info": f"Sent live from {smtp_email}"
         }
@@ -100,6 +149,8 @@ def test_smtp_connection(smtp_email: str, smtp_password: str, smtp_server: str =
     """
     Tests SMTP connection to verify credentials before going live.
     """
+    smtp_password = (smtp_password or "").replace(" ", "").strip()
+    smtp_email = (smtp_email or "").strip()
     if not smtp_email or not smtp_password:
         return {"success": False, "message": "Please provide both Email and App Password."}
 

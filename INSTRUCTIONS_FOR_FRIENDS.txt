@@ -3,23 +3,27 @@
 ====================================================================
 
 HOW TO RUN:
-1. Double-click "run.bat"
+1. Extract this ZIP folder anywhere (e.g. your Desktop or Documents).
+2. Double-click "run.bat"
+3. That's it! Your browser will open the live dashboard at http://localhost:8000.
 
-DO I NEED PYTHON INSTALLED?
-No! If you don't have Python, "run.bat" will automatically detect that,
-download the official Python installer directly from python.org, install
-it silently in the background (no admin password needed), install the
-libraries, and open AutoHunter AI in your browser.
+DO I NEED PYTHON PRE-INSTALLED?
+No! If you don't have Python, "run.bat" automatically detects that,
+downloads official Python silently from python.org, sets up the
+libraries, and launches the app in under 60 seconds.
 
-DO I NEED ANY SPECIAL SOFTWARE / ANTIGRAVITY?
-No! AutoHunter AI is 100% standalone. It runs on any standard Windows PC.
+DO I NEED NODE.JS, NPM, OR ANTIGRAVITY?
+No! AutoHunter AI is 100% pre-compiled and standalone. It runs on any
+Windows PC without installing node_modules or extra developer tools.
 
-FEATURES:
-- Live Global Freelance & High-Ticket Gig Radar (US, UK, Europe, Remote)
-- AI Code Generator & Deliverable Packager (Zero setup required)
-- Anti-Scam Shield & Automated Reply Bot (Protects you from scam clients)
-- 1-Click Humanized Cold Pitch Composer
-- Micro-Gig Filters: Video Captions, Subtitles, Translations, Excel scripts
+WHAT'S INCLUDED:
+- 🎯 Global Freelance Radar: Live gigs from Discord, LinkedIn, RemoteOK, WWR, HN
+- 📬 Gmail Outreach CRM: Track Sent, Pending, Approved, and Denied deals
+- 🔄 2-Hour Autonomous Auto-Sync: Automatically scans feeds every 2 hours
+- 🛡️ Anti-Scam Shield Bot: Analyzes client replies to prevent unpaid work & scams
+- ⚡ 1-Click Cold Pitch Composer: Custom high-converting pitches that bypass AI detectors
+- 📦 1-Click Deliverable Generator: AI builds the working code and deliverables for clients
+- 📱 Android / Mobile Support: Access on your phone over Wi-Fi!
 
-Enjoy closing deals!
+Enjoy hunting and closing deals!
 ====================================================================
