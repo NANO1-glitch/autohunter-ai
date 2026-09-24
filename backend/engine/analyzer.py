@@ -205,9 +205,25 @@ def analyze_job(job_data: Dict[str, Any]) -> Dict[str, Any]:
                 deduped_skills.append(val)
 
     # 5. Resume / Bidding vs Direct Deal Detection
-    resume_indicators = ["resume", "cv", "curriculum vitae", "cover letter", "submit application", "years of experience required", "send your resume"]
-    requires_resume = any(ind in content for ind in resume_indicators)
-    application_type = "Resume Required" if requires_resume else "Direct Deal (No Resume / No Bidding)"
+    resume_indicators = ["resume", "cv", "curriculum vitae", "cover letter", "submit application", "years of experience", "send your resume", "experience required"]
+    bidding_indicators = ["fiverr", "freelancer", "upwork", "bid", "bidding", "proposal", "connects", "hourly rate", "submit proposal", "apply via portal", "bounty"]
+    
+    source_lower = str(job_data.get("source", "")).lower()
+    is_bidding_source = any(bp in source_lower for bp in ["fiverr", "freelancer", "upwork", "remoteok", "weworkremotely", "jobicy", "remotive"])
+    
+    has_resume_req = any(ind in content for ind in resume_indicators)
+    has_bidding_req = any(ind in content for ind in bidding_indicators)
+    
+    requires_resume = has_resume_req or (is_bidding_source and not bool(job_data.get("contact_email")))
+    is_bidding_gig = requires_resume or has_bidding_req or is_bidding_source
+
+    if is_bidding_gig or requires_resume:
+        application_type = "Bidding & Resume Required"
+        marketplace_category = "bidding_and_resumes"
+    else:
+        application_type = "Direct Deal (No Resume / No Bidding)"
+        marketplace_category = "direct_deals"
+
 
     # 6. Global Country & Currency Detection
     loc = job_data.get("location", "").lower()
@@ -266,7 +282,10 @@ def analyze_job(job_data: Dict[str, Any]) -> Dict[str, Any]:
         "deliverable": deliverable,
         "effective_hourly_rate": effective_hourly_rate,
         "requires_resume": requires_resume,
+        "is_bidding_gig": is_bidding_gig,
+        "marketplace_category": marketplace_category,
         "application_type": application_type,
+
         "country_badge": country_badge,
         "skills": deduped_skills
     }

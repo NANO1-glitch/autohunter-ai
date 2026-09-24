@@ -62,7 +62,9 @@ class Database:
                  difficulty: Optional[str] = None,
                  no_resume_only: Optional[bool] = False,
                  hide_done: Optional[bool] = False,
-                 search: Optional[str] = None) -> List[Dict[str, Any]]:
+                 search: Optional[str] = None,
+                 marketplace_category: Optional[str] = None) -> List[Dict[str, Any]]:
+
         data = self._read_data()
         jobs = data.get("jobs", [])
         closed_statuses = {"contacted", "won", "done", "completed", "closed", "rejected", "passed"}
@@ -84,6 +86,16 @@ class Database:
                 continue
             if no_resume_only and job.get("requires_resume") is True:
                 continue
+            if marketplace_category:
+                cat = marketplace_category.lower()
+                is_bidding = bool(job.get("is_bidding_gig") or job.get("requires_resume") or job.get("marketplace_category") == "bidding_and_resumes")
+                if cat in ["bidding_and_resumes", "bidding", "resumes"]:
+                    if not is_bidding:
+                        continue
+                elif cat in ["direct_deals", "direct", "no_resume"]:
+                    if is_bidding:
+                        continue
+
             if search:
                 q = search.lower()
                 title = job.get("title", "").lower()
@@ -206,6 +218,29 @@ class Database:
             self.update_job_status(outreach_entry["job_id"], "contacted")
 
         return outreach_entry
+
+    def is_already_pitched(self, to_email: str, job_id: Optional[str] = None) -> bool:
+        """
+        Enforces strict single-pitch policy: Checks if this client email or job
+        has already been contacted in CRM. Prevents sending multiple cold emails
+        to the same client. Only replies are permitted after initial contact.
+        """
+        data = self._read_data()
+        outreaches = data.get("outreaches", [])
+        target_email = (to_email or "").strip().lower()
+
+        for o in outreaches:
+            sent_email = (o.get("to_email") or "").strip().lower()
+            sent_job = o.get("job_id")
+            # Block if same recipient has already been emailed
+            if target_email and sent_email == target_email:
+                return True
+            # Block if same job has already been emailed
+            if job_id and sent_job and str(job_id) == str(sent_job):
+                return True
+
+        return False
+
 
     def get_outreaches(self) -> List[Dict[str, Any]]:
         outreaches = self._read_data().get("outreaches", [])

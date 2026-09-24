@@ -8,9 +8,12 @@ pnpm-debug.log*
 lerna-debug.log*
 
 node_modules
-dist
+# dist is tracked so the app runs out-of-the-box without Node.js installed
+!dist
+!dist/**
 dist-ssr
 *.local
+
 
 # Editor directories and files
 .vscode/*

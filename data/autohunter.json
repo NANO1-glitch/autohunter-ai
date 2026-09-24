@@ -31,7 +31,9 @@
       "application_type": "Direct Deal (No Resume / No Bidding)",
       "country_badge": "\ud83c\udf0d Global Remote ($ USD)",
       "has_direct_email": false,
-      "apply_mode": "official_portal"
+      "apply_mode": "official_portal",
+      "is_bidding_gig": false,
+      "marketplace_category": "direct_deals"
     },
     {
       "id": "link-auto-802",
@@ -67,7 +69,9 @@
       "application_type": "Direct Deal (No Resume / No Bidding)",
       "country_badge": "\ud83c\uddfa\ud83c\uddf8 USA ($ USD)",
       "has_direct_email": false,
-      "apply_mode": "official_portal"
+      "apply_mode": "official_portal",
+      "is_bidding_gig": false,
+      "marketplace_category": "direct_deals"
     },
     {
       "id": "disc-des-803",
@@ -99,7 +103,9 @@
       "application_type": "Direct Deal (No Resume / No Bidding)",
       "country_badge": "\ud83c\udf0d Global Remote ($ USD)",
       "has_direct_email": false,
-      "apply_mode": "official_portal"
+      "apply_mode": "official_portal",
+      "is_bidding_gig": false,
+      "marketplace_category": "direct_deals"
     },
     {
       "id": "link-bot-805",
@@ -133,7 +139,9 @@
       "application_type": "Direct Deal (No Resume / No Bidding)",
       "country_badge": "\ud83c\udf0d Global Remote ($ USD)",
       "has_direct_email": false,
-      "apply_mode": "official_portal"
+      "apply_mode": "official_portal",
+      "is_bidding_gig": false,
+      "marketplace_category": "direct_deals"
     },
     {
       "id": "hn-auto-806",
@@ -167,7 +175,9 @@
       "application_type": "Direct Deal (No Resume / No Bidding)",
       "country_badge": "\ud83c\udf0d Global Remote ($ USD)",
       "has_direct_email": false,
-      "apply_mode": "official_portal"
+      "apply_mode": "official_portal",
+      "is_bidding_gig": false,
+      "marketplace_category": "direct_deals"
     },
     {
       "id": "disc-web-807",
@@ -201,7 +211,9 @@
       "application_type": "Direct Deal (No Resume / No Bidding)",
       "country_badge": "\ud83c\uddfa\ud83c\uddf8 USA ($ USD)",
       "has_direct_email": false,
-      "apply_mode": "official_portal"
+      "apply_mode": "official_portal",
+      "is_bidding_gig": false,
+      "marketplace_category": "direct_deals"
     },
     {
       "id": "rok-1137412",
@@ -238,11 +250,13 @@
       "effective_hourly_rate": 2143,
       "created_at": "2026-09-23T05:24:48.151340",
       "status": "portal_ready",
-      "requires_resume": false,
-      "application_type": "Direct Deal (No Resume / No Bidding)",
+      "requires_resume": true,
+      "application_type": "Bidding & Resume Required",
       "country_badge": "\ud83c\udf0d Global Remote ($ USD)",
       "has_direct_email": false,
-      "apply_mode": "official_portal"
+      "apply_mode": "official_portal",
+      "is_bidding_gig": true,
+      "marketplace_category": "bidding_and_resumes"
     },
     {
       "id": "rok-1137411",
@@ -291,11 +305,13 @@
       "effective_hourly_rate": 1600,
       "created_at": "2026-09-23T05:24:48.151341",
       "status": "new",
-      "requires_resume": false,
-      "application_type": "Direct Deal (No Resume / No Bidding)",
+      "requires_resume": true,
+      "application_type": "Bidding & Resume Required",
       "country_badge": "\ud83c\udf0d Global Remote ($ USD)",
       "has_direct_email": false,
-      "apply_mode": "official_portal"
+      "apply_mode": "official_portal",
+      "is_bidding_gig": true,
+      "marketplace_category": "bidding_and_resumes"
     },
     {
       "id": "rok-1137410",
@@ -341,11 +357,13 @@
       "effective_hourly_rate": 1000,
       "created_at": "2026-09-23T05:24:48.151342",
       "status": "portal_ready",
-      "requires_resume": false,
-      "application_type": "Direct Deal (No Resume / No Bidding)",
+      "requires_resume": true,
+      "application_type": "Bidding & Resume Required",
       "country_badge": "\ud83c\udf0d Global Remote ($ USD)",
       "has_direct_email": false,
-      "apply_mode": "official_portal"
+      "apply_mode": "official_portal",
+      "is_bidding_gig": true,
+      "marketplace_category": "bidding_and_resumes"
     },
     {
       "id": "rok-1137409",
@@ -374,11 +392,13 @@
       "effective_hourly_rate": 1600,
       "created_at": "2026-09-23T05:24:48.151343",
       "status": "new",
-      "requires_resume": false,
-      "application_type": "Direct Deal (No Resume / No Bidding)",
+      "requires_resume": true,
+      "application_type": "Bidding & Resume Required",
       "country_badge": "\ud83c\udf0d Global Remote ($ USD)",
       "has_direct_email": false,
-      "apply_mode": "official_portal"
+      "apply_mode": "official_portal",
+      "is_bidding_gig": true,
+      "marketplace_category": "bidding_and_resumes"
     },
     {
       "id": "rok-1137408",
@@ -425,11 +445,13 @@
       "effective_hourly_rate": 1600,
       "created_at": "2026-09-23T05:24:48.151344",
       "status": "portal_ready",
-      "requires_resume": false,
-      "application_type": "Direct Deal (No Resume / No Bidding)",
+      "requires_resume": true,
+      "application_type": "Bidding & Resume Required",
       "country_badge": "\ud83c\udf0d Global Remote ($ USD)",
       "has_direct_email": false,
-      "apply_mode": "official_portal"
+      "apply_mode": "official_portal",
+      "is_bidding_gig": true,
+      "marketplace_category": "bidding_and_resumes"
     },
     {
       "id": "rok-1137407",
@@ -469,11 +491,13 @@
       "effective_hourly_rate": 1600,
       "created_at": "2026-09-23T05:24:48.151345",
       "status": "new",
-      "requires_resume": false,
-      "application_type": "Direct Deal (No Resume / No Bidding)",
+      "requires_resume": true,
+      "application_type": "Bidding & Resume Required",
       "country_badge": "\ud83c\udf0d Global Remote ($ USD)",
       "has_direct_email": false,
-      "apply_mode": "official_portal"
+      "apply_mode": "official_portal",
+      "is_bidding_gig": true,
+      "marketplace_category": "bidding_and_resumes"
     },
     {
       "id": "rok-1137406",
@@ -520,10 +544,12 @@
       "created_at": "2026-09-23T05:24:48.151346",
       "status": "portal_ready",
       "requires_resume": false,
-      "application_type": "Direct Deal (No Resume / No Bidding)",
+      "application_type": "Bidding & Resume Required",
       "country_badge": "\ud83c\udf0d Global Remote ($ USD)",
       "has_direct_email": true,
-      "apply_mode": "direct_email"
+      "apply_mode": "direct_email",
+      "is_bidding_gig": true,
+      "marketplace_category": "bidding_and_resumes"
     },
     {
       "id": "rok-1137405",
@@ -557,11 +583,13 @@
       "effective_hourly_rate": 1500,
       "created_at": "2026-09-23T05:24:48.151347",
       "status": "portal_ready",
-      "requires_resume": false,
-      "application_type": "Direct Deal (No Resume / No Bidding)",
+      "requires_resume": true,
+      "application_type": "Bidding & Resume Required",
       "country_badge": "\ud83c\udf0d Global Remote ($ USD)",
       "has_direct_email": false,
-      "apply_mode": "official_portal"
+      "apply_mode": "official_portal",
+      "is_bidding_gig": true,
+      "marketplace_category": "bidding_and_resumes"
     },
     {
       "id": "rok-1137400",
@@ -591,11 +619,13 @@
       "effective_hourly_rate": 2400,
       "created_at": "2026-09-23T05:24:48.151348",
       "status": "portal_ready",
-      "requires_resume": false,
-      "application_type": "Direct Deal (No Resume / No Bidding)",
+      "requires_resume": true,
+      "application_type": "Bidding & Resume Required",
       "country_badge": "\ud83c\udf0d Global Remote ($ USD)",
       "has_direct_email": false,
-      "apply_mode": "official_portal"
+      "apply_mode": "official_portal",
+      "is_bidding_gig": true,
+      "marketplace_category": "bidding_and_resumes"
     },
     {
       "id": "rok-1137399",
@@ -627,11 +657,13 @@
       "effective_hourly_rate": 2400,
       "created_at": "2026-09-23T05:24:48.151349",
       "status": "portal_ready",
-      "requires_resume": false,
-      "application_type": "Direct Deal (No Resume / No Bidding)",
+      "requires_resume": true,
+      "application_type": "Bidding & Resume Required",
       "country_badge": "\ud83c\udf0d Global Remote ($ USD)",
       "has_direct_email": false,
-      "apply_mode": "official_portal"
+      "apply_mode": "official_portal",
+      "is_bidding_gig": true,
+      "marketplace_category": "bidding_and_resumes"
     },
     {
       "id": "rok-1137398",
@@ -658,11 +690,13 @@
       "effective_hourly_rate": 1600,
       "created_at": "2026-09-23T05:24:48.151350",
       "status": "new",
-      "requires_resume": false,
-      "application_type": "Direct Deal (No Resume / No Bidding)",
+      "requires_resume": true,
+      "application_type": "Bidding & Resume Required",
       "country_badge": "\ud83c\udf0d Global Remote ($ USD)",
       "has_direct_email": false,
-      "apply_mode": "official_portal"
+      "apply_mode": "official_portal",
+      "is_bidding_gig": true,
+      "marketplace_category": "bidding_and_resumes"
     },
     {
       "id": "rok-1137396",
@@ -699,11 +733,13 @@
       "effective_hourly_rate": 1600,
       "created_at": "2026-09-23T05:24:48.151351",
       "status": "new",
-      "requires_resume": false,
-      "application_type": "Direct Deal (No Resume / No Bidding)",
+      "requires_resume": true,
+      "application_type": "Bidding & Resume Required",
       "country_badge": "\ud83c\udf0d Global Remote ($ USD)",
       "has_direct_email": false,
-      "apply_mode": "official_portal"
+      "apply_mode": "official_portal",
+      "is_bidding_gig": true,
+      "marketplace_category": "bidding_and_resumes"
     },
     {
       "id": "rok-1137394",
@@ -739,11 +775,13 @@
       "effective_hourly_rate": 1600,
       "created_at": "2026-09-23T05:24:48.151352",
       "status": "new",
-      "requires_resume": false,
-      "application_type": "Direct Deal (No Resume / No Bidding)",
+      "requires_resume": true,
+      "application_type": "Bidding & Resume Required",
       "country_badge": "\ud83c\udf0d Global Remote ($ USD)",
       "has_direct_email": false,
-      "apply_mode": "official_portal"
+      "apply_mode": "official_portal",
+      "is_bidding_gig": true,
+      "marketplace_category": "bidding_and_resumes"
     },
     {
       "id": "rok-1137391",
@@ -784,11 +822,13 @@
       "effective_hourly_rate": 1600,
       "created_at": "2026-09-23T05:24:48.151353",
       "status": "new",
-      "requires_resume": false,
-      "application_type": "Direct Deal (No Resume / No Bidding)",
+      "requires_resume": true,
+      "application_type": "Bidding & Resume Required",
       "country_badge": "\ud83c\udf0d Global Remote ($ USD)",
       "has_direct_email": false,
-      "apply_mode": "official_portal"
+      "apply_mode": "official_portal",
+      "is_bidding_gig": true,
+      "marketplace_category": "bidding_and_resumes"
     },
     {
       "id": "rok-1137388",
@@ -823,11 +863,13 @@
       "effective_hourly_rate": 1600,
       "created_at": "2026-09-23T05:24:48.151353",
       "status": "new",
-      "requires_resume": false,
-      "application_type": "Direct Deal (No Resume / No Bidding)",
+      "requires_resume": true,
+      "application_type": "Bidding & Resume Required",
       "country_badge": "\ud83c\udf0d Global Remote ($ USD)",
       "has_direct_email": false,
-      "apply_mode": "official_portal"
+      "apply_mode": "official_portal",
+      "is_bidding_gig": true,
+      "marketplace_category": "bidding_and_resumes"
     },
     {
       "id": "rok-1137387",
@@ -859,11 +901,13 @@
       "effective_hourly_rate": 1500,
       "created_at": "2026-09-23T05:24:48.151355",
       "status": "new",
-      "requires_resume": false,
-      "application_type": "Direct Deal (No Resume / No Bidding)",
+      "requires_resume": true,
+      "application_type": "Bidding & Resume Required",
       "country_badge": "\ud83c\udf0d Global Remote ($ USD)",
       "has_direct_email": false,
-      "apply_mode": "official_portal"
+      "apply_mode": "official_portal",
+      "is_bidding_gig": true,
+      "marketplace_category": "bidding_and_resumes"
     },
     {
       "id": "rok-1137381",
@@ -900,11 +944,13 @@
       "effective_hourly_rate": 1000,
       "created_at": "2026-09-23T05:24:48.151357",
       "status": "portal_ready",
-      "requires_resume": false,
-      "application_type": "Direct Deal (No Resume / No Bidding)",
+      "requires_resume": true,
+      "application_type": "Bidding & Resume Required",
       "country_badge": "\ud83c\udf0d Global Remote ($ USD)",
       "has_direct_email": false,
-      "apply_mode": "official_portal"
+      "apply_mode": "official_portal",
+      "is_bidding_gig": true,
+      "marketplace_category": "bidding_and_resumes"
     },
     {
       "id": "rok-1137380",
@@ -1649,7 +1695,9 @@
       "application_type": "Direct Deal (No Resume / No Bidding)",
       "country_badge": "\ud83c\udf0d Global Remote ($ USD)",
       "has_direct_email": false,
-      "apply_mode": "official_portal"
+      "apply_mode": "official_portal",
+      "is_bidding_gig": false,
+      "marketplace_category": "direct_deals"
     },
     {
       "id": "hn-43865309",
@@ -1681,10 +1729,12 @@
       "created_at": "2026-09-23T05:24:48.151381",
       "status": "contacted",
       "requires_resume": true,
-      "application_type": "Resume Required",
+      "application_type": "Bidding & Resume Required",
       "country_badge": "\ud83c\udf0d Global Remote ($ USD)",
       "has_direct_email": true,
-      "apply_mode": "direct_email"
+      "apply_mode": "direct_email",
+      "is_bidding_gig": true,
+      "marketplace_category": "bidding_and_resumes"
     },
     {
       "id": "hn-41195347",
@@ -1715,7 +1765,9 @@
       "application_type": "Direct Deal (No Resume / No Bidding)",
       "country_badge": "\ud83c\udf0d Global Remote ($ USD)",
       "has_direct_email": false,
-      "apply_mode": "official_portal"
+      "apply_mode": "official_portal",
+      "is_bidding_gig": false,
+      "marketplace_category": "direct_deals"
     },
     {
       "id": "hn-38844453",
@@ -1746,7 +1798,9 @@
       "application_type": "Direct Deal (No Resume / No Bidding)",
       "country_badge": "\ud83c\udf0d Global Remote ($ USD)",
       "has_direct_email": false,
-      "apply_mode": "official_portal"
+      "apply_mode": "official_portal",
+      "is_bidding_gig": false,
+      "marketplace_category": "direct_deals"
     },
     {
       "id": "hn-48384606",
@@ -1780,7 +1834,9 @@
       "application_type": "Direct Deal (No Resume / No Bidding)",
       "country_badge": "\ud83c\udf0d Global Remote ($ USD)",
       "has_direct_email": false,
-      "apply_mode": "official_portal"
+      "apply_mode": "official_portal",
+      "is_bidding_gig": false,
+      "marketplace_category": "direct_deals"
     },
     {
       "id": "hn-47994643",
@@ -1815,7 +1871,9 @@
       "application_type": "Direct Deal (No Resume / No Bidding)",
       "country_badge": "\ud83c\udf0d Global Remote ($ USD)",
       "has_direct_email": true,
-      "apply_mode": "direct_email"
+      "apply_mode": "direct_email",
+      "is_bidding_gig": false,
+      "marketplace_category": "direct_deals"
     },
     {
       "id": "hn-46767265",
@@ -1843,10 +1901,12 @@
       "created_at": "2026-09-23T05:24:48.151386",
       "status": "new",
       "requires_resume": false,
-      "application_type": "Direct Deal (No Resume / No Bidding)",
+      "application_type": "Bidding & Resume Required",
       "country_badge": "\ud83c\udf0d Global Remote ($ USD)",
       "has_direct_email": false,
-      "apply_mode": "official_portal"
+      "apply_mode": "official_portal",
+      "is_bidding_gig": true,
+      "marketplace_category": "bidding_and_resumes"
     },
     {
       "id": "hn-42779583",
@@ -1877,7 +1937,9 @@
       "application_type": "Direct Deal (No Resume / No Bidding)",
       "country_badge": "\ud83c\udf0d Global Remote ($ USD)",
       "has_direct_email": false,
-      "apply_mode": "official_portal"
+      "apply_mode": "official_portal",
+      "is_bidding_gig": false,
+      "marketplace_category": "direct_deals"
     },
     {
       "id": "hn-48331694",
@@ -1911,7 +1973,9 @@
       "application_type": "Direct Deal (No Resume / No Bidding)",
       "country_badge": "\ud83c\udf0d Global Remote ($ USD)",
       "has_direct_email": false,
-      "apply_mode": "official_portal"
+      "apply_mode": "official_portal",
+      "is_bidding_gig": false,
+      "marketplace_category": "direct_deals"
     },
     {
       "id": "hn-43569859",
@@ -1943,10 +2007,12 @@
       "created_at": "2026-09-23T05:24:48.151389",
       "status": "contacted",
       "requires_resume": false,
-      "application_type": "Direct Deal (No Resume / No Bidding)",
+      "application_type": "Bidding & Resume Required",
       "country_badge": "\ud83c\udf0d Global Remote ($ USD)",
       "has_direct_email": true,
-      "apply_mode": "direct_email"
+      "apply_mode": "direct_email",
+      "is_bidding_gig": true,
+      "marketplace_category": "bidding_and_resumes"
     },
     {
       "id": "hn-39810351",
@@ -1977,7 +2043,9 @@
       "application_type": "Direct Deal (No Resume / No Bidding)",
       "country_badge": "\ud83c\udf0d Global Remote ($ USD)",
       "has_direct_email": false,
-      "apply_mode": "official_portal"
+      "apply_mode": "official_portal",
+      "is_bidding_gig": false,
+      "marketplace_category": "direct_deals"
     },
     {
       "id": "rok-1137415",
@@ -2003,11 +2071,13 @@
       "effective_hourly_rate": 1600,
       "created_at": "2026-09-23T05:37:23.556617",
       "status": "new",
-      "requires_resume": false,
-      "application_type": "Direct Deal (No Resume / No Bidding)",
+      "requires_resume": true,
+      "application_type": "Bidding & Resume Required",
       "country_badge": "\ud83c\udf0d Global Remote ($ USD)",
       "has_direct_email": false,
-      "apply_mode": "official_portal"
+      "apply_mode": "official_portal",
+      "is_bidding_gig": true,
+      "marketplace_category": "bidding_and_resumes"
     },
     {
       "id": "rok-1137414",
@@ -2050,11 +2120,13 @@
       "effective_hourly_rate": 240,
       "created_at": "2026-09-23T05:37:23.556636",
       "status": "new",
-      "requires_resume": false,
-      "application_type": "Direct Deal (No Resume / No Bidding)",
+      "requires_resume": true,
+      "application_type": "Bidding & Resume Required",
       "country_badge": "\ud83c\udf0d Global Remote ($ USD)",
       "has_direct_email": false,
-      "apply_mode": "official_portal"
+      "apply_mode": "official_portal",
+      "is_bidding_gig": true,
+      "marketplace_category": "bidding_and_resumes"
     },
     {
       "id": "wwr-d9994b6a",
@@ -2591,11 +2663,13 @@
       "effective_hourly_rate": 1000,
       "created_at": "2026-09-23T05:37:23.556691",
       "status": "portal_ready",
-      "requires_resume": false,
-      "application_type": "Direct Deal (No Resume / No Bidding)",
+      "requires_resume": true,
+      "application_type": "Bidding & Resume Required",
       "country_badge": "\ud83c\uddfa\ud83c\uddf8 USA ($ USD)",
       "has_direct_email": false,
-      "apply_mode": "official_portal"
+      "apply_mode": "official_portal",
+      "is_bidding_gig": true,
+      "marketplace_category": "bidding_and_resumes"
     },
     {
       "id": "rem-2091140",
@@ -2661,11 +2735,13 @@
       "effective_hourly_rate": 1500,
       "created_at": "2026-09-23T05:37:23.556692",
       "status": "portal_ready",
-      "requires_resume": false,
-      "application_type": "Direct Deal (No Resume / No Bidding)",
+      "requires_resume": true,
+      "application_type": "Bidding & Resume Required",
       "country_badge": "\ud83c\udf0d Global Remote ($ USD)",
       "has_direct_email": false,
-      "apply_mode": "official_portal"
+      "apply_mode": "official_portal",
+      "is_bidding_gig": true,
+      "marketplace_category": "bidding_and_resumes"
     },
     {
       "id": "rem-2091139",
@@ -2693,11 +2769,13 @@
       "effective_hourly_rate": 600,
       "created_at": "2026-09-23T05:37:23.556693",
       "status": "portal_ready",
-      "requires_resume": false,
-      "application_type": "Direct Deal (No Resume / No Bidding)",
+      "requires_resume": true,
+      "application_type": "Bidding & Resume Required",
       "country_badge": "\ud83c\uddea\ud83c\uddfa Europe (\u20ac EUR)",
       "has_direct_email": false,
-      "apply_mode": "official_portal"
+      "apply_mode": "official_portal",
+      "is_bidding_gig": true,
+      "marketplace_category": "bidding_and_resumes"
     },
     {
       "id": "rem-2091131",
@@ -2768,11 +2846,13 @@
       "effective_hourly_rate": 2400,
       "created_at": "2026-09-23T05:37:23.556694",
       "status": "portal_ready",
-      "requires_resume": false,
-      "application_type": "Direct Deal (No Resume / No Bidding)",
+      "requires_resume": true,
+      "application_type": "Bidding & Resume Required",
       "country_badge": "\ud83c\uddfa\ud83c\uddf8 USA ($ USD)",
       "has_direct_email": false,
-      "apply_mode": "official_portal"
+      "apply_mode": "official_portal",
+      "is_bidding_gig": true,
+      "marketplace_category": "bidding_and_resumes"
     },
     {
       "id": "rem-2091130",
@@ -2842,11 +2922,13 @@
       "effective_hourly_rate": 1000,
       "created_at": "2026-09-23T05:37:23.556695",
       "status": "portal_ready",
-      "requires_resume": false,
-      "application_type": "Direct Deal (No Resume / No Bidding)",
+      "requires_resume": true,
+      "application_type": "Bidding & Resume Required",
       "country_badge": "\ud83c\uddfa\ud83c\uddf8 USA ($ USD)",
       "has_direct_email": false,
-      "apply_mode": "official_portal"
+      "apply_mode": "official_portal",
+      "is_bidding_gig": true,
+      "marketplace_category": "bidding_and_resumes"
     },
     {
       "id": "rem-2091129",
@@ -2917,11 +2999,13 @@
       "effective_hourly_rate": 2400,
       "created_at": "2026-09-23T05:37:23.556695",
       "status": "portal_ready",
-      "requires_resume": false,
-      "application_type": "Direct Deal (No Resume / No Bidding)",
+      "requires_resume": true,
+      "application_type": "Bidding & Resume Required",
       "country_badge": "\ud83c\uddfa\ud83c\uddf8 USA ($ USD)",
       "has_direct_email": false,
-      "apply_mode": "official_portal"
+      "apply_mode": "official_portal",
+      "is_bidding_gig": true,
+      "marketplace_category": "bidding_and_resumes"
     },
     {
       "id": "rem-1919265",
@@ -2951,11 +3035,13 @@
       "effective_hourly_rate": 3400,
       "created_at": "2026-09-23T05:37:23.556696",
       "status": "new",
-      "requires_resume": false,
-      "application_type": "Direct Deal (No Resume / No Bidding)",
+      "requires_resume": true,
+      "application_type": "Bidding & Resume Required",
       "country_badge": "\ud83c\uddfa\ud83c\uddf8 USA ($ USD)",
       "has_direct_email": false,
-      "apply_mode": "official_portal"
+      "apply_mode": "official_portal",
+      "is_bidding_gig": true,
+      "marketplace_category": "bidding_and_resumes"
     },
     {
       "id": "rem-1919266",
@@ -2990,11 +3076,13 @@
       "effective_hourly_rate": 267,
       "created_at": "2026-09-23T05:37:23.556697",
       "status": "new",
-      "requires_resume": false,
-      "application_type": "Direct Deal (No Resume / No Bidding)",
+      "requires_resume": true,
+      "application_type": "Bidding & Resume Required",
       "country_badge": "\ud83c\uddfa\ud83c\uddf8 USA ($ USD)",
       "has_direct_email": false,
-      "apply_mode": "official_portal"
+      "apply_mode": "official_portal",
+      "is_bidding_gig": true,
+      "marketplace_category": "bidding_and_resumes"
     },
     {
       "id": "rem-2069746",
@@ -3046,11 +3134,13 @@
       "effective_hourly_rate": 2400,
       "created_at": "2026-09-23T05:37:23.556698",
       "status": "portal_ready",
-      "requires_resume": false,
-      "application_type": "Direct Deal (No Resume / No Bidding)",
+      "requires_resume": true,
+      "application_type": "Bidding & Resume Required",
       "country_badge": "\ud83c\uddfa\ud83c\uddf8 USA ($ USD)",
       "has_direct_email": false,
-      "apply_mode": "official_portal"
+      "apply_mode": "official_portal",
+      "is_bidding_gig": true,
+      "marketplace_category": "bidding_and_resumes"
     },
     {
       "id": "rem-2091126",
@@ -3081,11 +3171,13 @@
       "effective_hourly_rate": 600,
       "created_at": "2026-09-23T05:37:23.556699",
       "status": "portal_ready",
-      "requires_resume": false,
-      "application_type": "Direct Deal (No Resume / No Bidding)",
+      "requires_resume": true,
+      "application_type": "Bidding & Resume Required",
       "country_badge": "\ud83c\uddea\ud83c\uddfa Europe (\u20ac EUR)",
       "has_direct_email": false,
-      "apply_mode": "official_portal"
+      "apply_mode": "official_portal",
+      "is_bidding_gig": true,
+      "marketplace_category": "bidding_and_resumes"
     },
     {
       "id": "rem-2086540",
@@ -3113,11 +3205,13 @@
       "effective_hourly_rate": 1000,
       "created_at": "2026-09-23T05:37:23.556701",
       "status": "new",
-      "requires_resume": false,
-      "application_type": "Direct Deal (No Resume / No Bidding)",
+      "requires_resume": true,
+      "application_type": "Bidding & Resume Required",
       "country_badge": "\ud83c\udf0d Global Remote ($ USD)",
       "has_direct_email": false,
-      "apply_mode": "official_portal"
+      "apply_mode": "official_portal",
+      "is_bidding_gig": true,
+      "marketplace_category": "bidding_and_resumes"
     },
     {
       "id": "rem-2091045",
@@ -3153,11 +3247,13 @@
       "effective_hourly_rate": 1600,
       "created_at": "2026-09-23T05:37:23.556702",
       "status": "new",
-      "requires_resume": false,
-      "application_type": "Direct Deal (No Resume / No Bidding)",
+      "requires_resume": true,
+      "application_type": "Bidding & Resume Required",
       "country_badge": "\ud83c\udf0d Global Remote ($ USD)",
       "has_direct_email": false,
-      "apply_mode": "official_portal"
+      "apply_mode": "official_portal",
+      "is_bidding_gig": true,
+      "marketplace_category": "bidding_and_resumes"
     },
     {
       "id": "rem-1185979",
@@ -3185,11 +3281,13 @@
       "effective_hourly_rate": 1143,
       "created_at": "2026-09-23T05:37:23.556703",
       "status": "portal_ready",
-      "requires_resume": false,
-      "application_type": "Direct Deal (No Resume / No Bidding)",
+      "requires_resume": true,
+      "application_type": "Bidding & Resume Required",
       "country_badge": "\ud83c\udf0d Global Remote ($ USD)",
       "has_direct_email": false,
-      "apply_mode": "official_portal"
+      "apply_mode": "official_portal",
+      "is_bidding_gig": true,
+      "marketplace_category": "bidding_and_resumes"
     },
     {
       "id": "rem-1749306",
@@ -3226,11 +3324,13 @@
       "effective_hourly_rate": 1000,
       "created_at": "2026-09-23T05:37:23.556704",
       "status": "portal_ready",
-      "requires_resume": false,
-      "application_type": "Direct Deal (No Resume / No Bidding)",
+      "requires_resume": true,
+      "application_type": "Bidding & Resume Required",
       "country_badge": "\ud83c\udf0d Global Remote ($ USD)",
       "has_direct_email": false,
-      "apply_mode": "official_portal"
+      "apply_mode": "official_portal",
+      "is_bidding_gig": true,
+      "marketplace_category": "bidding_and_resumes"
     },
     {
       "id": "rem-2091101",
@@ -3303,11 +3403,13 @@
       "effective_hourly_rate": 1000,
       "created_at": "2026-09-23T05:37:23.556704",
       "status": "portal_ready",
-      "requires_resume": false,
-      "application_type": "Direct Deal (No Resume / No Bidding)",
+      "requires_resume": true,
+      "application_type": "Bidding & Resume Required",
       "country_badge": "\ud83c\uddfa\ud83c\uddf8 USA ($ USD)",
       "has_direct_email": false,
-      "apply_mode": "official_portal"
+      "apply_mode": "official_portal",
+      "is_bidding_gig": true,
+      "marketplace_category": "bidding_and_resumes"
     },
     {
       "id": "rem-2091100",
@@ -3380,11 +3482,13 @@
       "effective_hourly_rate": 1857,
       "created_at": "2026-09-23T05:37:23.556705",
       "status": "portal_ready",
-      "requires_resume": false,
-      "application_type": "Direct Deal (No Resume / No Bidding)",
+      "requires_resume": true,
+      "application_type": "Bidding & Resume Required",
       "country_badge": "\ud83c\uddea\ud83c\uddfa Europe (\u20ac EUR)",
       "has_direct_email": false,
-      "apply_mode": "official_portal"
+      "apply_mode": "official_portal",
+      "is_bidding_gig": true,
+      "marketplace_category": "bidding_and_resumes"
     },
     {
       "id": "rem-2091099",
@@ -3465,11 +3569,13 @@
       "effective_hourly_rate": 1500,
       "created_at": "2026-09-23T05:37:23.556706",
       "status": "new",
-      "requires_resume": false,
-      "application_type": "Direct Deal (No Resume / No Bidding)",
+      "requires_resume": true,
+      "application_type": "Bidding & Resume Required",
       "country_badge": "\ud83c\uddfa\ud83c\uddf8 USA ($ USD)",
       "has_direct_email": false,
-      "apply_mode": "official_portal"
+      "apply_mode": "official_portal",
+      "is_bidding_gig": true,
+      "marketplace_category": "bidding_and_resumes"
     },
     {
       "id": "wwr-a7ba4421",
@@ -5361,7 +5467,9 @@
       "created_at": "2026-09-23T06:04:41.114852",
       "status": "contacted",
       "has_direct_email": false,
-      "apply_mode": "official_portal"
+      "apply_mode": "official_portal",
+      "is_bidding_gig": false,
+      "marketplace_category": "direct_deals"
     },
     {
       "id": "link-trans-809",
@@ -5395,7 +5503,9 @@
       "created_at": "2026-09-23T06:04:41.114870",
       "status": "contacted",
       "has_direct_email": false,
-      "apply_mode": "official_portal"
+      "apply_mode": "official_portal",
+      "is_bidding_gig": false,
+      "marketplace_category": "direct_deals"
     },
     {
       "id": "wwr-2cc3a0f3",
@@ -6493,13 +6603,15 @@
       "is_high_ticket": false,
       "deliverable": "Automated solution package",
       "effective_hourly_rate": 1600,
-      "requires_resume": false,
-      "application_type": "Direct Deal (No Resume / No Bidding)",
+      "requires_resume": true,
+      "application_type": "Bidding & Resume Required",
       "country_badge": "\ud83c\uddea\ud83c\uddfa Europe (\u20ac EUR)",
       "created_at": "2026-09-24T05:58:09.067527",
       "status": "new",
       "has_direct_email": false,
-      "apply_mode": "official_portal"
+      "apply_mode": "official_portal",
+      "is_bidding_gig": true,
+      "marketplace_category": "bidding_and_resumes"
     },
     {
       "id": "rok-1137420",
@@ -6543,13 +6655,15 @@
       "is_high_ticket": true,
       "deliverable": "Responsive, high-converting landing page with mobile optimization",
       "effective_hourly_rate": 1000,
-      "requires_resume": false,
-      "application_type": "Direct Deal (No Resume / No Bidding)",
+      "requires_resume": true,
+      "application_type": "Bidding & Resume Required",
       "country_badge": "\ud83c\udf0d Global Remote ($ USD)",
       "created_at": "2026-09-24T05:58:09.067530",
       "status": "portal_ready",
       "has_direct_email": false,
-      "apply_mode": "official_portal"
+      "apply_mode": "official_portal",
+      "is_bidding_gig": true,
+      "marketplace_category": "bidding_and_resumes"
     },
     {
       "id": "rok-1137418",
@@ -6585,13 +6699,15 @@
       "is_high_ticket": false,
       "deliverable": "Automated solution package",
       "effective_hourly_rate": 1600,
-      "requires_resume": false,
-      "application_type": "Direct Deal (No Resume / No Bidding)",
+      "requires_resume": true,
+      "application_type": "Bidding & Resume Required",
       "country_badge": "\ud83c\udf0d Global Remote ($ USD)",
       "created_at": "2026-09-24T05:58:09.067531",
       "status": "new",
       "has_direct_email": false,
-      "apply_mode": "official_portal"
+      "apply_mode": "official_portal",
+      "is_bidding_gig": true,
+      "marketplace_category": "bidding_and_resumes"
     },
     {
       "id": "rok-1137417",
@@ -6619,13 +6735,15 @@
       "is_high_ticket": false,
       "deliverable": "Automated solution package",
       "effective_hourly_rate": 1600,
-      "requires_resume": false,
-      "application_type": "Direct Deal (No Resume / No Bidding)",
+      "requires_resume": true,
+      "application_type": "Bidding & Resume Required",
       "country_badge": "\ud83c\udf0d Global Remote ($ USD)",
       "created_at": "2026-09-24T05:58:09.067532",
       "status": "new",
       "has_direct_email": false,
-      "apply_mode": "official_portal"
+      "apply_mode": "official_portal",
+      "is_bidding_gig": true,
+      "marketplace_category": "bidding_and_resumes"
     },
     {
       "id": "rok-1137386",
@@ -6659,13 +6777,15 @@
       "is_high_ticket": false,
       "deliverable": "Automated solution package",
       "effective_hourly_rate": 1600,
-      "requires_resume": false,
-      "application_type": "Direct Deal (No Resume / No Bidding)",
+      "requires_resume": true,
+      "application_type": "Bidding & Resume Required",
       "country_badge": "\ud83c\udf0d Global Remote ($ USD)",
       "created_at": "2026-09-24T05:58:09.067559",
       "status": "contacted",
       "has_direct_email": false,
-      "apply_mode": "official_portal"
+      "apply_mode": "official_portal",
+      "is_bidding_gig": true,
+      "marketplace_category": "bidding_and_resumes"
     },
     {
       "id": "wwr-84c70af4",
@@ -7227,12 +7347,14 @@
       "deliverable": "Optimized SQL queries + clean dataset export + reporting dashboard",
       "effective_hourly_rate": 1000,
       "requires_resume": true,
-      "application_type": "Resume Required",
+      "application_type": "Bidding & Resume Required",
       "country_badge": "\ud83c\udf0d Global Remote ($ USD)",
       "created_at": "2026-09-24T05:58:09.067581",
       "status": "contacted",
       "has_direct_email": true,
-      "apply_mode": "direct_email"
+      "apply_mode": "direct_email",
+      "is_bidding_gig": true,
+      "marketplace_category": "bidding_and_resumes"
     },
     {
       "id": "rem-2091144",
@@ -7258,13 +7380,15 @@
       "is_high_ticket": false,
       "deliverable": "Automated solution package",
       "effective_hourly_rate": 1600,
-      "requires_resume": false,
-      "application_type": "Direct Deal (No Resume / No Bidding)",
+      "requires_resume": true,
+      "application_type": "Bidding & Resume Required",
       "country_badge": "\ud83c\uddfa\ud83c\uddf8 USA ($ USD)",
       "created_at": "2026-09-24T05:58:09.067592",
       "status": "new",
       "has_direct_email": false,
-      "apply_mode": "official_portal"
+      "apply_mode": "official_portal",
+      "is_bidding_gig": true,
+      "marketplace_category": "bidding_and_resumes"
     },
     {
       "id": "rem-1680495",
@@ -7309,13 +7433,15 @@
       "is_high_ticket": false,
       "deliverable": "100% cleaned and validated spreadsheet + 1-click update script",
       "effective_hourly_rate": 1143,
-      "requires_resume": false,
-      "application_type": "Direct Deal (No Resume / No Bidding)",
+      "requires_resume": true,
+      "application_type": "Bidding & Resume Required",
       "country_badge": "\ud83c\udf0d Global Remote ($ USD)",
       "created_at": "2026-09-24T05:58:09.067606",
       "status": "contacted",
       "has_direct_email": false,
-      "apply_mode": "official_portal"
+      "apply_mode": "official_portal",
+      "is_bidding_gig": true,
+      "marketplace_category": "bidding_and_resumes"
     },
     {
       "id": "jby-153977",
@@ -10257,7 +10383,9 @@
       "application_type": "Direct Deal (No Resume / No Bidding)",
       "country_badge": "\ud83c\udf0d Global Remote ($ USD)",
       "created_at": "2026-09-24T07:25:08.190496",
-      "status": "contacted"
+      "status": "contacted",
+      "is_bidding_gig": false,
+      "marketplace_category": "direct_deals"
     },
     {
       "id": "wwr-5423e6cd",
@@ -10817,10 +10945,12 @@
       "deliverable": "Automated solution package",
       "effective_hourly_rate": 1600,
       "requires_resume": false,
-      "application_type": "Direct Deal (No Resume / No Bidding)",
+      "application_type": "Bidding & Resume Required",
       "country_badge": "\ud83c\udf0d Global Remote ($ USD)",
       "created_at": "2026-09-24T07:25:08.190629",
-      "status": "new"
+      "status": "new",
+      "is_bidding_gig": true,
+      "marketplace_category": "bidding_and_resumes"
     },
     {
       "id": "hn-47639647",
@@ -10851,10 +10981,12 @@
       "deliverable": "Responsive, high-converting landing page with mobile optimization",
       "effective_hourly_rate": 1000,
       "requires_resume": false,
-      "application_type": "Direct Deal (No Resume / No Bidding)",
+      "application_type": "Bidding & Resume Required",
       "country_badge": "\ud83c\udf0d Global Remote ($ USD)",
       "created_at": "2026-09-24T07:25:08.190630",
-      "status": "portal_ready"
+      "status": "portal_ready",
+      "is_bidding_gig": true,
+      "marketplace_category": "bidding_and_resumes"
     },
     {
       "id": "hn-47976690",
@@ -10882,10 +11014,12 @@
       "deliverable": "Automated solution package",
       "effective_hourly_rate": 1600,
       "requires_resume": false,
-      "application_type": "Direct Deal (No Resume / No Bidding)",
+      "application_type": "Bidding & Resume Required",
       "country_badge": "\ud83c\udf0d Global Remote ($ USD)",
       "created_at": "2026-09-24T07:25:08.190631",
-      "status": "new"
+      "status": "new",
+      "is_bidding_gig": true,
+      "marketplace_category": "bidding_and_resumes"
     },
     {
       "id": "wwr-8382963e",
@@ -13476,7 +13610,9 @@
       "application_type": "Direct Deal (No Resume / No Bidding)",
       "country_badge": "\ud83c\udf0d Global Remote ($ USD)",
       "created_at": "2026-09-24T07:38:39.114356",
-      "status": "contacted"
+      "status": "contacted",
+      "is_bidding_gig": false,
+      "marketplace_category": "direct_deals"
     },
     {
       "id": "link-api-811",
@@ -13512,7 +13648,9 @@
       "application_type": "Direct Deal (No Resume / No Bidding)",
       "country_badge": "\ud83c\uddfa\ud83c\uddf8 USA ($ USD)",
       "created_at": "2026-09-24T07:38:39.114363",
-      "status": "contacted"
+      "status": "contacted",
+      "is_bidding_gig": false,
+      "marketplace_category": "direct_deals"
     },
     {
       "id": "disc-scrape-812",
@@ -13545,7 +13683,9 @@
       "application_type": "Direct Deal (No Resume / No Bidding)",
       "country_badge": "\ud83c\udf0d Global Remote ($ USD)",
       "created_at": "2026-09-24T07:38:39.114365",
-      "status": "contacted"
+      "status": "contacted",
+      "is_bidding_gig": false,
+      "marketplace_category": "direct_deals"
     },
     {
       "id": "disc-cap-813",
@@ -13579,7 +13719,9 @@
       "application_type": "Direct Deal (No Resume / No Bidding)",
       "country_badge": "\ud83c\udf0d Global Remote ($ USD)",
       "created_at": "2026-09-24T07:38:39.114366",
-      "status": "contacted"
+      "status": "contacted",
+      "is_bidding_gig": false,
+      "marketplace_category": "direct_deals"
     },
     {
       "id": "link-web-814",
@@ -13613,7 +13755,9 @@
       "application_type": "Direct Deal (No Resume / No Bidding)",
       "country_badge": "\ud83c\udf0d Global Remote ($ USD)",
       "created_at": "2026-09-24T07:38:39.114368",
-      "status": "contacted"
+      "status": "contacted",
+      "is_bidding_gig": false,
+      "marketplace_category": "direct_deals"
     },
     {
       "id": "disc-trans-815",
@@ -13647,7 +13791,9 @@
       "application_type": "Direct Deal (No Resume / No Bidding)",
       "country_badge": "\ud83c\udf0d Global Remote ($ USD)",
       "created_at": "2026-09-24T07:38:39.114369",
-      "status": "contacted"
+      "status": "contacted",
+      "is_bidding_gig": false,
+      "marketplace_category": "direct_deals"
     },
     {
       "id": "wwr-40bd83d0",
@@ -17730,7 +17876,9 @@
       "application_type": "Direct Deal (No Resume / No Bidding)",
       "country_badge": "\ud83c\udf0d Global Remote ($ USD)",
       "created_at": "2026-09-24T08:29:55.542858",
-      "status": "contacted"
+      "status": "contacted",
+      "is_bidding_gig": false,
+      "marketplace_category": "direct_deals"
     },
     {
       "id": "vetted-ld-817",
@@ -17761,10 +17909,12 @@
       "deliverable": "End-to-end webhook bridge + auto-retry error handling + instructions",
       "effective_hourly_rate": 5000,
       "requires_resume": false,
-      "application_type": "Direct Deal (No Resume / No Bidding)",
+      "application_type": "Bidding & Resume Required",
       "country_badge": "\ud83c\udf0d Global Remote ($ USD)",
       "created_at": "2026-09-24T08:29:55.542871",
-      "status": "contacted"
+      "status": "contacted",
+      "is_bidding_gig": true,
+      "marketplace_category": "bidding_and_resumes"
     },
     {
       "id": "wwr-8cdeb8d0",
@@ -27403,11 +27553,13 @@
       "is_high_ticket": false,
       "deliverable": "Automated solution package",
       "effective_hourly_rate": 1600,
-      "requires_resume": false,
-      "application_type": "Direct Deal (No Resume / No Bidding)",
+      "requires_resume": true,
+      "application_type": "Bidding & Resume Required",
       "country_badge": "\ud83c\udf0d Global Remote ($ USD)",
       "created_at": "2026-09-24T15:22:51.563903",
-      "status": "new"
+      "status": "new",
+      "is_bidding_gig": true,
+      "marketplace_category": "bidding_and_resumes"
     },
     {
       "id": "jby-149520",
@@ -27432,11 +27584,13 @@
       "is_high_ticket": false,
       "deliverable": "Automated solution package",
       "effective_hourly_rate": 1600,
-      "requires_resume": false,
-      "application_type": "Direct Deal (No Resume / No Bidding)",
+      "requires_resume": true,
+      "application_type": "Bidding & Resume Required",
       "country_badge": "\ud83c\udf0d Global Remote ($ USD)",
       "created_at": "2026-09-24T15:22:51.563904",
-      "status": "new"
+      "status": "new",
+      "is_bidding_gig": true,
+      "marketplace_category": "bidding_and_resumes"
     },
     {
       "id": "jby-149554",
@@ -27461,11 +27615,13 @@
       "is_high_ticket": false,
       "deliverable": "Automated solution package",
       "effective_hourly_rate": 1600,
-      "requires_resume": false,
-      "application_type": "Direct Deal (No Resume / No Bidding)",
+      "requires_resume": true,
+      "application_type": "Bidding & Resume Required",
       "country_badge": "\ud83c\udf0d Global Remote ($ USD)",
       "created_at": "2026-09-24T15:22:51.563905",
-      "status": "new"
+      "status": "new",
+      "is_bidding_gig": true,
+      "marketplace_category": "bidding_and_resumes"
     },
     {
       "id": "jby-149550",
@@ -27490,11 +27646,13 @@
       "is_high_ticket": false,
       "deliverable": "Automated solution package",
       "effective_hourly_rate": 1600,
-      "requires_resume": false,
-      "application_type": "Direct Deal (No Resume / No Bidding)",
+      "requires_resume": true,
+      "application_type": "Bidding & Resume Required",
       "country_badge": "\ud83c\udf0d Global Remote ($ USD)",
       "created_at": "2026-09-24T15:22:51.563906",
-      "status": "new"
+      "status": "new",
+      "is_bidding_gig": true,
+      "marketplace_category": "bidding_and_resumes"
     },
     {
       "id": "jby-152576",
@@ -27523,11 +27681,13 @@
       "is_high_ticket": true,
       "deliverable": "End-to-end automation workflow + auto-retry error handling + instructions",
       "effective_hourly_rate": 1600,
-      "requires_resume": false,
-      "application_type": "Direct Deal (No Resume / No Bidding)",
+      "requires_resume": true,
+      "application_type": "Bidding & Resume Required",
       "country_badge": "\ud83c\udf0d Global Remote ($ USD)",
       "created_at": "2026-09-24T15:22:51.563906",
-      "status": "portal_ready"
+      "status": "portal_ready",
+      "is_bidding_gig": true,
+      "marketplace_category": "bidding_and_resumes"
     },
     {
       "id": "jby-151047",
@@ -27556,11 +27716,13 @@
       "is_high_ticket": false,
       "deliverable": "3-5 high-resolution vector logo concepts (SVG, PNG transparent, brand palette)",
       "effective_hourly_rate": 1286,
-      "requires_resume": false,
-      "application_type": "Direct Deal (No Resume / No Bidding)",
+      "requires_resume": true,
+      "application_type": "Bidding & Resume Required",
       "country_badge": "\ud83c\uddec\ud83c\udde7 UK (\u00a3 GBP)",
       "created_at": "2026-09-24T15:22:51.563907",
-      "status": "portal_ready"
+      "status": "portal_ready",
+      "is_bidding_gig": true,
+      "marketplace_category": "bidding_and_resumes"
     },
     {
       "id": "jby-151488",
@@ -27589,11 +27751,13 @@
       "is_high_ticket": true,
       "deliverable": "Custom trained AI bot embeddable on website/WhatsApp + prompt template",
       "effective_hourly_rate": 2400,
-      "requires_resume": false,
-      "application_type": "Direct Deal (No Resume / No Bidding)",
+      "requires_resume": true,
+      "application_type": "Bidding & Resume Required",
       "country_badge": "\ud83c\uddfa\ud83c\uddf8 USA ($ USD)",
       "created_at": "2026-09-24T15:22:51.563908",
-      "status": "portal_ready"
+      "status": "portal_ready",
+      "is_bidding_gig": true,
+      "marketplace_category": "bidding_and_resumes"
     },
     {
       "id": "jby-151483",
@@ -27618,11 +27782,13 @@
       "is_high_ticket": false,
       "deliverable": "Automated solution package",
       "effective_hourly_rate": 1600,
-      "requires_resume": false,
-      "application_type": "Direct Deal (No Resume / No Bidding)",
+      "requires_resume": true,
+      "application_type": "Bidding & Resume Required",
       "country_badge": "\ud83c\uddfa\ud83c\uddf8 USA ($ USD)",
       "created_at": "2026-09-24T15:22:51.563909",
-      "status": "new"
+      "status": "new",
+      "is_bidding_gig": true,
+      "marketplace_category": "bidding_and_resumes"
     },
     {
       "id": "jby-151482",
@@ -27648,10 +27814,12 @@
       "deliverable": "Automated solution package",
       "effective_hourly_rate": 1600,
       "requires_resume": false,
-      "application_type": "Direct Deal (No Resume / No Bidding)",
+      "application_type": "Bidding & Resume Required",
       "country_badge": "\ud83c\uddfa\ud83c\uddf8 USA ($ USD)",
       "created_at": "2026-09-24T15:22:51.563910",
-      "status": "contacted"
+      "status": "contacted",
+      "is_bidding_gig": true,
+      "marketplace_category": "bidding_and_resumes"
     },
     {
       "id": "jby-151480",
@@ -27681,10 +27849,12 @@
       "deliverable": "Custom trained AI bot embeddable on website/WhatsApp + prompt template",
       "effective_hourly_rate": 2400,
       "requires_resume": false,
-      "application_type": "Direct Deal (No Resume / No Bidding)",
+      "application_type": "Bidding & Resume Required",
       "country_badge": "\ud83c\uddfa\ud83c\uddf8 USA ($ USD)",
       "created_at": "2026-09-24T15:22:51.563911",
-      "status": "contacted"
+      "status": "contacted",
+      "is_bidding_gig": true,
+      "marketplace_category": "bidding_and_resumes"
     },
     {
       "id": "jby-149596",
@@ -27710,10 +27880,12 @@
       "deliverable": "Automated solution package",
       "effective_hourly_rate": 1600,
       "requires_resume": false,
-      "application_type": "Direct Deal (No Resume / No Bidding)",
+      "application_type": "Bidding & Resume Required",
       "country_badge": "\ud83c\uddfa\ud83c\uddf8 USA ($ USD)",
       "created_at": "2026-09-24T15:22:51.563912",
-      "status": "contacted"
+      "status": "contacted",
+      "is_bidding_gig": true,
+      "marketplace_category": "bidding_and_resumes"
     },
     {
       "id": "jby-151493",
@@ -27738,11 +27910,13 @@
       "is_high_ticket": false,
       "deliverable": "Automated solution package",
       "effective_hourly_rate": 1600,
-      "requires_resume": false,
-      "application_type": "Direct Deal (No Resume / No Bidding)",
+      "requires_resume": true,
+      "application_type": "Bidding & Resume Required",
       "country_badge": "\ud83c\udf0d Global Remote ($ USD)",
       "created_at": "2026-09-24T15:22:51.563913",
-      "status": "new"
+      "status": "new",
+      "is_bidding_gig": true,
+      "marketplace_category": "bidding_and_resumes"
     },
     {
       "id": "jby-151522",
@@ -27771,11 +27945,13 @@
       "is_high_ticket": true,
       "deliverable": "End-to-end automation workflow + auto-retry error handling + instructions",
       "effective_hourly_rate": 1600,
-      "requires_resume": false,
-      "application_type": "Direct Deal (No Resume / No Bidding)",
+      "requires_resume": true,
+      "application_type": "Bidding & Resume Required",
       "country_badge": "\ud83c\uddfa\ud83c\uddf8 USA ($ USD)",
       "created_at": "2026-09-24T15:22:51.563913",
-      "status": "portal_ready"
+      "status": "portal_ready",
+      "is_bidding_gig": true,
+      "marketplace_category": "bidding_and_resumes"
     },
     {
       "id": "jby-151520",
@@ -27800,11 +27976,13 @@
       "is_high_ticket": false,
       "deliverable": "Automated solution package",
       "effective_hourly_rate": 1600,
-      "requires_resume": false,
-      "application_type": "Direct Deal (No Resume / No Bidding)",
+      "requires_resume": true,
+      "application_type": "Bidding & Resume Required",
       "country_badge": "\ud83c\uddea\ud83c\uddfa Europe (\u20ac EUR)",
       "created_at": "2026-09-24T15:22:51.563914",
-      "status": "new"
+      "status": "new",
+      "is_bidding_gig": true,
+      "marketplace_category": "bidding_and_resumes"
     },
     {
       "id": "jby-151507",
@@ -27833,11 +28011,13 @@
       "is_high_ticket": true,
       "deliverable": "Custom trained AI bot embeddable on website/WhatsApp + prompt template",
       "effective_hourly_rate": 2400,
-      "requires_resume": false,
-      "application_type": "Direct Deal (No Resume / No Bidding)",
+      "requires_resume": true,
+      "application_type": "Bidding & Resume Required",
       "country_badge": "\ud83c\udf0d Global Remote ($ USD)",
       "created_at": "2026-09-24T15:22:51.563915",
-      "status": "portal_ready"
+      "status": "portal_ready",
+      "is_bidding_gig": true,
+      "marketplace_category": "bidding_and_resumes"
     },
     {
       "id": "jby-151503",
@@ -27866,11 +28046,13 @@
       "is_high_ticket": true,
       "deliverable": "End-to-end automation workflow + auto-retry error handling + instructions",
       "effective_hourly_rate": 1600,
-      "requires_resume": false,
-      "application_type": "Direct Deal (No Resume / No Bidding)",
+      "requires_resume": true,
+      "application_type": "Bidding & Resume Required",
       "country_badge": "\ud83c\udf0d Global Remote ($ USD)",
       "created_at": "2026-09-24T15:22:51.563916",
-      "status": "portal_ready"
+      "status": "portal_ready",
+      "is_bidding_gig": true,
+      "marketplace_category": "bidding_and_resumes"
     },
     {
       "id": "jby-151500",
@@ -27895,11 +28077,13 @@
       "is_high_ticket": false,
       "deliverable": "Automated solution package",
       "effective_hourly_rate": 1600,
-      "requires_resume": false,
-      "application_type": "Direct Deal (No Resume / No Bidding)",
+      "requires_resume": true,
+      "application_type": "Bidding & Resume Required",
       "country_badge": "\ud83c\udf0d Global Remote ($ USD)",
       "created_at": "2026-09-24T15:22:51.563917",
-      "status": "new"
+      "status": "new",
+      "is_bidding_gig": true,
+      "marketplace_category": "bidding_and_resumes"
     },
     {
       "id": "jby-149595",
@@ -27928,11 +28112,13 @@
       "is_high_ticket": false,
       "deliverable": "Accurate, culturally natural translated document + side-by-side verification",
       "effective_hourly_rate": 600,
-      "requires_resume": false,
-      "application_type": "Direct Deal (No Resume / No Bidding)",
+      "requires_resume": true,
+      "application_type": "Bidding & Resume Required",
       "country_badge": "\ud83c\uddfa\ud83c\uddf8 USA ($ USD)",
       "created_at": "2026-09-24T15:22:51.563918",
-      "status": "portal_ready"
+      "status": "portal_ready",
+      "is_bidding_gig": true,
+      "marketplace_category": "bidding_and_resumes"
     },
     {
       "id": "jby-151496",
@@ -27960,11 +28146,13 @@
       "is_high_ticket": true,
       "deliverable": "Responsive, high-converting landing page with mobile optimization",
       "effective_hourly_rate": 1000,
-      "requires_resume": false,
-      "application_type": "Direct Deal (No Resume / No Bidding)",
+      "requires_resume": true,
+      "application_type": "Bidding & Resume Required",
       "country_badge": "\ud83c\udf0d Global Remote ($ USD)",
       "created_at": "2026-09-24T15:22:51.563919",
-      "status": "new"
+      "status": "new",
+      "is_bidding_gig": true,
+      "marketplace_category": "bidding_and_resumes"
     },
     {
       "id": "jby-151527",
@@ -27993,11 +28181,13 @@
       "is_high_ticket": true,
       "deliverable": "Custom trained AI bot embeddable on website/WhatsApp + prompt template",
       "effective_hourly_rate": 2400,
-      "requires_resume": false,
-      "application_type": "Direct Deal (No Resume / No Bidding)",
+      "requires_resume": true,
+      "application_type": "Bidding & Resume Required",
       "country_badge": "\ud83c\uddfa\ud83c\uddf8 USA ($ USD)",
       "created_at": "2026-09-24T15:22:51.563920",
-      "status": "portal_ready"
+      "status": "portal_ready",
+      "is_bidding_gig": true,
+      "marketplace_category": "bidding_and_resumes"
     },
     {
       "id": "jby-149591",
@@ -28022,11 +28212,13 @@
       "is_high_ticket": false,
       "deliverable": "Automated solution package",
       "effective_hourly_rate": 1600,
-      "requires_resume": false,
-      "application_type": "Direct Deal (No Resume / No Bidding)",
+      "requires_resume": true,
+      "application_type": "Bidding & Resume Required",
       "country_badge": "\ud83c\uddfa\ud83c\uddf8 USA ($ USD)",
       "created_at": "2026-09-24T15:22:51.563921",
-      "status": "new"
+      "status": "new",
+      "is_bidding_gig": true,
+      "marketplace_category": "bidding_and_resumes"
     },
     {
       "id": "jby-151531",
@@ -28055,11 +28247,13 @@
       "is_high_ticket": true,
       "deliverable": "End-to-end automation workflow + auto-retry error handling + instructions",
       "effective_hourly_rate": 1600,
-      "requires_resume": false,
-      "application_type": "Direct Deal (No Resume / No Bidding)",
+      "requires_resume": true,
+      "application_type": "Bidding & Resume Required",
       "country_badge": "\ud83c\uddfa\ud83c\uddf8 USA ($ USD)",
       "created_at": "2026-09-24T15:22:51.563922",
-      "status": "portal_ready"
+      "status": "portal_ready",
+      "is_bidding_gig": true,
+      "marketplace_category": "bidding_and_resumes"
     },
     {
       "id": "jby-151512",
@@ -28084,11 +28278,13 @@
       "is_high_ticket": false,
       "deliverable": "Automated solution package",
       "effective_hourly_rate": 1600,
-      "requires_resume": false,
-      "application_type": "Direct Deal (No Resume / No Bidding)",
+      "requires_resume": true,
+      "application_type": "Bidding & Resume Required",
       "country_badge": "\ud83c\uddfa\ud83c\uddf8 USA ($ USD)",
       "created_at": "2026-09-24T15:22:51.563923",
-      "status": "new"
+      "status": "new",
+      "is_bidding_gig": true,
+      "marketplace_category": "bidding_and_resumes"
     },
     {
       "id": "jby-151502",
@@ -28114,10 +28310,12 @@
       "deliverable": "Automated solution package",
       "effective_hourly_rate": 1600,
       "requires_resume": false,
-      "application_type": "Direct Deal (No Resume / No Bidding)",
+      "application_type": "Bidding & Resume Required",
       "country_badge": "\ud83c\udde8\ud83c\udde6 Canada ($ CAD)",
       "created_at": "2026-09-24T15:22:51.563923",
-      "status": "contacted"
+      "status": "contacted",
+      "is_bidding_gig": true,
+      "marketplace_category": "bidding_and_resumes"
     },
     {
       "id": "jby-149623",
@@ -28142,11 +28340,13 @@
       "is_high_ticket": false,
       "deliverable": "Automated solution package",
       "effective_hourly_rate": 1600,
-      "requires_resume": false,
-      "application_type": "Direct Deal (No Resume / No Bidding)",
+      "requires_resume": true,
+      "application_type": "Bidding & Resume Required",
       "country_badge": "\ud83c\uddfa\ud83c\uddf8 USA ($ USD)",
       "created_at": "2026-09-24T15:22:51.563924",
-      "status": "new"
+      "status": "new",
+      "is_bidding_gig": true,
+      "marketplace_category": "bidding_and_resumes"
     },
     {
       "id": "wwr-7a0b4271",
@@ -33713,6 +33913,831 @@
       "country_badge": "\ud83c\udf0d Global Remote ($ USD)",
       "created_at": "2026-09-24T16:38:50.996393",
       "status": "new"
+    },
+    {
+      "id": "wwr-58be698e",
+      "title": "Senior .NET Full-stack Developer",
+      "company": "Lemon.io",
+      "contact_email": "",
+      "source": "WeWorkRemotely",
+      "location": "Remote",
+      "budget": 450,
+      "description": "<img src=\"https://we-work-remotely.imgix.net/logos/0171/6398/logo.gif?ixlib=rails-4.0.0&amp;w=50&amp;h=50&amp;dpr=2&amp;fit=fill&amp;auto=compress\" />\n\n<p>\n  <strong>Headquarters:</strong> New York, NY\n    <br /><strong>URL:</strong> <a href=\"https://lemon.io\">https://lemon.io</a>\n</p>\n\n<p>Are you a talented Senior Developer looking for a remote job that lets you show your skills and get decent compensation? Look no further than <a href=\"https://lemon.io/for-developers/?utm_source=weworkremotely&amp;utm_medium=job_ad&amp;utm_campaign=supply_en_fullstack_react/.net_sep_2026_job_ad\">Lemon.io</a> \u2014 the marketplace that connects you with hand-picked startups in the US and Europe.</p>\n<p><strong>What we offer:</strong></p>\n<ul>\n<li>The rate depends on your seniority level, skills and experience. We've already paid out over $11M to our engineers.</li>\n<li>No more hunting for clients or negotiating rates \u2014 let us handle the business side of things so you can focus on what you do best.</li>\n<l",
+      "skills": [
+        "Graphic Design",
+        "Logo Design",
+        "Branding",
+        "Vector SVG",
+        "Python",
+        "Automation",
+        "Remote"
+      ],
+      "url": "https://weworkremotely.com/remote-jobs/lemon-io-senior-net-full-stack-developer-1",
+      "has_direct_email": false,
+      "apply_mode": "official_portal",
+      "category": "Logo & Brand Design",
+      "feasibility_score": 90,
+      "difficulty": "Very Easy",
+      "ai_dev_time": "15-30 mins with AI generation + vectorization",
+      "turnaround_time": "24 to 48 hours",
+      "is_high_ticket": false,
+      "deliverable": "3-5 high-resolution vector logo concepts (SVG, PNG transparent, brand palette)",
+      "effective_hourly_rate": 1286,
+      "requires_resume": true,
+      "is_bidding_gig": true,
+      "marketplace_category": "bidding_and_resumes",
+      "application_type": "Bidding & Resume Required",
+      "country_badge": "\ud83c\udf0d Global Remote ($ USD)",
+      "created_at": "2026-09-24T16:50:05.836565",
+      "status": "new"
+    },
+    {
+      "id": "wwr-76053f38",
+      "title": "Full-Stack Product Engineer - Agentic First",
+      "company": "Wonderdog",
+      "contact_email": "",
+      "source": "WeWorkRemotely",
+      "location": "Remote",
+      "budget": 1800,
+      "description": "<img src=\"https://we-work-remotely.imgix.net/logos/0171/5766/logo.gif?ixlib=rails-4.0.0&amp;w=50&amp;h=50&amp;dpr=2&amp;fit=fill&amp;auto=compress\" />\n\n<p>\n  <strong>Headquarters:</strong> Los Angeles\n    <br /><strong>URL:</strong> <a href=\"https://wonderdoghealth.com/\">https://wonderdoghealth.com/</a>\n</p>\n\n<p class=\"font-claude-response-body break-words whitespace-normal\">Wonder Dog is a preventative health platform for dogs. We send licensed vet techs to your home for a blood draw, run a 40+ biomarker panel through a national lab, and turn the results into something owners can actually act on. We're a small team with paying customers, and you'd be working directly with the founder and our lead engineer.</p>\n<p class=\"font-claude-response-body break-words whitespace-normal\"><strong>How we work</strong></p>\n<p class=\"font-claude-response-body break-words whitespace-normal\">AI coding agents do most of the typing here. Your job is to direct them, review the output, and make sure what s",
+      "skills": [
+        "AI Chatbots",
+        "Prompt Engineering",
+        "OpenAI/Gemini",
+        "FastAPI",
+        "Python",
+        "Automation",
+        "Remote"
+      ],
+      "url": "https://weworkremotely.com/remote-jobs/wonderdog-full-stack-product-engineer-agentic-first",
+      "has_direct_email": false,
+      "apply_mode": "official_portal",
+      "category": "AI Chatbots & Workflows",
+      "feasibility_score": 92,
+      "difficulty": "Easy",
+      "ai_dev_time": "45 mins with FastAPI + OpenAI/Gemini API",
+      "turnaround_time": "3 to 4 days",
+      "is_high_ticket": true,
+      "deliverable": "Custom trained AI bot embeddable on website/WhatsApp + prompt template",
+      "effective_hourly_rate": 2400,
+      "requires_resume": true,
+      "is_bidding_gig": true,
+      "marketplace_category": "bidding_and_resumes",
+      "application_type": "Bidding & Resume Required",
+      "country_badge": "\ud83c\udf0d Global Remote ($ USD)",
+      "created_at": "2026-09-24T16:50:05.836587",
+      "status": "new"
+    },
+    {
+      "id": "wwr-df2a1967",
+      "title": "Senior Java & React Developer",
+      "company": "Lemon.io",
+      "contact_email": "",
+      "source": "WeWorkRemotely",
+      "location": "Remote",
+      "budget": 1500,
+      "description": "<img src=\"https://we-work-remotely.imgix.net/logos/0171/6341/logo.gif?ixlib=rails-4.0.0&amp;w=50&amp;h=50&amp;dpr=2&amp;fit=fill&amp;auto=compress\" />\n\n<p>\n  <strong>Headquarters:</strong> New York, NY\n    <br /><strong>URL:</strong> <a href=\"https://lemon.io\">https://lemon.io</a>\n</p>\n\n<p>Are you a talented Senior Developer looking for a remote job that lets you show your skills and get decent compensation? Look no further than <a href=\"https://lemon.io/for-developers/?utm_source=weworkremotely&amp;utm_medium=job_ad&amp;utm_campaign=supply_en_fullstack_react/java_sep_2026_job_ad\">Lemon.io</a> \u2014 the marketplace that connects you with hand-picked startups in the US and Europe.</p>\n<p><strong>What we offer:</strong></p>\n<ul>\n<li>The rate depends on your location, skills and experience. We've already paid out over $11M to our engineers.</li>\n<li>No more hunting for clients or negotiating rates \u2014 let us handle the business side of things so you can focus on what you do best.</li>\n<li>We'll",
+      "skills": [
+        "Web Development",
+        "React/Tailwind",
+        "Responsive Design",
+        "Python",
+        "Automation",
+        "Remote"
+      ],
+      "url": "https://weworkremotely.com/remote-jobs/lemon-io-senior-java-react-developer",
+      "has_direct_email": false,
+      "apply_mode": "official_portal",
+      "category": "Web & Landing Page Dev",
+      "feasibility_score": 85,
+      "difficulty": "Moderate",
+      "ai_dev_time": "1-2 hours using AI code generation & Tailwind",
+      "turnaround_time": "3 to 5 days",
+      "is_high_ticket": true,
+      "deliverable": "Responsive, high-converting landing page with mobile optimization",
+      "effective_hourly_rate": 1000,
+      "requires_resume": true,
+      "is_bidding_gig": true,
+      "marketplace_category": "bidding_and_resumes",
+      "application_type": "Bidding & Resume Required",
+      "country_badge": "\ud83c\udf0d Global Remote ($ USD)",
+      "created_at": "2026-09-24T16:50:05.836589",
+      "status": "new"
+    },
+    {
+      "id": "wwr-3f54c760",
+      "title": "Director of Production Engineering",
+      "company": "Legion",
+      "contact_email": "recruiting@legion.co",
+      "source": "WeWorkRemotely",
+      "location": "Remote",
+      "budget": 750,
+      "description": "<p>\n  <strong>Headquarters:</strong> Remote, United States\n</p>\n\n<h1>Director of Production Engineering&nbsp;</h1>\n<h2><strong>Remote, United States</strong></h2>\n<p><strong>About this Position</strong></p>\n<p>Are you passionate about building the reliability, automation, and security foundations that let engineering teams move fast with confidence? At Legion, we are seeking a Director of Engineering, DevOps &amp; SRE to lead the teams responsible for the availability, scalability, and security of our production environment. Our production infrastructure runs on AWS, leveraging services such as EKS, RDS, and a broad set of AWS-native technologies. You will partner closely with engineering and IT to build resilient systems, drive operational excellence, and ensure our platform meets the highest standards of security and compliance.</p>\n<p>This is a hands-on leadership role where you'll spend ~20-30% of your time contributing directly to architecture, tooling, and incident response, and ",
+      "skills": [
+        "DevOps",
+        "Docker",
+        "CI/CD",
+        "Cloud",
+        "Python",
+        "Automation",
+        "Remote"
+      ],
+      "url": "https://weworkremotely.com/remote-jobs/legion-director-of-production-engineering",
+      "has_direct_email": true,
+      "apply_mode": "direct_email",
+      "category": "DevOps & Cloud Engineering",
+      "feasibility_score": 85,
+      "difficulty": "Moderate",
+      "ai_dev_time": "1 hour with Docker & Terraform",
+      "turnaround_time": "2 to 3 days",
+      "is_high_ticket": false,
+      "deliverable": "Containerized setup + CI/CD workflow pipeline",
+      "effective_hourly_rate": 1500,
+      "requires_resume": false,
+      "is_bidding_gig": true,
+      "marketplace_category": "bidding_and_resumes",
+      "application_type": "Bidding & Resume Required",
+      "country_badge": "\ud83c\udf0d Global Remote ($ USD)",
+      "created_at": "2026-09-24T16:50:05.836590",
+      "status": "new"
+    },
+    {
+      "id": "wwr-23346967",
+      "title": "Chief Architect",
+      "company": "Legion",
+      "contact_email": "recruiting@legion.co",
+      "source": "WeWorkRemotely",
+      "location": "Remote",
+      "budget": 800,
+      "description": "<p>\n  <strong>Headquarters:</strong> Remote, United States\n</p>\n\n<h1><strong>Chief Architect</strong></h1>\n<h1><span><strong>Remote - US</strong></span></h1>\n<p>Legion Technologies is building the AI-powered operating system for the hourly workforce. We are hiring a Chief Architect to serve as Legion\u2019s most senior hands-on technical leader and to shape the technical foundation that will power the next decade of product innovation.</p>\n<p>This is not a strategy-only or advisory role. The Chief Architect must live close to the code, go deep with engineering teams, challenge assumptions, write and review technical designs, make high-consequence architecture decisions, and help turn bold product ambitions into scalable, reliable production systems.</p>\n<p><strong>This person will own architecture and technical decision-making for the most complex parts of Legion\u2019s Workforce Management platform, including AI, optimization, forecasting, scheduling, distributed systems, data platforms, real-t",
+      "skills": [
+        "Python",
+        "Automation",
+        "Remote"
+      ],
+      "url": "https://weworkremotely.com/remote-jobs/legion-chief-architect",
+      "has_direct_email": true,
+      "apply_mode": "direct_email",
+      "category": "General Automation",
+      "feasibility_score": 80,
+      "difficulty": "Easy",
+      "ai_dev_time": "30 mins",
+      "turnaround_time": "2 to 3 days",
+      "is_high_ticket": false,
+      "deliverable": "Automated solution package",
+      "effective_hourly_rate": 1600,
+      "requires_resume": false,
+      "is_bidding_gig": true,
+      "marketplace_category": "bidding_and_resumes",
+      "application_type": "Bidding & Resume Required",
+      "country_badge": "\ud83c\udf0d Global Remote ($ USD)",
+      "created_at": "2026-09-24T16:50:05.836592",
+      "status": "new"
+    },
+    {
+      "id": "wwr-77e59cc3",
+      "title": "Lead Developer \u2014 Rebuild, Modernize, & Scale (Social Good SaaS, Remote)",
+      "company": "Track it Forward",
+      "contact_email": "",
+      "source": "WeWorkRemotely",
+      "location": "Remote",
+      "budget": 450,
+      "description": "<img src=\"https://we-work-remotely.imgix.net/logos/0015/7892/logo.gif?ixlib=rails-4.0.0&amp;w=50&amp;h=50&amp;dpr=2&amp;fit=fill&amp;auto=compress\" />\n\n<p>\n  <strong>Headquarters:</strong> Oakland, CA\n    <br /><strong>URL:</strong> <a href=\"https://www.trackitforward.com\">https://www.trackitforward.com</a>\n</p>\n\n<p>We are looking for a lead developer to do a greenfield rebuild of our legacy SaaS app, modernize our mobile apps, and lead the tech effort to scale our app.&nbsp; You will help choose the language, build the technical foundation, work with our product manager to rebuild the app, and migrate all customers over.</p>\n<p><strong>About Track it Forward </strong>Track it Forward is the leading volunteer time-tracking application for nonprofits and schools. For 15 years, we\u2019ve helped thousands of organizations mobilize volunteers and track over 30 million hours. We are a profitable, bootstrapped team of 4 focused on great work-life balance, high-impact work, and a fun, puzzle-lovi",
+      "skills": [
+        "Graphic Design",
+        "Logo Design",
+        "Branding",
+        "Vector SVG",
+        "Python",
+        "Automation",
+        "Remote"
+      ],
+      "url": "https://weworkremotely.com/remote-jobs/track-it-forward-lead-developer-rebuild-modernize-scale-social-good-saas-remote",
+      "has_direct_email": false,
+      "apply_mode": "official_portal",
+      "category": "Logo & Brand Design",
+      "feasibility_score": 90,
+      "difficulty": "Very Easy",
+      "ai_dev_time": "15-30 mins with AI generation + vectorization",
+      "turnaround_time": "24 to 48 hours",
+      "is_high_ticket": false,
+      "deliverable": "3-5 high-resolution vector logo concepts (SVG, PNG transparent, brand palette)",
+      "effective_hourly_rate": 1286,
+      "requires_resume": true,
+      "is_bidding_gig": true,
+      "marketplace_category": "bidding_and_resumes",
+      "application_type": "Bidding & Resume Required",
+      "country_badge": "\ud83c\udf0d Global Remote ($ USD)",
+      "created_at": "2026-09-24T16:50:05.836593",
+      "status": "new"
+    },
+    {
+      "id": "wwr-15d29664",
+      "title": "Senior Independent AI Engineer / Architect",
+      "company": "A.Team",
+      "contact_email": "",
+      "source": "WeWorkRemotely",
+      "location": "Remote",
+      "budget": 200.0,
+      "description": "<img src=\"https://we-work-remotely.imgix.net/logos/0071/4151/logo.gif?ixlib=rails-4.0.0&amp;w=50&amp;h=50&amp;dpr=2&amp;fit=fill&amp;auto=compress\" />\n\n<p>\n  <strong>Headquarters:</strong> NYC and TLV\n    <br /><strong>URL:</strong> <a href=\"http://a.team/ai-jobs?utm_source=wwr&amp;utm_medium=post&amp;utm_campaign=wwrai\">http://a.team/ai-jobs?utm_source=wwr&amp;utm_medium=post&amp;utm_campaign=wwrai</a>\n</p>\n\n<p><strong>Senior Independent AI Engineer / Architect</strong></p>\n<p><em>Remote | Americas, Europe, or Israel</em></p>\n<p>Most AI engineers can find work.</p>\n<p>Finding work worth doing is harder.</p>\n<p>A.Team is an invite-only network of senior AI engineers, ML engineers, and AI architects working on production AI systems for startups, scale-ups, and global companies.</p>\n<p>Since 2020, builders in the network have earned more than $200M working with companies including Lyft, Google X, HCA, Unilever, Sightful, D-ID, and others.</p>\n<p><strong>The Work</strong></p>\n<p>You'll jo",
+      "skills": [
+        "Graphic Design",
+        "Logo Design",
+        "Branding",
+        "Vector SVG",
+        "Python",
+        "Automation",
+        "Remote"
+      ],
+      "url": "https://weworkremotely.com/remote-jobs/a-team-senior-independent-ai-engineer-architect",
+      "has_direct_email": false,
+      "apply_mode": "official_portal",
+      "category": "Logo & Brand Design",
+      "feasibility_score": 90,
+      "difficulty": "Very Easy",
+      "ai_dev_time": "15-30 mins with AI generation + vectorization",
+      "turnaround_time": "24 to 48 hours",
+      "is_high_ticket": false,
+      "deliverable": "3-5 high-resolution vector logo concepts (SVG, PNG transparent, brand palette)",
+      "effective_hourly_rate": 571,
+      "requires_resume": true,
+      "is_bidding_gig": true,
+      "marketplace_category": "bidding_and_resumes",
+      "application_type": "Bidding & Resume Required",
+      "country_badge": "\ud83c\udf0d Global Remote ($ USD)",
+      "created_at": "2026-09-24T16:50:05.836594",
+      "status": "new"
+    },
+    {
+      "id": "wwr-be92bd96",
+      "title": "Senior Independent Software Developer ($90-$170/hr)",
+      "company": "A.Team",
+      "contact_email": "",
+      "source": "WeWorkRemotely",
+      "location": "Remote",
+      "budget": 2160.0,
+      "description": "<img src=\"https://we-work-remotely.imgix.net/logos/0066/7400/logo.gif?ixlib=rails-4.0.0&amp;w=50&amp;h=50&amp;dpr=2&amp;fit=fill&amp;auto=compress\" />\n\n<p>\n  <strong>Headquarters:</strong> NYC and TLV\n    <br /><strong>URL:</strong> <a href=\"https://build.a.team/wwrfastrackreferral\">https://build.a.team/wwrfastrackreferral</a>\n</p>\n\n<div>Imagine choosing your projects, collaborating with the best, and keeping every dollar you earn.<br /><br /></div><div><br />At A\u00b7Team, we\u2019ve turned this vision into reality for top-tier independent software builders. Since May 2020, A\u00b7Teamers have earned over $108 million working on high-impact projects for companies backed by a16z, YC, Insight Partners, Tiger Global, Softbank, General Catalyst, and more.<br /><br /></div><div><strong><br />Why A\u00b7Team?<br /></strong><br /></div><ul><li><strong>High-paying, meaningful missions:</strong> Earn $90-$170/hr with over 500 companies\u2014from trailblazing startups like Sightful, D-ID, and Apprentice to enterprise ",
+      "skills": [
+        "Graphic Design",
+        "Logo Design",
+        "Branding",
+        "Vector SVG",
+        "Python",
+        "Automation",
+        "Remote"
+      ],
+      "url": "https://weworkremotely.com/remote-jobs/a-team-senior-independent-software-developer-90-170-hr",
+      "has_direct_email": false,
+      "apply_mode": "official_portal",
+      "category": "Logo & Brand Design",
+      "feasibility_score": 90,
+      "difficulty": "Very Easy",
+      "ai_dev_time": "15-30 mins with AI generation + vectorization",
+      "turnaround_time": "24 to 48 hours",
+      "is_high_ticket": true,
+      "deliverable": "3-5 high-resolution vector logo concepts (SVG, PNG transparent, brand palette)",
+      "effective_hourly_rate": 6171,
+      "requires_resume": true,
+      "is_bidding_gig": true,
+      "marketplace_category": "bidding_and_resumes",
+      "application_type": "Bidding & Resume Required",
+      "country_badge": "\ud83c\udf0d Global Remote ($ USD)",
+      "created_at": "2026-09-24T16:50:05.836595",
+      "status": "new"
+    },
+    {
+      "id": "wwr-1a516232",
+      "title": "Senior React Native Developer",
+      "company": "Lemon.io",
+      "contact_email": "",
+      "source": "WeWorkRemotely",
+      "location": "Remote",
+      "budget": 1500,
+      "description": "<img src=\"https://we-work-remotely.imgix.net/logos/0171/6322/logo.gif?ixlib=rails-4.0.0&amp;w=50&amp;h=50&amp;dpr=2&amp;fit=fill&amp;auto=compress\" />\n\n<p>\n  <strong>Headquarters:</strong> New York, NY\n    <br /><strong>URL:</strong> <a href=\"https://lemon.io\">https://lemon.io</a>\n</p>\n\n<p>Are you a talented Senior Developer looking for a remote job that lets you show your skills and get decent compensation? Look no further than <a href=\"https://lemon.io/for-developers/?utm_source=weworkremotely&amp;utm_medium=job_ad&amp;utm_campaign=supply_en_react_native/react/node_sep_2026_job_ad\">Lemon.io</a> \u2014 the marketplace that connects you with hand-picked startups in the US and Europe.</p>\n<p><strong>What we offer:</strong></p>\n<ul>\n<li>The rate depends on your seniority level, skills and experience. We've already paid out over $11M to our engineers.</li>\n<li>No more hunting for clients or negotiating rates \u2014 let us handle the business side of things so you can focus on what you do best.</li>",
+      "skills": [
+        "Web Development",
+        "React/Tailwind",
+        "Responsive Design",
+        "Python",
+        "Automation",
+        "Remote"
+      ],
+      "url": "https://weworkremotely.com/remote-jobs/lemon-io-senior-react-native-developer-1",
+      "has_direct_email": false,
+      "apply_mode": "official_portal",
+      "category": "Web & Landing Page Dev",
+      "feasibility_score": 85,
+      "difficulty": "Moderate",
+      "ai_dev_time": "1-2 hours using AI code generation & Tailwind",
+      "turnaround_time": "3 to 5 days",
+      "is_high_ticket": true,
+      "deliverable": "Responsive, high-converting landing page with mobile optimization",
+      "effective_hourly_rate": 1000,
+      "requires_resume": true,
+      "is_bidding_gig": true,
+      "marketplace_category": "bidding_and_resumes",
+      "application_type": "Bidding & Resume Required",
+      "country_badge": "\ud83c\udf0d Global Remote ($ USD)",
+      "created_at": "2026-09-24T16:50:05.836596",
+      "status": "new"
+    },
+    {
+      "id": "wwr-d3d4fc9f",
+      "title": "Senior Solutions Engineer- LATAM",
+      "company": "Fin",
+      "contact_email": "",
+      "source": "WeWorkRemotely",
+      "location": "Remote",
+      "budget": 1800,
+      "description": "<p>\n  <strong>Headquarters:</strong> NYC, Remote; San Francisco, California\n</p>\n\n<div class=\"content-intro\"><p><a href=\"https://fin.ai/\">Fin</a> is the AI Customer Agent company on a mission to help businesses provide perfect customer experiences.</p>\n<p>Our AI Agent Fin is the highest-performing AI Customer Agent on the market today, enabling businesses to deliver impeccable, always-on customer support across the customer journey \u2013 from service, to sales, to ecommerce. Powered by our own AI models, Fin resolves complex customer issues end-to-end across every channel, with minimal set-up and integration. Fin can also be combined with our natively integrated Intercom help desk for one single system that is designed to meet the needs of modern day support teams.</p>\n<p>Founded in 2011, Fin became one of the fastest growing companies and remains one of the largest private software companies in the world with nearly 30,000 global businesses using our products to transform their customer s",
+      "skills": [
+        "AI Chatbots",
+        "Prompt Engineering",
+        "OpenAI/Gemini",
+        "FastAPI",
+        "Python",
+        "Automation",
+        "Remote"
+      ],
+      "url": "https://weworkremotely.com/remote-jobs/fin-senior-solutions-engineer-latam",
+      "has_direct_email": false,
+      "apply_mode": "official_portal",
+      "category": "AI Chatbots & Workflows",
+      "feasibility_score": 92,
+      "difficulty": "Easy",
+      "ai_dev_time": "45 mins with FastAPI + OpenAI/Gemini API",
+      "turnaround_time": "3 to 4 days",
+      "is_high_ticket": true,
+      "deliverable": "Custom trained AI bot embeddable on website/WhatsApp + prompt template",
+      "effective_hourly_rate": 2400,
+      "requires_resume": true,
+      "is_bidding_gig": true,
+      "marketplace_category": "bidding_and_resumes",
+      "application_type": "Bidding & Resume Required",
+      "country_badge": "\ud83c\udf0d Global Remote ($ USD)",
+      "created_at": "2026-09-24T16:50:05.836597",
+      "status": "new"
+    },
+    {
+      "id": "wwr-ece5581b",
+      "title": "Director, Channel & Partnerships",
+      "company": "Prove",
+      "contact_email": "",
+      "source": "WeWorkRemotely",
+      "location": "Remote",
+      "budget": 800,
+      "description": "<p>\n  <strong>Headquarters:</strong> New York, NY; United States (Remote)\n</p>\n\n<div class=\"content-intro\"><h1><img alt=\"We're Hiring!\" src=\"https://i.imgur.com/gwyI98w.png\" width=\"100%\" /></h1>\n<h1>About Prove&nbsp;</h1>\n<div>\n<p><span>As the world moves to a mobile-first economy, businesses need to modernize how they acquire, engage with and enable consumers. Prove\u2019s phone-centric identity tokenization and passive cryptographic authentication solutions reduce friction, enhance security and privacy across all digital channels, and accelerate revenues while reducing operating expenses and fraud losses. Over 1,000 enterprise customers use Prove\u2019s platform to process 20 billion customer requests annually across industries, including banking, lending, healthcare, gaming, crypto, e-commerce, marketplaces, and payments. For the latest updates from Prove, </span><a href=\"https://www.linkedin.com/company/proveidentity/\"><span>follow us on LinkedIn.</span></a></p>\n<p><span>Prove is driving the",
+      "skills": [
+        "Python",
+        "Automation",
+        "Remote"
+      ],
+      "url": "https://weworkremotely.com/remote-jobs/prove-director-channel-partnerships",
+      "has_direct_email": false,
+      "apply_mode": "official_portal",
+      "category": "General Automation",
+      "feasibility_score": 80,
+      "difficulty": "Easy",
+      "ai_dev_time": "30 mins",
+      "turnaround_time": "2 to 3 days",
+      "is_high_ticket": false,
+      "deliverable": "Automated solution package",
+      "effective_hourly_rate": 1600,
+      "requires_resume": true,
+      "is_bidding_gig": true,
+      "marketplace_category": "bidding_and_resumes",
+      "application_type": "Bidding & Resume Required",
+      "country_badge": "\ud83c\udf0d Global Remote ($ USD)",
+      "created_at": "2026-09-24T16:50:05.836598",
+      "status": "new"
+    },
+    {
+      "id": "wwr-60bdba65",
+      "title": "FULL TIME: Software Engineer Position - React and Rest",
+      "company": "Yooli",
+      "contact_email": "",
+      "source": "WeWorkRemotely",
+      "location": "Remote",
+      "budget": 1500,
+      "description": "<img src=\"https://we-work-remotely.imgix.net/logos/0161/6774/logo.gif?ixlib=rails-4.0.0&amp;w=50&amp;h=50&amp;dpr=2&amp;fit=fill&amp;auto=compress\" />\n\n<p>\n  <strong>Headquarters:</strong> Australia\n    <br /><strong>URL:</strong> <a href=\"http://yooli.co\">http://yooli.co</a>\n</p>\n\n<div><strong>Job description</strong></div>\n<ul>\n<li>We are seeking a highly skilled <strong>Senior Software Engineer</strong> to join our team and contribute to the transformative tech evolution in healthcare.&nbsp;</li>\n<li>This critical role involves developing, integrating, and optimising our backend and database systems.&nbsp;</li>\n<li>You will work closely with our Chief Engineer and CTO to build and refine our software solutions, ensuring they remain at the cutting edge of innovation.</li>\n</ul>\n<div>&nbsp;</div>\n<div><strong>Your Role:</strong></div>\n<ul>\n<li>Develop and maintain robust backend services using <strong>NestJS</strong> and <strong>Node.js</strong>, ensuring top-tier performance and secu",
+      "skills": [
+        "Web Development",
+        "React/Tailwind",
+        "Responsive Design",
+        "Python",
+        "Automation",
+        "Remote"
+      ],
+      "url": "https://weworkremotely.com/remote-jobs/yooli-full-time-software-engineer-position-react-and-rest-1",
+      "has_direct_email": false,
+      "apply_mode": "official_portal",
+      "category": "Web & Landing Page Dev",
+      "feasibility_score": 85,
+      "difficulty": "Moderate",
+      "ai_dev_time": "1-2 hours using AI code generation & Tailwind",
+      "turnaround_time": "3 to 5 days",
+      "is_high_ticket": true,
+      "deliverable": "Responsive, high-converting landing page with mobile optimization",
+      "effective_hourly_rate": 1000,
+      "requires_resume": true,
+      "is_bidding_gig": true,
+      "marketplace_category": "bidding_and_resumes",
+      "application_type": "Bidding & Resume Required",
+      "country_badge": "\ud83c\udf0d Global Remote ($ USD)",
+      "created_at": "2026-09-24T16:50:05.836599",
+      "status": "new"
+    },
+    {
+      "id": "wwr-454ddef6",
+      "title": "Senior PeopleSoft Developer/Analyst II",
+      "company": "Princeton University",
+      "contact_email": "",
+      "source": "WeWorkRemotely",
+      "location": "Remote",
+      "budget": 800,
+      "description": "<p>\n  <strong>Headquarters:</strong> Princeton, New Jersey, United States\n    <br /><strong>URL:</strong> <a href=\"https://www.click2apply.net/WAQm2XC7Qr2yLU5m7H7yeG\">https://www.click2apply.net/WAQm2XC7Qr2yLU5m7H7yeG</a>\n</p>\n\n<p><strong>Job Type</strong>&nbsp;Full-Time<br /><br /><strong>Overview</strong><br /><br /></p>\n<p>Princeton University\u2019s Office of Information Technology is seeking a Senior Developer/Analyst II to serve as a technical expert for the PeopleSoft Human Capital Management (HCM) application. This position analyzes customer needs and develops customizations, reports, interfaces and bolt-on solutions for HCM. Responsibilities also include operational support, testing, maintenance, and customer support. The Senior Developer/Analyst works under the general supervision of senior staff and the Senior Manager/Director of the group.</p>\n<p>A Senior Developer/Analyst will build and maintains interactive applications within the ERP landscape: focusing on design, development",
+      "skills": [
+        "Python",
+        "Automation",
+        "Remote"
+      ],
+      "url": "https://weworkremotely.com/remote-jobs/princeton-university-senior-peoplesoft-developer-analyst-ii",
+      "has_direct_email": false,
+      "apply_mode": "official_portal",
+      "category": "General Automation",
+      "feasibility_score": 80,
+      "difficulty": "Easy",
+      "ai_dev_time": "30 mins",
+      "turnaround_time": "2 to 3 days",
+      "is_high_ticket": false,
+      "deliverable": "Automated solution package",
+      "effective_hourly_rate": 1600,
+      "requires_resume": true,
+      "is_bidding_gig": true,
+      "marketplace_category": "bidding_and_resumes",
+      "application_type": "Bidding & Resume Required",
+      "country_badge": "\ud83c\udf0d Global Remote ($ USD)",
+      "created_at": "2026-09-24T16:50:05.836600",
+      "status": "new"
+    },
+    {
+      "id": "wwr-cca2f097",
+      "title": "Managed SIEM Detection Engineer",
+      "company": "Expel",
+      "contact_email": "",
+      "source": "WeWorkRemotely",
+      "location": "Remote",
+      "budget": 750,
+      "description": "<p>\n  <strong>Headquarters:</strong> Remote\n</p>\n\n<p class=\"artifact-docx-preview_heading2\">Are you a detection engineer who wants to bring real depth of expertise into a new and growing function and use it to deliver security excellence to customers? Expel's professional services practice is just getting started, and we're looking for the technical expert who'll deliver the work that gets customers ready to thrive under our co-managed SIEM model. You'll bring hands-on skill to a team that's finding its stride, help it grow, and have a real runway to grow into a lead yourself.</p>\n<p class=\"artifact-docx-preview_heading2\"><span></span>Here's the work. Customers come to us with SIEMs that should be surfacing threats but are instead consuming their teams: ingestion costs climbing year over year, engineers buried in alert noise and broken pipelines, and detection blind spots leaving real gaps. You're the engineer who turns that around: authoring and tuning detection content that satisfies",
+      "skills": [
+        "Cyber Security",
+        "SIEM",
+        "Detection Rules",
+        "Linux",
+        "Python",
+        "Automation",
+        "Remote"
+      ],
+      "url": "https://weworkremotely.com/remote-jobs/expel-managed-siem-detection-engineer",
+      "has_direct_email": false,
+      "apply_mode": "official_portal",
+      "category": "Cyber Security & Infrastructure",
+      "feasibility_score": 80,
+      "difficulty": "Moderate",
+      "ai_dev_time": "1-2 hours",
+      "turnaround_time": "3 to 5 days",
+      "is_high_ticket": false,
+      "deliverable": "Security policy configuration + detection rules + audit report",
+      "effective_hourly_rate": 500,
+      "requires_resume": true,
+      "is_bidding_gig": true,
+      "marketplace_category": "bidding_and_resumes",
+      "application_type": "Bidding & Resume Required",
+      "country_badge": "\ud83c\udf0d Global Remote ($ USD)",
+      "created_at": "2026-09-24T16:50:05.836602",
+      "status": "new"
+    },
+    {
+      "id": "wwr-64e73c00",
+      "title": "Smartsheet Expert for Integrated Project Planning",
+      "company": "Toptal",
+      "contact_email": "",
+      "source": "WeWorkRemotely",
+      "location": "Remote",
+      "budget": 800,
+      "description": "<p>\n  <strong>Headquarters:</strong> \n</p>\n\n<p>Summary<br />We are seeking a Smartsheet Expert to support integrated project planning activities related to the integration of a regional utility's service territory and assets. This role will focus on building complex Smartsheet solutions, coaching the client on similar sheet and formula creation, and producing training materials.</p><p>General information<br />This engagement supports integrated project planning work tied to a regional utility integration effort. The scope centers on improving planning visibility and structure within Smartsheet, including program views, dependencies, and a more robust RAID log with formulas and connectors.</p><p>The ideal freelancer will be comfortable serving in both a hands-on build capacity and a coaching capacity, helping the client strengthen its internal use of Smartsheet while delivering practical project artifacts.</p><p><strong>Tasks and Deliverables</strong><br />- Build Smartsheet solutions t",
+      "skills": [
+        "Python",
+        "Automation",
+        "Remote"
+      ],
+      "url": "https://weworkremotely.com/remote-jobs/toptal-smartsheet-expert-for-integrated-project-planning",
+      "has_direct_email": false,
+      "apply_mode": "official_portal",
+      "category": "General Automation",
+      "feasibility_score": 80,
+      "difficulty": "Easy",
+      "ai_dev_time": "30 mins",
+      "turnaround_time": "2 to 3 days",
+      "is_high_ticket": false,
+      "deliverable": "Automated solution package",
+      "effective_hourly_rate": 1600,
+      "requires_resume": true,
+      "is_bidding_gig": true,
+      "marketplace_category": "bidding_and_resumes",
+      "application_type": "Bidding & Resume Required",
+      "country_badge": "\ud83c\udf0d Global Remote ($ USD)",
+      "created_at": "2026-09-24T16:50:05.836603",
+      "status": "new"
+    },
+    {
+      "id": "fl-auto-901",
+      "title": "Python Scraper & CSV Extractor for Automotive Parts Catalog",
+      "company": "AutoDirect Supply",
+      "contact_email": "",
+      "source": "Freelancer.com",
+      "location": "Remote (Worldwide)",
+      "budget": 850.0,
+      "description": "Freelancer.com Bidding Project: Need a Python developer with Playwright/BeautifulSoup experience. Must submit bid proposal with portfolio/resume and past web scraping scripts. Bidding closes in 48 hours.",
+      "skills": [
+        "Python",
+        "Playwright",
+        "Web Scraping",
+        "CSV/Excel Data",
+        "CSV Export"
+      ],
+      "url": "https://www.freelancer.com/projects/python/scraping-automotive-catalog",
+      "has_direct_email": false,
+      "apply_mode": "official_portal",
+      "category": "Web Scraping & Data Extraction",
+      "feasibility_score": 95,
+      "difficulty": "Very Easy",
+      "ai_dev_time": "15-25 mins with Python Playwright/BeautifulSoup",
+      "turnaround_time": "24 to 48 hours",
+      "is_high_ticket": false,
+      "deliverable": "Robust Python extraction script + Clean sample CSV + README setup",
+      "effective_hourly_rate": 2429,
+      "requires_resume": true,
+      "is_bidding_gig": true,
+      "marketplace_category": "bidding_and_resumes",
+      "application_type": "Bidding & Resume Required",
+      "country_badge": "\ud83c\udf0d Global Remote ($ USD)",
+      "created_at": "2026-09-24T16:50:05.836677",
+      "status": "new"
+    },
+    {
+      "id": "fiv-bot-902",
+      "title": "Build Custom WhatsApp & Telegram AI Lead Capture Bot",
+      "company": "GrowthWave Studio",
+      "contact_email": "",
+      "source": "Fiverr Gigs",
+      "location": "Remote",
+      "budget": 950.0,
+      "description": "Fiverr Buyer Request: Looking for a top-rated AI chatbot freelancer. Must submit gig proposal with custom offer, CV summary, and past chatbot demos. Fast delivery required.",
+      "skills": [
+        "AI Chatbots",
+        "Prompt Engineering",
+        "OpenAI/Gemini",
+        "FastAPI",
+        "WhatsApp API",
+        "Telegram Bot"
+      ],
+      "url": "https://www.fiverr.com/gigs/ai-chatbot-automation",
+      "has_direct_email": false,
+      "apply_mode": "official_portal",
+      "category": "AI Chatbots & Workflows",
+      "feasibility_score": 92,
+      "difficulty": "Easy",
+      "ai_dev_time": "45 mins with FastAPI + OpenAI/Gemini API",
+      "turnaround_time": "3 to 4 days",
+      "is_high_ticket": false,
+      "deliverable": "Custom trained AI bot embeddable on website/WhatsApp + prompt template",
+      "effective_hourly_rate": 1267,
+      "requires_resume": true,
+      "is_bidding_gig": true,
+      "marketplace_category": "bidding_and_resumes",
+      "application_type": "Bidding & Resume Required",
+      "country_badge": "\ud83c\udf0d Global Remote ($ USD)",
+      "created_at": "2026-09-24T16:50:05.836678",
+      "status": "new"
+    },
+    {
+      "id": "up-integ-903",
+      "title": "Make.com & Stripe Webhook Pipeline with Error Logging",
+      "company": "Apex SaaS Inc",
+      "contact_email": "",
+      "source": "Upwork",
+      "location": "Remote (US/Global)",
+      "budget": 1400.0,
+      "description": "Upwork Fixed-Price Gig: Seeking intermediate or expert automation freelancer. Connects required: 8. Submit cover letter, resume or Upwork portfolio, and answer screening questions about webhook latency.",
+      "skills": [
+        "Python",
+        "API Integration",
+        "Make.com",
+        "Zapier",
+        "Webhooks",
+        "Stripe API",
+        "Slack API"
+      ],
+      "url": "https://www.upwork.com/freelance-jobs/automation-stripe-make",
+      "has_direct_email": false,
+      "apply_mode": "official_portal",
+      "category": "API & Webhook Automations",
+      "feasibility_score": 94,
+      "difficulty": "Easy",
+      "ai_dev_time": "25-35 mins with Python or Make.com",
+      "turnaround_time": "24 to 48 hours",
+      "is_high_ticket": true,
+      "deliverable": "End-to-end webhook bridge + auto-retry error handling + instructions",
+      "effective_hourly_rate": 2800,
+      "requires_resume": true,
+      "is_bidding_gig": true,
+      "marketplace_category": "bidding_and_resumes",
+      "application_type": "Bidding & Resume Required",
+      "country_badge": "\ud83c\uddfa\ud83c\uddf8 USA ($ USD)",
+      "created_at": "2026-09-24T16:50:05.836679",
+      "status": "new"
+    },
+    {
+      "id": "fl-dash-904",
+      "title": "React & Tailwind CSS Customer Analytics Dashboard",
+      "company": "VentureMetrics",
+      "contact_email": "",
+      "source": "Freelancer.com",
+      "location": "Remote",
+      "budget": 1650.0,
+      "description": "Freelancer.com Contest & Bidding: Looking for clean, responsive frontend engineer. Submit competitive bid with resume and live GitHub/portfolio links. Wireframes provided.",
+      "skills": [
+        "Web Development",
+        "React/Tailwind",
+        "Responsive Design",
+        "React",
+        "Tailwind CSS",
+        "JavaScript",
+        "UI/UX"
+      ],
+      "url": "https://www.freelancer.com/projects/react-js/modern-analytics-dashboard",
+      "has_direct_email": false,
+      "apply_mode": "official_portal",
+      "category": "Web & Landing Page Dev",
+      "feasibility_score": 85,
+      "difficulty": "Moderate",
+      "ai_dev_time": "1-2 hours using AI code generation & Tailwind",
+      "turnaround_time": "3 to 5 days",
+      "is_high_ticket": true,
+      "deliverable": "Responsive, high-converting landing page with mobile optimization",
+      "effective_hourly_rate": 1100,
+      "requires_resume": true,
+      "is_bidding_gig": true,
+      "marketplace_category": "bidding_and_resumes",
+      "application_type": "Bidding & Resume Required",
+      "country_badge": "\ud83c\udf0d Global Remote ($ USD)",
+      "created_at": "2026-09-24T16:50:05.836680",
+      "status": "new"
+    },
+    {
+      "id": "fiv-brand-905",
+      "title": "Vector Minimalist Logo & Brand Assets for FinTech App",
+      "company": "NovaPay Global",
+      "contact_email": "",
+      "source": "Fiverr Gigs",
+      "location": "Remote",
+      "budget": 700.0,
+      "description": "Fiverr Project: Need vector SVG and transparent PNG marks. Send custom proposal, portfolio link, and sample draft concepts.",
+      "skills": [
+        "Graphic Design",
+        "Logo Design",
+        "Branding",
+        "Vector SVG"
+      ],
+      "url": "https://www.fiverr.com/gigs/minimalist-tech-logo",
+      "has_direct_email": false,
+      "apply_mode": "official_portal",
+      "category": "Logo & Brand Design",
+      "feasibility_score": 90,
+      "difficulty": "Very Easy",
+      "ai_dev_time": "15-30 mins with AI generation + vectorization",
+      "turnaround_time": "24 to 48 hours",
+      "is_high_ticket": false,
+      "deliverable": "3-5 high-resolution vector logo concepts (SVG, PNG transparent, brand palette)",
+      "effective_hourly_rate": 2000,
+      "requires_resume": true,
+      "is_bidding_gig": true,
+      "marketplace_category": "bidding_and_resumes",
+      "application_type": "Bidding & Resume Required",
+      "country_badge": "\ud83c\udf0d Global Remote ($ USD)",
+      "created_at": "2026-09-24T16:50:05.836681",
+      "status": "new"
+    },
+    {
+      "id": "up-etl-906",
+      "title": "SQL Data Transformation & Clean Lead Database Script",
+      "company": "OmniReach Partners",
+      "contact_email": "",
+      "source": "Upwork",
+      "location": "Remote",
+      "budget": 1100.0,
+      "description": "Upwork Hourly Contract ($45-65/hr, 20 hrs estimated): Need data cleaning specialist with Python Pandas and PostgreSQL experience. Submit proposal with resume, previous data pipeline experience, and milestones.",
+      "skills": [
+        "SQL",
+        "Data Analytics",
+        "Databricks",
+        "Reporting",
+        "Python Pandas",
+        "Data Cleaning",
+        "PostgreSQL"
+      ],
+      "url": "https://www.upwork.com/freelance-jobs/sql-data-pipeline",
+      "has_direct_email": false,
+      "apply_mode": "official_portal",
+      "category": "Data Analytics & SQL Pipelines",
+      "feasibility_score": 90,
+      "difficulty": "Easy",
+      "ai_dev_time": "30-45 mins with SQL & Pandas",
+      "turnaround_time": "24 to 48 hours",
+      "is_high_ticket": true,
+      "deliverable": "Optimized SQL queries + clean dataset export + reporting dashboard",
+      "effective_hourly_rate": 1467,
+      "requires_resume": true,
+      "is_bidding_gig": true,
+      "marketplace_category": "bidding_and_resumes",
+      "application_type": "Bidding & Resume Required",
+      "country_badge": "\ud83c\udf0d Global Remote ($ USD)",
+      "created_at": "2026-09-24T16:50:05.836682",
+      "status": "new"
+    },
+    {
+      "id": "wwr-dev-907",
+      "title": "Full-Stack Python & FastAPI Microservice Integration",
+      "company": "CloudScale Engineering",
+      "contact_email": "",
+      "source": "WeWorkRemotely",
+      "location": "Remote",
+      "budget": 2800.0,
+      "description": "Contract role on WeWorkRemotely: Requires formal resume/CV submission, cover letter explaining your automation approach, and code sample link. Competitive contractor compensation.",
+      "skills": [
+        "Python",
+        "API Integration",
+        "Automation",
+        "Zapier/Make",
+        "FastAPI",
+        "Docker",
+        "REST APIs"
+      ],
+      "url": "https://weworkremotely.com/remote-jobs/python-fastapi-microservice",
+      "has_direct_email": false,
+      "apply_mode": "official_portal",
+      "category": "Automation & Python Scripts",
+      "feasibility_score": 92,
+      "difficulty": "Easy",
+      "ai_dev_time": "30-45 mins with Python or Make.com",
+      "turnaround_time": "2 to 3 days",
+      "is_high_ticket": true,
+      "deliverable": "End-to-end automation workflow + auto-retry error handling + instructions",
+      "effective_hourly_rate": 3733,
+      "requires_resume": true,
+      "is_bidding_gig": true,
+      "marketplace_category": "bidding_and_resumes",
+      "application_type": "Bidding & Resume Required",
+      "country_badge": "\ud83c\udf0d Global Remote ($ USD)",
+      "created_at": "2026-09-24T16:50:05.836683",
+      "status": "new"
+    },
+    {
+      "id": "rok-sec-908",
+      "title": "Cloud Infrastructure & CI/CD Pipeline Automation Engineer",
+      "company": "CyberShield Technologies",
+      "contact_email": "",
+      "source": "RemoteOK",
+      "location": "Remote",
+      "budget": 3200.0,
+      "description": "Remote contract opportunity via RemoteOK portal: Traditional application process requiring resume, LinkedIn profile, and technical screening questions.",
+      "skills": [
+        "DevOps",
+        "Docker",
+        "CI/CD",
+        "Cloud",
+        "Terraform",
+        "AWS"
+      ],
+      "url": "https://remoteok.com/remote-jobs/cloud-pipeline-engineer",
+      "has_direct_email": false,
+      "apply_mode": "official_portal",
+      "category": "DevOps & Cloud Engineering",
+      "feasibility_score": 85,
+      "difficulty": "Moderate",
+      "ai_dev_time": "1 hour with Docker & Terraform",
+      "turnaround_time": "2 to 3 days",
+      "is_high_ticket": true,
+      "deliverable": "Containerized setup + CI/CD workflow pipeline",
+      "effective_hourly_rate": 6400,
+      "requires_resume": true,
+      "is_bidding_gig": true,
+      "marketplace_category": "bidding_and_resumes",
+      "application_type": "Bidding & Resume Required",
+      "country_badge": "\ud83c\udf0d Global Remote ($ USD)",
+      "created_at": "2026-09-24T16:50:05.836683",
+      "status": "new"
     }
   ],
   "outreaches": [
@@ -34872,7 +35897,7 @@
       "budget": 800
     }
   ],
-  "last_sync": "2026-09-24T16:38:50.996605",
+  "last_sync": "2026-09-24T16:50:05.836694",
   "autopilot_logs": [
     {
       "id": "74506fd8",

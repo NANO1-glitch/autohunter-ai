@@ -30,6 +30,7 @@ frontend/.pnp
 frontend/.pnp.js
 frontend/dist_temp/
 !frontend/dist/
+!frontend/dist/**
 
 # Environment Variables & Personal Credentials
 .env

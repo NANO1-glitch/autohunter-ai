@@ -73,11 +73,15 @@ class AutoPilotEngine:
                 and j.get("feasibility_score", 0) >= min_feasibility
             ]
 
-            # Separate direct email clients from portal applications
+            # Separate direct email clients from portal applications (exclude already pitched clients)
             direct_pitch_deals = [
                 j for j in eligible 
-                if j.get("contact_email") and "@" in j.get("contact_email") and not db.is_placeholder_or_bounced(j.get("contact_email"))
+                if j.get("contact_email") 
+                and "@" in j.get("contact_email") 
+                and not db.is_placeholder_or_bounced(j.get("contact_email"))
+                and not db.is_already_pitched(j.get("contact_email"), j.get("id"))
             ]
+
             portal_deals = [
                 j for j in eligible 
                 if not j.get("contact_email") or db.is_placeholder_or_bounced(j.get("contact_email"))

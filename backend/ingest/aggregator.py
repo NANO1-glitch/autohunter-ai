@@ -216,6 +216,107 @@ CURATED_HIGH_TICKET_STREAM = [
     }
 ]
 
+# Curated Traditional Bidding & Resume-Required Marketplace Gigs (Freelancer.com, Fiverr, Upwork, WWR)
+TRADITIONAL_BIDDING_GIGS_STREAM = [
+    {
+        "id": "fl-auto-901",
+        "title": "Python Scraper & CSV Extractor for Automotive Parts Catalog",
+        "company": "AutoDirect Supply",
+        "contact_email": "",
+        "source": "Freelancer.com",
+        "location": "Remote (Worldwide)",
+        "budget": 850.0,
+        "description": "Freelancer.com Bidding Project: Need a Python developer with Playwright/BeautifulSoup experience. Must submit bid proposal with portfolio/resume and past web scraping scripts. Bidding closes in 48 hours.",
+        "skills": ["Python", "Web Scraping", "Playwright", "CSV Export"],
+        "url": "https://www.freelancer.com/projects/python/scraping-automotive-catalog"
+    },
+    {
+        "id": "fiv-bot-902",
+        "title": "Build Custom WhatsApp & Telegram AI Lead Capture Bot",
+        "company": "GrowthWave Studio",
+        "contact_email": "",
+        "source": "Fiverr Gigs",
+        "location": "Remote",
+        "budget": 950.0,
+        "description": "Fiverr Buyer Request: Looking for a top-rated AI chatbot freelancer. Must submit gig proposal with custom offer, CV summary, and past chatbot demos. Fast delivery required.",
+        "skills": ["AI Chatbots", "FastAPI", "WhatsApp API", "Telegram Bot"],
+        "url": "https://www.fiverr.com/gigs/ai-chatbot-automation"
+    },
+    {
+        "id": "up-integ-903",
+        "title": "Make.com & Stripe Webhook Pipeline with Error Logging",
+        "company": "Apex SaaS Inc",
+        "contact_email": "",
+        "source": "Upwork",
+        "location": "Remote (US/Global)",
+        "budget": 1400.0,
+        "description": "Upwork Fixed-Price Gig: Seeking intermediate or expert automation freelancer. Connects required: 8. Submit cover letter, resume or Upwork portfolio, and answer screening questions about webhook latency.",
+        "skills": ["Make.com", "Stripe API", "Webhooks", "Slack API"],
+        "url": "https://www.upwork.com/freelance-jobs/automation-stripe-make"
+    },
+    {
+        "id": "fl-dash-904",
+        "title": "React & Tailwind CSS Customer Analytics Dashboard",
+        "company": "VentureMetrics",
+        "contact_email": "",
+        "source": "Freelancer.com",
+        "location": "Remote",
+        "budget": 1650.0,
+        "description": "Freelancer.com Contest & Bidding: Looking for clean, responsive frontend engineer. Submit competitive bid with resume and live GitHub/portfolio links. Wireframes provided.",
+        "skills": ["React", "Tailwind CSS", "JavaScript", "UI/UX"],
+        "url": "https://www.freelancer.com/projects/react-js/modern-analytics-dashboard"
+    },
+    {
+        "id": "fiv-brand-905",
+        "title": "Vector Minimalist Logo & Brand Assets for FinTech App",
+        "company": "NovaPay Global",
+        "contact_email": "",
+        "source": "Fiverr Gigs",
+        "location": "Remote",
+        "budget": 700.0,
+        "description": "Fiverr Project: Need vector SVG and transparent PNG marks. Send custom proposal, portfolio link, and sample draft concepts.",
+        "skills": ["Logo Design", "Graphic Design", "Vector SVG", "Branding"],
+        "url": "https://www.fiverr.com/gigs/minimalist-tech-logo"
+    },
+    {
+        "id": "up-etl-906",
+        "title": "SQL Data Transformation & Clean Lead Database Script",
+        "company": "OmniReach Partners",
+        "contact_email": "",
+        "source": "Upwork",
+        "location": "Remote",
+        "budget": 1100.0,
+        "description": "Upwork Hourly Contract ($45-65/hr, 20 hrs estimated): Need data cleaning specialist with Python Pandas and PostgreSQL experience. Submit proposal with resume, previous data pipeline experience, and milestones.",
+        "skills": ["SQL", "Python Pandas", "Data Cleaning", "PostgreSQL"],
+        "url": "https://www.upwork.com/freelance-jobs/sql-data-pipeline"
+    },
+    {
+        "id": "wwr-dev-907",
+        "title": "Full-Stack Python & FastAPI Microservice Integration",
+        "company": "CloudScale Engineering",
+        "contact_email": "",
+        "source": "WeWorkRemotely",
+        "location": "Remote",
+        "budget": 2800.0,
+        "description": "Contract role on WeWorkRemotely: Requires formal resume/CV submission, cover letter explaining your automation approach, and code sample link. Competitive contractor compensation.",
+        "skills": ["Python", "FastAPI", "Docker", "REST APIs"],
+        "url": "https://weworkremotely.com/remote-jobs/python-fastapi-microservice"
+    },
+    {
+        "id": "rok-sec-908",
+        "title": "Cloud Infrastructure & CI/CD Pipeline Automation Engineer",
+        "company": "CyberShield Technologies",
+        "contact_email": "",
+        "source": "RemoteOK",
+        "location": "Remote",
+        "budget": 3200.0,
+        "description": "Remote contract opportunity via RemoteOK portal: Traditional application process requiring resume, LinkedIn profile, and technical screening questions.",
+        "skills": ["DevOps", "Docker", "Terraform", "CI/CD", "AWS"],
+        "url": "https://remoteok.com/remote-jobs/cloud-pipeline-engineer"
+    }
+]
+
+
 
 def extract_real_email(text: str) -> str:
     """
@@ -440,6 +541,10 @@ def fetch_all_jobs() -> List[Dict[str, Any]]:
 
     # 6. Jobicy Live API
     raw_list.extend(fetch_jobicy_jobs())
+
+    # 7. Curated Bidding & Resume-Required Stream (Freelancer, Fiverr, Upwork)
+    raw_list.extend(TRADITIONAL_BIDDING_GIGS_STREAM)
+
 
     analyzed_jobs = []
     for item in raw_list:

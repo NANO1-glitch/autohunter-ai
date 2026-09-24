@@ -87,7 +87,8 @@ def get_jobs(
     difficulty: Optional[str] = None,
     no_resume_only: Optional[bool] = False,
     hide_done: Optional[bool] = False,
-    search: Optional[str] = None
+    search: Optional[str] = None,
+    marketplace_category: Optional[str] = None
 ):
     return db.get_jobs(
         category=category,
@@ -96,8 +97,10 @@ def get_jobs(
         difficulty=difficulty,
         no_resume_only=no_resume_only,
         hide_done=hide_done,
-        search=search
+        search=search,
+        marketplace_category=marketplace_category
     )
+
 
 @app.get("/api/jobs/{job_id}")
 def get_job(job_id: str):

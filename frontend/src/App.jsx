@@ -13,7 +13,7 @@ import AutoPilotConsole from './components/AutoPilotConsole';
 import AntiScamModal from './components/AntiScamModal';
 import GmailOutreachHub from './components/GmailOutreachHub';
 import JobDetailsModal from './components/JobDetailsModal';
-import { Sparkles, RefreshCw, AlertCircle, CheckCircle2, Flame, Bot, Palette, FileSpreadsheet, Code2 } from 'lucide-react';
+import { Sparkles, RefreshCw, AlertCircle, CheckCircle2, Flame, Bot, Palette, FileSpreadsheet, Code2, Briefcase } from 'lucide-react';
 
 export default function App() {
   const [jobs, setJobs] = useState([]);
@@ -169,8 +169,21 @@ export default function App() {
     }
   };
 
+  const isBiddingTab = activeTab === 'bidding';
+  const directJobsCount = jobs.filter(j => !(j.is_bidding_gig || j.requires_resume || j.marketplace_category === 'bidding_and_resumes')).length;
+  const biddingJobsCount = jobs.filter(j => (j.is_bidding_gig || j.requires_resume || j.marketplace_category === 'bidding_and_resumes')).length;
+
   // Filter jobs locally or via API
   const filteredJobs = jobs.filter(job => {
+    // Separate Direct Deals Radar vs Bidding & Resume Gigs
+    const isBiddingJob = Boolean(job.is_bidding_gig || job.requires_resume || job.marketplace_category === 'bidding_and_resumes');
+    if (isBiddingTab && !isBiddingJob) {
+      return false;
+    }
+    if (activeTab === 'radar' && isBiddingJob) {
+      return false;
+    }
+
     // Hide completed, contacted, or closed gigs if hideDone is enabled
     if (hideDone && closedStatuses.includes(job.status)) {
       return false;
@@ -224,6 +237,8 @@ export default function App() {
         onOpenAntiScam={() => handleOpenAntiScam()}
         outboxCount={stats?.outreaches_sent || 0}
         totalJobs={jobs.length}
+        directCount={directJobsCount}
+        biddingCount={biddingJobsCount}
       />
 
       {/* Toast Notification */}
@@ -246,83 +261,146 @@ export default function App() {
           />
         ) : (
           <>
-            {/* Hero Section */}
-        <div className="mb-8 p-6 sm:p-8 rounded-3xl glass-panel border border-white/[0.08] relative overflow-hidden">
-          <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-br from-cyan-500/10 via-indigo-500/10 to-transparent rounded-full blur-3xl pointer-events-none" />
-          
-          <div className="max-w-3xl">
-            <div className="flex items-center gap-2 flex-wrap mb-3">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/25 text-cyan-300 text-xs font-semibold">
-                <Sparkles className="w-3.5 h-3.5 text-cyan-400" />
-                <span>AI-Powered Autonomous Deal Aggregation & Outreach</span>
+            {/* Dynamic Hero Section: Bidding Hub vs Direct Deals Radar */}
+            {isBiddingTab ? (
+              <div className="mb-8 p-6 sm:p-8 rounded-3xl glass-panel border border-purple-500/30 relative overflow-hidden bg-gradient-to-br from-slate-900 via-purple-950/20 to-slate-950">
+                <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-br from-purple-500/15 via-pink-500/10 to-transparent rounded-full blur-3xl pointer-events-none" />
+                
+                <div className="max-w-3xl">
+                  <div className="flex items-center gap-2 flex-wrap mb-3">
+                    <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple-500/15 border border-purple-500/30 text-purple-300 text-xs font-semibold">
+                      <Briefcase className="w-3.5 h-3.5 text-purple-400" />
+                      <span>Traditional Bidding & Resume Portals</span>
+                    </div>
+                    <div className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-slate-800/80 border border-white/[0.08] text-slate-300 text-xs font-medium">
+                      <span>Fiverr • Freelancer.com • Upwork • ATS Portals</span>
+                    </div>
+                  </div>
+
+                  <h1 className="text-2xl sm:text-4xl font-black text-white tracking-tight leading-tight m-0 mb-3">
+                    Bid on Gigs & Portals <br />
+                    <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 via-pink-300 to-indigo-400">
+                      Win Client Projects with AI Bids & Custom Proposals
+                    </span>
+                  </h1>
+
+                  <p className="text-xs sm:text-sm text-slate-300 leading-relaxed mb-5">
+                    Browse traditional marketplace gigs requiring bids, proposals, and resume highlights. Click <strong>"Submit Bid Proposal"</strong> on any gig to generate tailored proposal text, copy it, and apply with 1 click.
+                  </p>
+
+                  {/* Quick Source Filters for Bidding Platforms */}
+                  <div className="flex items-center gap-2 flex-wrap text-xs">
+                    <button
+                      onClick={() => { setSelectedSource('Freelancer.com'); }}
+                      className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg border text-xs font-bold cursor-pointer transition-all ${
+                        selectedSource === 'Freelancer.com' ? 'bg-purple-600 text-white border-purple-400 shadow-md shadow-purple-600/30' : 'bg-slate-900/90 text-slate-300 hover:text-white border-white/[0.06] hover:border-purple-500/40'
+                      }`}
+                    >
+                      <span>Freelancer.com</span>
+                    </button>
+                    <button
+                      onClick={() => { setSelectedSource('Fiverr'); }}
+                      className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg border text-xs font-bold cursor-pointer transition-all ${
+                        selectedSource === 'Fiverr' ? 'bg-emerald-600 text-white border-emerald-400 shadow-md shadow-emerald-600/30' : 'bg-slate-900/90 text-slate-300 hover:text-white border-white/[0.06] hover:border-emerald-500/40'
+                      }`}
+                    >
+                      <span>Fiverr Gigs</span>
+                    </button>
+                    <button
+                      onClick={() => { setSelectedSource('Upwork'); }}
+                      className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg border text-xs font-bold cursor-pointer transition-all ${
+                        selectedSource === 'Upwork' ? 'bg-green-600 text-white border-green-400 shadow-md shadow-green-600/30' : 'bg-slate-900/90 text-slate-300 hover:text-white border-white/[0.06] hover:border-green-500/40'
+                      }`}
+                    >
+                      <span>Upwork</span>
+                    </button>
+                    <button
+                      onClick={() => { setSelectedSource('All'); }}
+                      className="px-3 py-1.5 rounded-lg bg-slate-800 text-slate-300 hover:text-white text-xs font-medium cursor-pointer"
+                    >
+                      All Marketplaces ({biddingJobsCount})
+                    </button>
+                  </div>
+                </div>
               </div>
-              <div 
-                className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/25 text-emerald-300 text-xs font-bold shadow-sm"
-                title="Continuous 2-hour feed polling active"
-              >
-                <span className="relative flex h-2 w-2">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-                  <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
-                </span>
-                <span>Auto-Refresh: Every 2 Hours • Next: {schedulerStatus?.formatted_remaining || '2h 00m'}</span>
+            ) : (
+              <div className="mb-8 p-6 sm:p-8 rounded-3xl glass-panel border border-white/[0.08] relative overflow-hidden">
+                <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-br from-cyan-500/10 via-indigo-500/10 to-transparent rounded-full blur-3xl pointer-events-none" />
+                
+                <div className="max-w-3xl">
+                  <div className="flex items-center gap-2 flex-wrap mb-3">
+                    <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-cyan-500/10 border border-cyan-500/25 text-cyan-300 text-xs font-semibold">
+                      <Sparkles className="w-3.5 h-3.5 text-cyan-400" />
+                      <span>Direct Deals Radar • Zero-Bidding & No Resumes</span>
+                    </div>
+                    <div 
+                      className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-500/10 border border-emerald-500/25 text-emerald-300 text-xs font-bold shadow-sm"
+                      title="Continuous 2-hour feed polling active"
+                    >
+                      <span className="relative flex h-2 w-2">
+                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                        <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+                      </span>
+                      <span>Auto-Refresh: Every 2 Hours • Next: {schedulerStatus?.formatted_remaining || '2h 00m'}</span>
+                    </div>
+                  </div>
+
+                  <h1 className="text-2xl sm:text-4xl font-black text-white tracking-tight leading-tight m-0 mb-3">
+                    Direct Client Deals <br />
+                    <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-sky-300 to-indigo-400">
+                      100% Automated & Delivered with AI
+                    </span>
+                  </h1>
+
+                  <p className="text-xs sm:text-sm text-slate-300 leading-relaxed mb-5">
+                    Direct gigs curated worldwide from Discord channels, LinkedIn, and remote boards. Every opportunity has direct client contacts. Use <strong>1-Click Cold Pitch</strong> to send corporate HTML proposals with executive signatures.
+                  </p>
+
+                  {/* Quick Category Jump Buttons */}
+                  <div className="flex items-center gap-2 flex-wrap text-xs">
+                    <button
+                      onClick={() => { setSelectedCategory('Web Scraping & Data Extraction'); setMinBudget(0); }}
+                      className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-900/90 hover:bg-slate-800 border border-white/[0.06] hover:border-cyan-500/40 text-slate-300 hover:text-white transition-all cursor-pointer font-medium"
+                    >
+                      <Bot className="w-3.5 h-3.5 text-cyan-400" />
+                      <span>Web Scraping</span>
+                    </button>
+
+                    <button
+                      onClick={() => { setSelectedCategory('Automation & Python Scripts'); setMinBudget(0); }}
+                      className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-900/90 hover:bg-slate-800 border border-white/[0.06] hover:border-cyan-500/40 text-slate-300 hover:text-white transition-all cursor-pointer font-medium"
+                    >
+                      <Code2 className="w-3.5 h-3.5 text-emerald-400" />
+                      <span>Python Automations</span>
+                    </button>
+
+                    <button
+                      onClick={() => { setSelectedCategory('Data Entry & Excel Automations'); setMinBudget(0); }}
+                      className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-900/90 hover:bg-slate-800 border border-white/[0.06] hover:border-cyan-500/40 text-slate-300 hover:text-white transition-all cursor-pointer font-medium"
+                    >
+                      <FileSpreadsheet className="w-3.5 h-3.5 text-teal-400" />
+                      <span>Excel & Data Entry</span>
+                    </button>
+
+                    <button
+                      onClick={() => { setSelectedCategory('Logo & Brand Design'); setMinBudget(0); }}
+                      className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-900/90 hover:bg-slate-800 border border-white/[0.06] hover:border-cyan-500/40 text-slate-300 hover:text-white transition-all cursor-pointer font-medium"
+                    >
+                      <Palette className="w-3.5 h-3.5 text-amber-400" />
+                      <span>Logo & Branding</span>
+                    </button>
+
+                    <button
+                      onClick={() => { setMinBudget(1000); setSelectedCategory('All'); }}
+                      className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-amber-500/10 hover:bg-amber-500/20 border border-amber-500/30 text-amber-300 transition-all cursor-pointer font-bold"
+                    >
+                      <Flame className="w-3.5 h-3.5 text-amber-400" />
+                      <span>High-Ticket Only ($1K+)</span>
+                    </button>
+                  </div>
+                </div>
               </div>
-            </div>
-
-            <h1 className="text-2xl sm:text-4xl font-black text-white tracking-tight leading-tight m-0 mb-3">
-              Sell High-Ticket Freelance Deals <br />
-              <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-400 via-sky-300 to-indigo-400">
-                100% Automated & Delivered with AI
-              </span>
-            </h1>
-
-            <p className="text-xs sm:text-sm text-slate-300 leading-relaxed mb-5">
-              Live gigs curated worldwide from Discord channels, LinkedIn, and remote boards. Every opportunity is pre-scored for <strong>turnaround time, difficulty rating, and profit margins</strong>. Use the <strong>Student Guide</strong> for step-by-step fulfillment and 1-Click Cold Pitch to send humanized proposals that pass AI detectors.
-            </p>
-
-            {/* Quick Category Jump Buttons */}
-            <div className="flex items-center gap-2 flex-wrap text-xs">
-              <button
-                onClick={() => { setSelectedCategory('Web Scraping & Data Extraction'); setMinBudget(0); }}
-                className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-900/90 hover:bg-slate-800 border border-white/[0.06] hover:border-cyan-500/40 text-slate-300 hover:text-white transition-all cursor-pointer font-medium"
-              >
-                <Bot className="w-3.5 h-3.5 text-cyan-400" />
-                <span>Web Scraping</span>
-              </button>
-
-              <button
-                onClick={() => { setSelectedCategory('Automation & Python Scripts'); setMinBudget(0); }}
-                className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-900/90 hover:bg-slate-800 border border-white/[0.06] hover:border-cyan-500/40 text-slate-300 hover:text-white transition-all cursor-pointer font-medium"
-              >
-                <Code2 className="w-3.5 h-3.5 text-emerald-400" />
-                <span>Python Automations</span>
-              </button>
-
-              <button
-                onClick={() => { setSelectedCategory('Data Entry & Excel Automations'); setMinBudget(0); }}
-                className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-900/90 hover:bg-slate-800 border border-white/[0.06] hover:border-cyan-500/40 text-slate-300 hover:text-white transition-all cursor-pointer font-medium"
-              >
-                <FileSpreadsheet className="w-3.5 h-3.5 text-teal-400" />
-                <span>Excel & Data Entry</span>
-              </button>
-
-              <button
-                onClick={() => { setSelectedCategory('Logo & Brand Design'); setMinBudget(0); }}
-                className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-slate-900/90 hover:bg-slate-800 border border-white/[0.06] hover:border-cyan-500/40 text-slate-300 hover:text-white transition-all cursor-pointer font-medium"
-              >
-                <Palette className="w-3.5 h-3.5 text-amber-400" />
-                <span>Logo & Branding</span>
-              </button>
-
-              <button
-                onClick={() => { setMinBudget(1000); setSelectedCategory('All'); }}
-                className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-amber-500/10 hover:bg-amber-500/20 border border-amber-500/30 text-amber-300 transition-all cursor-pointer font-bold"
-              >
-                <Flame className="w-3.5 h-3.5 text-amber-400" />
-                <span>High-Ticket Only ($1K+)</span>
-              </button>
-            </div>
-          </div>
-        </div>
+            )}
 
         {/* Executive KPI Stats */}
         <MetricsBar stats={stats} />

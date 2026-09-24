@@ -18,8 +18,10 @@ def send_cold_email(
     body: str, 
     job_id: str = None, 
     attachments: Optional[List[str]] = None,
-    html_body: Optional[str] = None
+    html_body: Optional[str] = None,
+    is_reply: bool = False
 ) -> Dict[str, Any]:
+
 
     """
     Sends cold outreach email.
@@ -77,7 +79,28 @@ def send_cold_email(
         }
 
 
+    # Anti-Spam Shield: Strictly enforce 1 cold email per client / per job.
+    # Subsequent messages to the same client are ONLY allowed if is_reply=True (replying to incoming response).
+    if not is_reply and db.is_already_pitched(to_email, job_id):
+        record = {
+            "job_id": job_id,
+            "to_email": to_email,
+            "subject": subject,
+            "body": body,
+            "status": "Blocked (Duplicate Pitch Prevented)",
+            "outreach_status": "blocked_duplicate",
+            "mode": "Anti-Spam Shield",
+            "info": f"Blocked outreach: Client {to_email} has already been pitched. Policy strictly limits contact to 1 email per client/job until they reply."
+        }
+        return {
+            "success": False,
+            "mode": "blocked_duplicate",
+            "message": f"Anti-spam shield blocked email to {to_email}: This client has already received a pitch. Follow-up is only permitted after client replies.",
+            "record": record
+        }
+
     # Real SMTP Dispatch
+
     try:
         sender_title = settings.get("sender_title", "Lead Automation & Solutions Engineer")
         sender_company = settings.get("sender_company", "Autonomous Systems & Workflow Automation")

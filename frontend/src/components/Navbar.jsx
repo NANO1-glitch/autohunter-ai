@@ -11,7 +11,8 @@ import {
   Mail,
   Zap,
   Clock,
-  Radio
+  Radio,
+  Briefcase
 } from 'lucide-react';
 
 export default function Navbar({ 
@@ -25,7 +26,9 @@ export default function Navbar({
   onOpenOutbox, 
   onOpenAntiScam,
   outboxCount,
-  totalJobs = 180 
+  totalJobs = 180,
+  directCount = 0,
+  biddingCount = 0
 }) {
   return (
     <header className="sticky top-0 z-40 w-full border-b border-white/[0.08] bg-slate-950/80 backdrop-blur-xl">
@@ -63,7 +66,7 @@ export default function Navbar({
           </div>
         </div>
 
-        {/* Navigation Tabs: Radar vs Gmail Outreach */}
+        {/* Navigation Tabs: Direct Deals vs Bidding & Resumes vs Gmail Outreach */}
         <div className="flex items-center gap-1 p-1 bg-slate-900/90 border border-slate-800 rounded-xl">
           <button
             onClick={() => onTabChange && onTabChange('radar')}
@@ -72,11 +75,28 @@ export default function Navbar({
                 ? 'bg-cyan-500/20 text-cyan-300 border border-cyan-500/40 shadow-sm'
                 : 'text-slate-400 hover:text-slate-200'
             }`}
+            title="Direct deals with client emails for 1-click pitches"
           >
             <Radar className="w-3.5 h-3.5 text-cyan-400" />
-            <span className="hidden sm:inline">Job Radar</span>
-            <span className="text-[10px] px-1.5 py-0.2 rounded-full bg-slate-800 text-slate-400 font-bold">
-              {totalJobs}
+            <span className="hidden sm:inline">Direct Deals</span>
+            <span className="text-[10px] px-1.5 py-0.2 rounded-full bg-slate-800 text-slate-300 font-bold">
+              {directCount || totalJobs}
+            </span>
+          </button>
+
+          <button
+            onClick={() => onTabChange && onTabChange('bidding')}
+            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-bold transition-all cursor-pointer ${
+              activeTab === 'bidding'
+                ? 'bg-purple-500/20 text-purple-300 border border-purple-500/40 shadow-sm'
+                : 'text-slate-400 hover:text-slate-200'
+            }`}
+            title="Freelance gigs from Fiverr, Freelancer.com, Upwork, and portals requiring proposals & resumes"
+          >
+            <Briefcase className="w-3.5 h-3.5 text-purple-400" />
+            <span className="hidden sm:inline">Bidding & Resumes</span>
+            <span className="text-[10px] px-1.5 py-0.2 rounded-full bg-purple-950/80 text-purple-300 border border-purple-800/40 font-bold">
+              {biddingCount}
             </span>
           </button>
 
@@ -87,9 +107,10 @@ export default function Navbar({
                 ? 'bg-red-500/20 text-red-300 border border-red-500/40 shadow-sm'
                 : 'text-slate-400 hover:text-slate-200'
             }`}
+            title="Gmail Outreach Tracking & Client Reply Hub"
           >
             <Mail className="w-3.5 h-3.5 text-red-400" />
-            <span>Gmail Outreach</span>
+            <span>Gmail Hub</span>
             {outboxCount > 0 && (
               <span className="text-[10px] px-1.5 py-0.2 rounded-full bg-red-500 text-white font-extrabold shadow-sm">
                 {outboxCount}

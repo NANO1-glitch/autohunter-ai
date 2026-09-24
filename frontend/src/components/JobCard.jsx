@@ -252,7 +252,7 @@ export default function JobCard({ job, onOpenPlaybook, onOpenOutreach, onOpenDel
           <span>Student Guide</span>
         </button>
 
-        {/* 1-Click Cold Approach or Official Portal */}
+        {/* 1-Click Cold Approach, Bidding Proposal, or Official Portal */}
         {job.has_direct_email ? (
           <button
             onClick={() => onOpenOutreach(job)}
@@ -261,6 +261,15 @@ export default function JobCard({ job, onOpenPlaybook, onOpenOutreach, onOpenDel
           >
             <Send className="w-3.5 h-3.5" />
             <span>Cold Pitch</span>
+          </button>
+        ) : (job.is_bidding_gig || job.marketplace_category === 'bidding_and_resumes') ? (
+          <button
+            onClick={() => onOpenOutreach(job)}
+            className="flex-1 flex items-center justify-center gap-1.5 py-2 px-3 rounded-xl bg-gradient-to-r from-purple-600 to-pink-600 hover:from-purple-500 hover:to-pink-500 text-white text-xs font-extrabold shadow-md shadow-purple-600/25 transition-all cursor-pointer hover:shadow-purple-500/40"
+            title="Generate custom bid proposal & open freelance portal"
+          >
+            <ExternalLink className="w-3.5 h-3.5" />
+            <span>Submit Bid</span>
           </button>
         ) : (
           <button
