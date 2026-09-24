@@ -5,6 +5,8 @@ import feedparser
 from datetime import datetime
 from typing import List, Dict, Any
 from backend.engine.analyzer import analyze_job
+from backend.mailer.dns_verifier import verify_email_domain_mx
+
 
 # Curated High-Ticket Vetted Pipeline from Top Discord Freelance Communities & LinkedIn Alerts
 CURATED_HIGH_TICKET_STREAM = [
@@ -12,7 +14,7 @@ CURATED_HIGH_TICKET_STREAM = [
         "id": "disc-auto-801",
         "title": "Need Python Playwright Scraper for E-commerce Price Tracking (Amazon & Shopify)",
         "company": "ScaleRetail Labs",
-        "contact_email": "ops@scaleretaillabs.io",
+        "contact_email": "",
         "source": "Discord #freelance-jobs",
         "location": "Remote (Global)",
         "budget": 1200.0,
@@ -24,7 +26,7 @@ CURATED_HIGH_TICKET_STREAM = [
         "id": "link-auto-802",
         "title": "Zapier / Make.com Automation: Sync Stripe Payments to Airtable & Slack",
         "company": "Apex Growth Partners",
-        "contact_email": "hello@apexgrowth.co",
+        "contact_email": "",
         "source": "LinkedIn Jobs",
         "location": "Remote (US/Worldwide)",
         "budget": 1800.0,
@@ -36,7 +38,7 @@ CURATED_HIGH_TICKET_STREAM = [
         "id": "disc-des-803",
         "title": "Modern Vector Logo & Brand Identity Pack for AI FinTech Startup",
         "company": "Krypton Pay",
-        "contact_email": "founders@kryptonpay.app",
+        "contact_email": "",
         "source": "Discord #design-bounties",
         "location": "Remote",
         "budget": 850.0,
@@ -48,7 +50,7 @@ CURATED_HIGH_TICKET_STREAM = [
         "id": "disc-data-804",
         "title": "Clean, Deduplicate & Standardize 45,000 Row B2B Lead Spreadsheet",
         "company": "Vanguard Outreach",
-        "contact_email": "leads@vanguardoutreach.com",
+        "contact_email": "",
         "source": "Discord #gigs",
         "location": "Remote",
         "budget": 650.0,
@@ -60,7 +62,7 @@ CURATED_HIGH_TICKET_STREAM = [
         "id": "link-bot-805",
         "title": "Build Custom OpenAI / Gemini WhatsApp Customer Support Chatbot",
         "company": "Veritas Health Clinics",
-        "contact_email": "tech@veritasclinics.com",
+        "contact_email": "",
         "source": "LinkedIn Jobs",
         "location": "Remote",
         "budget": 2400.0,
@@ -72,7 +74,7 @@ CURATED_HIGH_TICKET_STREAM = [
         "id": "hn-auto-806",
         "title": "Automate PDF Invoice Extraction & Sync to QuickBooks Online",
         "company": "Meridian Logistics",
-        "contact_email": "invoices@meridianlogistics.net",
+        "contact_email": "",
         "source": "HackerNews Freelance",
         "location": "Remote",
         "budget": 1500.0,
@@ -84,7 +86,7 @@ CURATED_HIGH_TICKET_STREAM = [
         "id": "disc-web-807",
         "title": "High-Converting Dark Mode Landing Page for Cyber Security Tool",
         "company": "Sentinel Defense",
-        "contact_email": "marketing@sentineldefense.tech",
+        "contact_email": "",
         "source": "Discord #web-dev",
         "location": "United States",
         "budget": 1600.0,
@@ -96,7 +98,7 @@ CURATED_HIGH_TICKET_STREAM = [
         "id": "disc-cap-808",
         "title": "Add Dynamic Animated Captions & Subtitles for 35 Short-Form Videos",
         "company": "Apex Media Creators",
-        "contact_email": "creators@apexmedia.co",
+        "contact_email": "",
         "source": "Discord #video-gigs",
         "location": "United States (Remote)",
         "budget": 350.0,
@@ -108,7 +110,7 @@ CURATED_HIGH_TICKET_STREAM = [
         "id": "link-trans-809",
         "title": "Translate 12 Technical Product User Guides from English to Spanish & French",
         "company": "Luminary Tech Global",
-        "contact_email": "docs@luminarytech.io",
+        "contact_email": "",
         "source": "LinkedIn Jobs",
         "location": "United Kingdom (Remote)",
         "budget": 450.0,
@@ -120,7 +122,7 @@ CURATED_HIGH_TICKET_STREAM = [
         "id": "disc-auto-810",
         "title": "Need Python Bot to Monitor Product Inventory & Send Instant Telegram Alerts",
         "company": "DropAlerts Network",
-        "contact_email": "botdev@sneakerdropalerts.com",
+        "contact_email": "",
         "source": "Discord #python-gigs",
         "location": "Remote",
         "budget": 950.0,
@@ -132,7 +134,7 @@ CURATED_HIGH_TICKET_STREAM = [
         "id": "link-api-811",
         "title": "Make.com & HubSpot Automation: Inbound Lead Qualification & Slack Alerts",
         "company": "Apex Venture Partners",
-        "contact_email": "integrations@apexventurepartners.io",
+        "contact_email": "",
         "source": "LinkedIn Jobs",
         "location": "Remote (US)",
         "budget": 1400.0,
@@ -144,7 +146,7 @@ CURATED_HIGH_TICKET_STREAM = [
         "id": "disc-scrape-812",
         "title": "Python Scraper to Extract Real Estate Listings & Historical Tax Records",
         "company": "Crestview Capital",
-        "contact_email": "deals@crestviewcapital.re",
+        "contact_email": "",
         "source": "Discord #freelance-jobs",
         "location": "Remote",
         "budget": 1100.0,
@@ -156,7 +158,7 @@ CURATED_HIGH_TICKET_STREAM = [
         "id": "disc-cap-813",
         "title": "Dynamic Animated Captions & Sound Effects for 25 YouTube Shorts / Reels",
         "company": "Elevate Studios",
-        "contact_email": "media@elevatestudios.co",
+        "contact_email": "",
         "source": "Discord #video-editing",
         "location": "Remote",
         "budget": 400.0,
@@ -168,7 +170,7 @@ CURATED_HIGH_TICKET_STREAM = [
         "id": "link-web-814",
         "title": "Modern Dark Mode SaaS Landing Page in React & Tailwind CSS",
         "company": "HyperFlow Analytics",
-        "contact_email": "product@hyperflowanalytics.com",
+        "contact_email": "",
         "source": "LinkedIn Jobs",
         "location": "Remote (Worldwide)",
         "budget": 1750.0,
@@ -180,15 +182,40 @@ CURATED_HIGH_TICKET_STREAM = [
         "id": "disc-trans-815",
         "title": "Translate & Localize Mobile Fitness App into German and Italian",
         "company": "PulseFit Global",
-        "contact_email": "apps@pulsefitglobal.com",
+        "contact_email": "",
         "source": "Discord #mobile-dev",
         "location": "Remote",
         "budget": 600.0,
         "description": "We need our iOS and Android fitness tracker strings and app store descriptions localized into natural German and Italian. Total approximately 5,500 words. Need native quality and workout terminology accuracy. $600.",
         "skills": ["Translation", "German", "Italian", "Localization"],
         "url": "https://discord.com/channels/pulsefit/trans-815"
+    },
+    {
+        "id": "vetted-tz-816",
+        "title": "Open Source LLM Gateway & Python SDK Integration Tooling",
+        "company": "TensorZero",
+        "contact_email": "hello@tensorzero.com",
+        "source": "HackerNews Hiring (Verified)",
+        "location": "Remote (Global)",
+        "budget": 2000.0,
+        "description": "Building next-generation open-source gateway for LLM engineering. Seeking developers experienced with Python, API design, telemetry, and fast inference pipelines. Paying competitive rates for high-velocity deliverables.",
+        "skills": ["Python", "LLMs", "FastAPI", "API Integration"],
+        "url": "https://tensorzero.com"
+    },
+    {
+        "id": "vetted-ld-817",
+        "title": "Feature Flag Automation & Webhook Integration Pipeline",
+        "company": "LaunchDarkly",
+        "contact_email": "hr@launchdarkly.com",
+        "source": "WeWorkRemotely (Verified)",
+        "location": "Remote (Worldwide)",
+        "budget": 2500.0,
+        "description": "Automating feature flag synchronization and webhook routing across distributed enterprise environments. Looking for clean code, automated retry mechanics, and CI/CD integration.",
+        "skills": ["Python", "Webhooks", "DevOps", "API Integration"],
+        "url": "https://launchdarkly.com"
     }
 ]
+
 
 def extract_real_email(text: str) -> str:
     """
@@ -202,7 +229,11 @@ def extract_real_email(text: str) -> str:
     fake_domains = {
         "clientcompany.com", "example.com", "domain.com", "test.com",
         "client.com", "sample.com", "company.com", "yourdomain.com", "placeholder.com",
-        "contractor.hn", "sentry.io", "w3.org", "schema.org", "google.com"
+        "contractor.hn", "sentry.io", "w3.org", "schema.org", "google.com",
+        "scaleretaillabs.io", "kryptonpay.app", "sentineldefense.tech",
+        "luminarytech.io", "pulsehealth.app", "veritasclinics.com",
+        "sneakerdropalerts.com", "apexventurepartners.io", "crestviewcapital.re",
+        "elevatestudios.co", "hyperflowanalytics.com", "pulsefitglobal.com"
     }
     image_exts = (".png", ".jpg", ".jpeg", ".svg", ".webp", ".gif", ".css", ".js")
     for email_candidate in matches:
@@ -214,8 +245,12 @@ def extract_real_email(text: str) -> str:
             continue
         if len(domain.split(".")) < 2 or len(domain.split(".")[-1]) < 2:
             continue
+        # Only accept if domain has active MX records
+        if not verify_email_domain_mx(domain):
+            continue
         return em
     return ""
+
 
 def fetch_remoteok_jobs() -> List[Dict[str, Any]]:
     jobs = []

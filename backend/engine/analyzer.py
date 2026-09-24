@@ -1,5 +1,7 @@
 import re
 from typing import Dict, Any, List
+from backend.mailer.dns_verifier import verify_email_domain_mx
+
 
 def analyze_job(job_data: Dict[str, Any]) -> Dict[str, Any]:
     """
@@ -227,12 +229,9 @@ def analyze_job(job_data: Dict[str, Any]) -> Dict[str, Any]:
     fake_domains = {
         "clientcompany.com", "example.com", "domain.com", "test.com",
         "client.com", "sample.com", "company.com", "yourdomain.com", "placeholder.com",
-        "contractor.hn", "sentry.io", "w3.org", "schema.org", "google.com"
-    }
-    curated_domains = {
-        "scaleretaillabs.io", "apexgrowth.co", "kryptonpay.app", "vanguardoutreach.com",
-        "meridianlogistics.net", "sentineldefense.tech", "apexmedia.co", "luminarytech.io",
-        "pulsehealth.app", "gmail.com", "outlook.com", "yahoo.com", "veritasclinics.com",
+        "contractor.hn", "sentry.io", "w3.org", "schema.org", "google.com",
+        "scaleretaillabs.io", "kryptonpay.app", "sentineldefense.tech",
+        "luminarytech.io", "pulsehealth.app", "veritasclinics.com",
         "sneakerdropalerts.com", "apexventurepartners.io", "crestviewcapital.re",
         "elevatestudios.co", "hyperflowanalytics.com", "pulsefitglobal.com"
     }
@@ -244,12 +243,13 @@ def analyze_job(job_data: Dict[str, Any]) -> Dict[str, Any]:
             not domain or 
             domain in fake_domains or 
             any(domain.endswith(ext) for ext in [".png", ".jpg", ".jpeg", ".svg", ".webp", ".gif", ".css", ".js"]) or
-            (any(target_em.startswith(p) for p in ["apply@", "careers@", "inquiries@", "jobs@", "recruiting@"]) and domain not in curated_domains)
+            not verify_email_domain_mx(domain)
         ):
             contact_email = ""
 
     has_direct_email = bool(contact_email)
     apply_mode = "direct_email" if has_direct_email else "official_portal"
+
 
     return {
         **job_data,

@@ -237,31 +237,38 @@ def check_gmail_for_replies() -> Dict[str, Any]:
         bounced_count = 0
         bounced_list = []
         try:
-            status, bounce_data = mail.search(None, '(OR (FROM "mailer-daemon") (SUBJECT "Delivery Status Notification"))')
+            status, bounce_data = mail.search(None, '(OR (FROM "mailer-daemon") (OR (SUBJECT "Delivery Status") (SUBJECT "Address not found")))')
             if status == "OK" and bounce_data and bounce_data[0]:
                 import re
-                for b_id in bounce_data[0].split()[-15:]:
+                for b_id in bounce_data[0].split()[-25:]:
                     res, fetch_data = mail.fetch(b_id, "(RFC822)")
                     if res != "OK":
                         continue
                     b_msg = email.message_from_bytes(fetch_data[0][1])
                     b_body = extract_email_body(b_msg)
                     
-                    # Regex match bounced addresses
-                    matches = re.findall(r"(?:wasn't delivered to|failed to deliver to|delivered to|to:)\s*<?([\w\.-]+@[\w\.-]+)>?", b_body, re.IGNORECASE)
-                    for bad_email in matches:
-                        bad_email = bad_email.strip().lower()
-                        if bad_email and bad_email != user.lower() and "google" not in bad_email:
-                            removed = db.add_bounced_email(bad_email)
-                            if bad_email not in bounced_list:
-                                bounced_list.append(bad_email)
-                                bounced_count += 1
-                                db.add_autopilot_log(
-                                    f"🚫 Auto-Purged Bounced Outreach: {bad_email} ('Address not found'). Blacklisted to protect sender reputation.",
-                                    level="warning"
-                                )
+                    # Regex match bounced addresses from multiple mailer-daemon formats
+                    patterns = [
+                        r"(?:wasn't delivered to|failed to deliver to|delivered to|unable to deliver to|couldn't be found)\s*<?([a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+)>?",
+                        r"Final-Recipient:\s*rfc822;\s*<?([a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+)>?",
+                        r"Original-Recipient:\s*rfc822;\s*<?([a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+)>?",
+                        r"\bto:\s*<?([a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+)>?"
+                    ]
+                    for pat in patterns:
+                        for bad_email in re.findall(pat, b_body, re.IGNORECASE):
+                            bad_email = bad_email.strip().lower()
+                            if bad_email and bad_email != user.lower() and "google" not in bad_email and "mailer-daemon" not in bad_email:
+                                removed = db.add_bounced_email(bad_email)
+                                if bad_email not in bounced_list:
+                                    bounced_list.append(bad_email)
+                                    bounced_count += 1
+                                    db.add_autopilot_log(
+                                        f"🚫 Auto-Purged Bounced Outreach: {bad_email} ('Address not found'). Blacklisted to protect sender reputation.",
+                                        level="warning"
+                                    )
         except Exception as b_err:
             print(f"[IMAP] Bounce check notice: {b_err}")
+
 
         mail.logout()
 

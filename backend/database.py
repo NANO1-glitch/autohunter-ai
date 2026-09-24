@@ -4,6 +4,8 @@ from datetime import datetime
 from pathlib import Path
 from typing import List, Dict, Any, Optional
 from backend.config import DB_PATH, SETTINGS_PATH, DEFAULT_SETTINGS
+from backend.mailer.dns_verifier import verify_email_domain_mx
+
 
 class Database:
     def __init__(self):
@@ -272,7 +274,8 @@ class Database:
 
     def is_placeholder_or_bounced(self, email_address: str) -> bool:
         """
-        Checks if an email is fake, a placeholder (e.g. clientcompany.com), or blacklisted.
+        Checks if an email is fake, a placeholder (e.g. clientcompany.com), blacklisted,
+        or has no valid MX records in DNS (which causes Mailer-Daemon bounces).
         """
         if not email_address or "@" not in email_address:
             return True
@@ -283,23 +286,21 @@ class Database:
         fake_domains = {
             "clientcompany.com", "example.com", "domain.com", "test.com",
             "client.com", "sample.com", "company.com", "yourdomain.com", "placeholder.com",
-            "contractor.hn", "sentry.io", "w3.org", "schema.org", "google.com"
+            "contractor.hn", "sentry.io", "w3.org", "schema.org", "google.com",
+            "scaleretaillabs.io", "kryptonpay.app", "sentineldefense.tech",
+            "luminarytech.io", "pulsehealth.app", "veritasclinics.com",
+            "sneakerdropalerts.com", "apexventurepartners.io", "crestviewcapital.re",
+            "elevatestudios.co", "hyperflowanalytics.com", "pulsefitglobal.com"
         }
         if domain in fake_domains:
             return True
         if any(domain.endswith(ext) for ext in [".png", ".jpg", ".jpeg", ".svg", ".webp", ".gif", ".css", ".js"]):
             return True
-        curated_domains = {
-            "scaleretaillabs.io", "apexgrowth.co", "kryptonpay.app", "vanguardoutreach.com",
-            "meridianlogistics.net", "sentineldefense.tech", "apexmedia.co", "luminarytech.io",
-            "pulsehealth.app", "gmail.com", "outlook.com", "yahoo.com", "veritasclinics.com",
-            "sneakerdropalerts.com", "apexventurepartners.io", "crestviewcapital.re",
-            "elevatestudios.co", "hyperflowanalytics.com", "pulsefitglobal.com"
-        }
-        if any(target.startswith(p) for p in ["apply@", "careers@", "inquiries@", "jobs@", "recruiting@"]):
-            if domain not in curated_domains:
-                return True
+        # Pre-flight real DNS MX check: If domain has no MX records, bounce is guaranteed
+        if not verify_email_domain_mx(domain):
+            return True
         return False
+
 
     def get_stats(self) -> Dict[str, Any]:
         data = self._read_data()

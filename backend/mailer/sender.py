@@ -7,6 +7,8 @@ from email import encoders
 from pathlib import Path
 from typing import Dict, Any, List, Optional
 from backend.database import db
+from backend.mailer.dns_verifier import verify_email_domain_mx
+
 
 def send_cold_email(
     to_email: str, 
@@ -50,25 +52,26 @@ def send_cold_email(
             "record": record
         }
 
-    # Pre-flight check: Prevent sending to placeholder or known bounced addresses
-    if db.is_placeholder_or_bounced(to_email):
+    # Pre-flight check: Prevent sending to placeholder, blacklisted, or domains without MX records
+    if db.is_placeholder_or_bounced(to_email) or not verify_email_domain_mx(to_email):
         record = {
             "job_id": job_id,
             "to_email": to_email,
             "subject": subject,
             "body": body,
-            "status": "Blocked (Invalid / Placeholder Domain)",
+            "status": "Blocked (No MX Record / Invalid Domain)",
             "outreach_status": "denied",
-            "mode": "Simulation (Pre-flight Shield)",
-            "info": f"Prevented delivery failure: {to_email} is a placeholder or bounced domain. Real SMTP skipped to protect sender reputation."
+            "mode": "Shielded (Pre-flight DNS Check)",
+            "info": f"Prevented bounce: {to_email} domain has no active DNS MX records. Real SMTP blocked to protect sender reputation."
         }
         db.record_outreach(record)
         return {
-            "success": True,
-            "mode": "blocked_fake_domain",
-            "message": f"Pre-flight shield prevented bounce to placeholder address ({to_email}).",
+            "success": False,
+            "mode": "blocked_no_mx",
+            "message": f"Pre-flight shield blocked dispatch to {to_email}: No valid MX records in DNS.",
             "record": record
         }
+
 
     # Real SMTP Dispatch
     try:
